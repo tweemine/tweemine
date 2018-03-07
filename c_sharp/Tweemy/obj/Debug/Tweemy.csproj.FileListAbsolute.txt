@@ -1,0 +1,9 @@
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\bin\Debug\Tweemy.exe.config
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.csprojResolveAssemblyReference.cache
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.Form1.resources
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.Properties.Resources.resources
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.csproj.GenerateResource.Cache
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\bin\Debug\Tweemy.exe
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\bin\Debug\Tweemy.pdb
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.exe
+c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.pdb
