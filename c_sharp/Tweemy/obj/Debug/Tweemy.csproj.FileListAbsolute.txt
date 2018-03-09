@@ -7,3 +7,13 @@ c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\bin\D
 c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\bin\Debug\Tweemy.pdb
 c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.exe
 c:\users\po288\onedrive\belgeler\visual studio 2015\Projects\Tweemy\Tweemy\obj\Debug\Tweemy.pdb
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\bin\Debug\Tweemy.exe.config
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\bin\Debug\Tweemy.exe
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\bin\Debug\Tweemy.pdb
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csprojResolveAssemblyReference.cache
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.Form1.resources
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.Properties.Resources.resources
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csproj.GenerateResource.Cache
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csproj.CoreCompileInputs.cache
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.exe
+C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.pdb

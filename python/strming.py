@@ -4,45 +4,31 @@
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+import json
+import codecs
 import tweepy
-filterList=[u'mutlu',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz',u'hüzün',u'sakin'  ]
-#Variables that contains the user credentials to access Twitter API 
-access_token = "xxx"
-access_token_secret = "oxxx"
-consumer_key = "Oxxxl"
-consumer_secret = "xxx"
+filterList=[u'a',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz',u'hüzün',u'sakin'  ]
+#Variables that contains the user credentials to access Twitter API
 
+#nothing is correct
+access_token = "2730466444-k6CP3c6asdsadasdasdoh3ilGUeksdJu5VGLbZt3e"
+access_token_secret = "pcOZhhtBQLasdasdasdasdasdeKtUZolR4u0Mo6urJDxsVXmwQ1hWBZ"
+consumer_key = "asdasasdasd"
+consumer_secret = "b34sTvlrbBFslkasdasdasdbnfVkJoxjunfV8cILwMdtvPryp"
+#nothing is correct
 counter = 0
 
-f = open("twitlerv2.txt","a")
+f = open("tweets.txt","w")
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
-
-   # def on_status(self, data):
-        #print data
-    #    global counter
-        #print 'counter: ' + counter
-        #print(data.created_at)
-        #print(data.text)
-        #f.write("\n\n "+ data.user.screen_name +"\n\n")
-        #f.write(data.text.encode("utf8"))
-        #printdata.user.screen_name
-        ##counter += 1
-        
-        
-        #b = dir(data)
-        #for a in b:
-         #   print a
-
-
-      
-     #   return True
-
+    
     def on_status(self, status):
         try:
-            text = status.extended_tweet["full_text"].encode('utf8')
+            text = status.extended_tweet["full_text"].encode('utf-8')
+            #f.write("Username: " + status.user.screen_name +"\n")
+            data={'Tweet': text }
+            json.dump(data,f,ensure_ascii=False)
             print text
-            f.write(text+"\n\n")
             f.flush()
         except AttributeError:
             text = status.text    

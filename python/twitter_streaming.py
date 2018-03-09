@@ -7,10 +7,10 @@ from tweepy import Stream
 import tweepy
 
 #Variables that contains the user credentials to access Twitter API 
-access_token = "XXXXXXXXXXXX-XXXXXXXXXXXXX"
-access_token_secret = "XXXXXXXXXXXXXXXXXXXX"
-consumer_key = "XXXXXXXXXXXXXXXXXX"
-consumer_secret = "XXXXXXXXXXXXXXXXXXXXX"
+access_token = "2730466444-k6CP3c6oh3ilGUeksuF8pgFZZULdJu5VGLbZt3e"
+access_token_secret = "pcOZhhtBQLeKtUZolR4u0Mo6urJR9aYPDxsVXmwQ1hWBZ"
+consumer_key = "ik6fmv37Gg21e4dHRV54B2VcO"
+consumer_secret = "b34sTvlrbBFslkbnfVkJoxjunfV8cILw5m8fou8BAeMdtvPryp"
 
 filterList=[u'mutlu',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz']
 
