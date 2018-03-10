@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtLabel = new System.Windows.Forms.TextBox();
             this.lblTweet = new System.Windows.Forms.Label();
             this.btnNextTweet = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnSaveJson = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -46,13 +48,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // txtLabel
             // 
-            this.textBox1.Location = new System.Drawing.Point(11, 237);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(162, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtLabel.Location = new System.Drawing.Point(11, 237);
+            this.txtLabel.Margin = new System.Windows.Forms.Padding(2);
+            this.txtLabel.Name = "txtLabel";
+            this.txtLabel.Size = new System.Drawing.Size(162, 20);
+            this.txtLabel.TabIndex = 1;
             // 
             // lblTweet
             // 
@@ -81,16 +83,38 @@
             this.listBox1.Size = new System.Drawing.Size(421, 95);
             this.listBox1.TabIndex = 5;
             // 
+            // btnSaveJson
+            // 
+            this.btnSaveJson.Location = new System.Drawing.Point(404, 431);
+            this.btnSaveJson.Name = "btnSaveJson";
+            this.btnSaveJson.Size = new System.Drawing.Size(85, 40);
+            this.btnSaveJson.TabIndex = 6;
+            this.btnSaveJson.Text = "Save To Json";
+            this.btnSaveJson.UseVisualStyleBackColor = true;
+            this.btnSaveJson.Click += new System.EventHandler(this.btnSaveJson_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(359, 175);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 40);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "labeled";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnNextTweet;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 468);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnSaveJson);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnNextTweet);
             this.Controls.Add(this.lblTweet);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtLabel);
             this.Controls.Add(this.button1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -104,10 +128,12 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtLabel;
         private System.Windows.Forms.Label lblTweet;
         private System.Windows.Forms.Button btnNextTweet;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnSaveJson;
+        private System.Windows.Forms.Button button2;
     }
 }
 
