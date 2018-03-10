@@ -7,37 +7,50 @@ from tweepy import Stream
 import json
 import codecs
 import tweepy
+import atexit
+import sys
 filterList=[u'a',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz',u'hüzün',u'sakin'  ]
 #Variables that contains the user credentials to access Twitter API
 
 #nothing is correct
-access_token = "2730466444-k6CP3c6asdsadasdasdoh3ilGUeksdJu5VGLbZt3e"
-access_token_secret = "pcOZhhtBQLasdasdasdasdasdeKtUZolR4u0Mo6urJDxsVXmwQ1hWBZ"
-consumer_key = "asdasasdasd"
-consumer_secret = "b34sTvlrbBFslkasdasdasdbnfVkJoxjunfV8cILwMdtvPryp"
+access_token = "sdf-dsf"
+access_token_secret = "sdf"
+consumer_key = "sdf"
+consumer_secret = "dsf"
 #nothing is correct
 counter = 0
-
-f = open("tweets.txt","w")
+listOfData=[]
+f = open("tweets.json","w")
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
-    
+    countData=0
     def on_status(self, status):
         try:
             text = status.extended_tweet["full_text"].encode('utf-8')
             #f.write("Username: " + status.user.screen_name +"\n")
             data={'Tweet': text }
-            json.dump(data,f,ensure_ascii=False)
+            listOfData.append(data)
             print text
-            f.flush()
+            #f.flush()
+            if len(listOfData) >= 10:
+                sys.exitfunc()
+                
+
         except AttributeError:
             text = status.text    
     def on_error(self, status):
         print(status ,'hatasi')
 
+        
+def saver():
+    json.dump(listOfData,f,ensure_ascii=False)
+    print "exit"
+    quit()
+
 if __name__ == '__main__':
 	    
     #This handles Twitter authetification and the connection to Twitter Streaming API
+    atexit.register(saver)
     l = StdOutListener()
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
@@ -47,6 +60,16 @@ if __name__ == '__main__':
     
 
 
+
+
+
+
+
+    
+
+
+
+    
 
 
 

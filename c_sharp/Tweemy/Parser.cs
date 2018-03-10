@@ -16,7 +16,7 @@ namespace Tweemy
 
             foreach (var item in data)
             {
-                string s = item.Trim(' ',',','-','!','#','&' );
+                string s = item.Trim(' ',',','-','!','#','&','.' );
            
                 if (reg.IsMatch(s))
                 {
