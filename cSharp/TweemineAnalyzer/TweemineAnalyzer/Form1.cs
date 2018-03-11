@@ -15,6 +15,7 @@ namespace TweemineAnalyzer
 {
     public partial class Form1 : Form
     {
+        #region Variables
         //we need all read tweets so we need this glob. var.
         TweetData[] tweetDatas;
         LabeledTweetData[] labeledTweetDatas;
@@ -24,13 +25,16 @@ namespace TweemineAnalyzer
         int currentTweetIndex = 0;
         int currentLabeledDataIndex = 0;
 
-        string tweetsPath = @"..\..\..\..\..\python\tweets.json";
+        string tweetsPath =Path.Combine("..","..","..","..","..","python","tweets.json");
         string labeledTweetsPath = "labeledData.json";
+        #endregion
+
         public Form1()
         {
             InitializeComponent();
+            labeledTweetDataList = new List<LabeledTweetData>();
         }
-
+        #region ComponentsEvents
         private void Form1_Load(object sender, EventArgs e)
         {
            tweetDatas = ReadTweetsFromJsonFile(tweetsPath);
@@ -76,14 +80,16 @@ namespace TweemineAnalyzer
             for (int i = 0; i 
                 < labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].words.Length; i++)
             {
-                rawTweet += labeledTweetDatas[currentLabeledDataIndex].words[i] + " ";
+                rawTweet += labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].words[i] + " ";
             }
 
             if (tweetDatas.Length > 0)
             {
                 //we can write asked tweet data. currentTweetIndex % tweetDatas.Length --> we can go over tweets so
                 //we can start from 0
-                lblTweetText.Text = labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].label;
+                lblTweetText.Text = "Tweet :"+rawTweet+
+                    "\n\nLabel:"+labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].label+
+                    "\n\nUser :" + labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].user;
             }
             else
             {
@@ -105,6 +111,15 @@ namespace TweemineAnalyzer
                labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
             }
         }
+        private void btnTag_Click(object sender, EventArgs e)
+        {
+            string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex].Tweet).ToArray();
+            string labelT = cmbTags.Text;
+            string userT = cmbUserName.Text;
+
+            labeledTweetDataList.Add(new LabeledTweetData() { label = labelT, words = wordsT, user = userT });
+        }
+        #endregion
         #region FileReadWrite
         /// <summary>
         /// reads tweets from a file
@@ -130,12 +145,19 @@ namespace TweemineAnalyzer
         LabeledTweetData[] ReadLabeledDataFromJsonFile(string path)
         {
             LabeledTweetData[] labeledTweets;
-            using (TextReader reader = new StreamReader(path, Encoding.UTF8))
+            using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
             {
                 //Reading the json File
                 string context = reader.ReadToEnd();
+
+                //we have a string looks like "[\\{obj\\},\\{obj2\\}]" so we are removing things that json doesnt understand 
+                context = context.Replace("\\", string.Empty);
+                context = context.Trim('"');
                 //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
-                labeledTweets = JsonConvert.DeserializeObject<LabeledTweetData[]>(context);
+                labeledTweets = JsonConvert.DeserializeObject<LabeledTweetData[]>(context, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
                 //close the file
                 reader.Close();
 
@@ -167,6 +189,7 @@ namespace TweemineAnalyzer
     {
         public string[] words;
         public string label;
+        public string user;
     }
     #endregion
 }
