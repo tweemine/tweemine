@@ -19,3 +19,16 @@ C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.pdb
 C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\bin\Debug\Newtonsoft.Json.dll
 C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\bin\Debug\Newtonsoft.Json.xml
 C:\Users\S0FTS4M\Documents\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.Form1.resources
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\bin\Debug\Tweemy.exe.config
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\bin\Debug\Tweemy.exe
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\bin\Debug\Tweemy.pdb
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csprojResolveAssemblyReference.cache
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.Form1.resources
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.Properties.Resources.resources
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csproj.GenerateResource.cache
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csproj.CoreCompileInputs.cache
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.csproj.CopyComplete
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.exe
+C:\Users\sml_o\Documents\GitHub\tweemine\c_sharp\Tweemy\obj\Debug\Tweemy.pdb

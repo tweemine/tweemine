@@ -16,8 +16,9 @@ namespace Tweemy
     public partial class Form1 : Form
     {
         int index = 0;
-        Tweets[] array;
+        Tweets[] readTweetArray;
         TTData[] arrayTdata;
+        dynamic labeledData;
         public Form1()
         {
             InitializeComponent();
@@ -30,61 +31,95 @@ namespace Tweemy
             listBox1.Items.AddRange(Parser.ParseTheText(lblTweet.Text).ToArray());
             TTData tTData = new TTData();
             tTData.words = Parser.ParseTheText(lblTweet.Text).ToArray();
-            tTData.label = string.IsNullOrEmpty(txtLabel.Text.Trim())?"Belirsiz":txtLabel.Text.Trim();
+            tTData.label = cmbTags.Text.Trim();
             serializableData.Add(tTData);
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        { 
+                ReadRawTweets();
+                ReadLabeledData();
+        }
+        //we are gonna read from the file which is in the python folder and we are in debug folder
+        //cd .. -> change directory back
+        void ReadRawTweets()
         {
-            //we are gonna read from the file which is in the python folder and we are in debug folder
-            //cd .. -> change directory back
-            StreamReader streamReader = new StreamReader(@"..\..\..\..\python\tweets.json");
 
-            string jsonTweets = streamReader.ReadToEnd();
-            
-            array = JsonConvert.DeserializeObject<Tweets[]>(jsonTweets);
+            using (StreamReader streamReader = new StreamReader(@"..\..\..\..\..\python\tweets.json"))
+            {
+                try
+                {
+                    string jsonTweets = streamReader.ReadToEnd();
 
-            lblTweet.Text = array[index++].Tweet;
+                    readTweetArray = JsonConvert.DeserializeObject<Tweets[]>(jsonTweets);
 
-            //we are reading labeled data from a file
+                    lblTweet.Text = readTweetArray[index++].Tweet;
+                }
+                catch
+                {
+                    streamReader.Close();
+                }
+                finally
+                {
+                    streamReader.Close();
+                }
+            }
+        }
+        //we are reading labeled data from a file
+        void ReadLabeledData()
+        {
+            using (TextReader textreader = new StreamReader("labeledData.json",Encoding.UTF8))
+            {
+                try
+                {
+                    string jsonTweets = textreader.ReadToEnd();
 
-             streamReader = new StreamReader(@"labeledData.json");
-
-             jsonTweets = streamReader.ReadToEnd();
-
-            arrayTdata = JsonConvert.DeserializeObject<TTData[]>(jsonTweets);
-
-            streamReader.Close();
-
-
-            //username[i%2=0]
-            //tweet   [i%2=1]
-
-
-
-            //listBox1.Items.AddRange(tweetList.ToArray());
+                    
+                    arrayTdata = JsonConvert.DeserializeObject<TTData[]>(jsonTweets);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    textreader.Close();
+                }
+                finally
+                {
+                    textreader.Close();
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            lblTweet.Text = array[(index++)%array.Length].Tweet;
+            lblTweet.Text = readTweetArray[(index++)%readTweetArray.Length].Tweet;
         }
 
         private void btnSaveJson_Click(object sender, EventArgs e)
         {
             //we are writing the labeled data to a file
             TextWriter textWriter=new StreamWriter("labeledData.json");
-         JsonSerializer jsonSer= JsonSerializer.Create();
+            JsonSerializer jsonSer = new JsonSerializer();
             string json = JsonConvert.SerializeObject(serializableData.ToArray());
             jsonSer.Serialize(textWriter, json);
+            
             textWriter.Close();
             
         }
-        int i = 0;
+        int labeledTweetIndex = 0;
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void btnLabeled_Click(object sender, EventArgs e)
         {
-            lblTweet.Text = arrayTdata[i++].words[0] + arrayTdata[i].label;
+            string tweet = "";
+            for (int i = 0; i < arrayTdata[i++].words.Length; i++)
+            {
+                tweet += arrayTdata[i++].words[i]+ " ";
+            }
+            lblTweet.Text = "Tweet:" +tweet+ "\nLabel:["+ arrayTdata[labeledTweetIndex].label+"]";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ReadLabeledData();
         }
     }
     class Tweets
