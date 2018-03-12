@@ -24,3 +24,4 @@ C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyze
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.CopyComplete
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.exe
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.pdb
+C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.toggle.resources
