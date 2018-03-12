@@ -64,6 +64,7 @@
             this.Controls.Add(this.button1);
             this.Name = "toggle";
             this.Size = new System.Drawing.Size(161, 33);
+            this.Load += new System.EventHandler(this.toggle_Load);
             this.ResumeLayout(false);
 
         }

@@ -72,7 +72,6 @@
             this.btnNextTweet.Text = ">";
             this.toolTip1.SetToolTip(this.btnNextTweet, "Next Tweet");
             this.btnNextTweet.UseVisualStyleBackColor = true;
-            this.btnNextTweet.Click += new System.EventHandler(this.NavigateTweets_Click);
             // 
             // btnPrevTweet
             // 
@@ -84,7 +83,6 @@
             this.btnPrevTweet.Text = "<";
             this.toolTip1.SetToolTip(this.btnPrevTweet, "Previous Tweet");
             this.btnPrevTweet.UseVisualStyleBackColor = true;
-            this.btnPrevTweet.Click += new System.EventHandler(this.NavigateTweets_Click);
             // 
             // btnWritetoJson
             // 
@@ -167,7 +165,6 @@
             this.btnTag.TabIndex = 1;
             this.btnTag.Text = "Tag";
             this.btnTag.UseVisualStyleBackColor = true;
-            this.btnTag.Click += new System.EventHandler(this.btnTag_Click);
             // 
             // cmbUserName
             // 
@@ -216,16 +213,17 @@
             // 
             // toggle1
             // 
-            this.toggle1.BackColor = System.Drawing.Color.LightBlue;
+            this.toggle1.BackColor = System.Drawing.Color.LightSeaGreen;
             this.toggle1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.toggle1.Location = new System.Drawing.Point(240, 269);
+            this.toggle1.Location = new System.Drawing.Point(250, 270);
             this.toggle1.Name = "toggle1";
-            this.toggle1.Size = new System.Drawing.Size(161, 34);
+            this.toggle1.Size = new System.Drawing.Size(161, 33);
+            this.toggle1.State = true;
             this.toggle1.TabIndex = 8;
-            this.toggle1.Toggle1Color = System.Drawing.Color.FloralWhite;
+            this.toggle1.Toggle1Color = System.Drawing.Color.MediumAquamarine;
             this.toggle1.Toggle1Text = "Tweet";
-            this.toggle1.Toggle2Color = System.Drawing.Color.LightBlue;
-            this.toggle1.Toggle2Text = "Labeled";
+            this.toggle1.Toggle2Color = System.Drawing.Color.LightSeaGreen;
+            this.toggle1.Toggle2Text = "Labeled Data";
             this.toggle1.ToggleChanged += new TweemineAnalyzer.toggle.Toggled(this.toggle1_ToggleChanged);
             // 
             // Form1

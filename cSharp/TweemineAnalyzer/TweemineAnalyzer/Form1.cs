@@ -34,6 +34,7 @@ namespace TweemineAnalyzer
         {
             InitializeComponent();
             labeledTweetDataList = new List<LabeledTweetData>();
+            toggle1.State = true;
         }
         #region ComponentsEvents
         private void Form1_Load(object sender, EventArgs e)
@@ -41,7 +42,6 @@ namespace TweemineAnalyzer
             tweetDatas = ReadTweetsFromJsonFile(tweetsPath);
             //when this form loads then show me the first tweet in the list
             NavigateTweets_Click(null, new EventArgs());
-            toggle1_ToggleChanged(false);
         }
 
         private void NavigateTweets_Click(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace TweemineAnalyzer
                 labels += labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].labels[i] + ",";
             }
             user = labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatasLength].user;
-            if (tweetDatas.Length > 0)
+            if (labeledTweetDatas.Length > 0)
             {
                 //we can write asked tweet data. currentTweetIndex % tweetDatas.Length --> we can go over tweets so
                 //we can start from 0
@@ -110,7 +110,7 @@ namespace TweemineAnalyzer
             }
             else
             {
-                lblTweetText.Text = "No Tweet data in the file";
+                lblTweetText.Text = "No labeled Tweet data in the file";
             }
         }
         private void ReadOrWriteToFile_Click(object sender, EventArgs e)
@@ -128,6 +128,10 @@ namespace TweemineAnalyzer
                 labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
             }
         }
+        private void btnLabeledTag_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
         private void btnTag_Click(object sender, EventArgs e)
         {
             List<string> labels = new List<string>();
@@ -136,7 +140,7 @@ namespace TweemineAnalyzer
                 labels.Add(item.ToString());
             }
 
-            string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex].Tweet).ToArray();
+            string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex%tweetDatas.Length].Tweet).ToArray();
             // = cmbTags.Text;
             string userT = cmbUserName.Text;
             string[] labelsT = labels.ToArray();
@@ -200,6 +204,7 @@ namespace TweemineAnalyzer
                 //write as json format in the file
                 jsonSerializer.Serialize(textWriter,
                                          jsonText);
+                textWriter.Close();
             }
         }
         #endregion
@@ -208,6 +213,7 @@ namespace TweemineAnalyzer
         {
             if(val==true)
             {
+                currentLabeledDataIndex = 0;
                 
                 btnNextTweet.Click -= NavigateLabeledData_Click;
                 btnNextTweet.Click += NavigateTweets_Click;
@@ -215,17 +221,23 @@ namespace TweemineAnalyzer
                 btnPrevTweet.Click -= NavigateLabeledData_Click;
                 btnPrevTweet.Click += NavigateTweets_Click;
 
+                btnTag.Click += btnTag_Click;
+                btnTag.Click -= btnLabeledTag_Click;
+
                 grpDataNavigation.Text = "Tweets";
             }
             else
             {
-                currentTweetIndex = 0;
+               // currentTweetIndex = 0;
                 
                 btnNextTweet.Click += NavigateLabeledData_Click;
                 btnNextTweet.Click -= NavigateTweets_Click;
 
                 btnPrevTweet.Click += NavigateLabeledData_Click;
                 btnPrevTweet.Click -= NavigateTweets_Click;
+
+                btnTag.Click -= btnTag_Click;
+                btnTag.Click += btnLabeledTag_Click;
 
                 grpDataNavigation.Text = "Labeled Data";
             }
