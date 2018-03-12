@@ -205,7 +205,8 @@
             "Sinirli",
             "Sevinçli",
             "Mutlu",
-            "Üzgün"});
+            "Üzgün",
+            "Kırılmış"});
             this.chcLstLabels.Location = new System.Drawing.Point(7, 22);
             this.chcLstLabels.Name = "chcLstLabels";
             this.chcLstLabels.Size = new System.Drawing.Size(95, 106);
