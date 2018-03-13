@@ -69,11 +69,14 @@ namespace TweemineAnalyzer
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             button1.Visible = true;
             button2.Visible = true;
             ((Button)sender).Visible = false;
             string tag = ((Button)sender).Tag.ToString();
+          
             bool buttonVal = bool.Parse(tag);
+            state = buttonVal;
             if (buttonVal == true)
             {
                 BackColor = Toggle1Color;
@@ -82,7 +85,9 @@ namespace TweemineAnalyzer
             {
                 BackColor = Toggle2Color;
             }
-            ToggleChanged?.Invoke(bool.Parse(tag));
+            ToggleChanged?.Invoke(buttonVal);
+
+           
 
         }
 

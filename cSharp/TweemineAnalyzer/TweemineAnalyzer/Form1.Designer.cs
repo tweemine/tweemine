@@ -72,6 +72,7 @@
             this.btnNextTweet.Text = ">";
             this.toolTip1.SetToolTip(this.btnNextTweet, "Next Tweet");
             this.btnNextTweet.UseVisualStyleBackColor = true;
+            this.btnNextTweet.Click += new System.EventHandler(this.Navigatebuttons_Click);
             // 
             // btnPrevTweet
             // 
@@ -83,22 +84,23 @@
             this.btnPrevTweet.Text = "<";
             this.toolTip1.SetToolTip(this.btnPrevTweet, "Previous Tweet");
             this.btnPrevTweet.UseVisualStyleBackColor = true;
+            this.btnPrevTweet.Click += new System.EventHandler(this.Navigatebuttons_Click);
             // 
             // btnWritetoJson
             // 
-            this.btnWritetoJson.Location = new System.Drawing.Point(72, 37);
+            this.btnWritetoJson.Location = new System.Drawing.Point(6, 38);
             this.btnWritetoJson.Name = "btnWritetoJson";
-            this.btnWritetoJson.Size = new System.Drawing.Size(60, 73);
+            this.btnWritetoJson.Size = new System.Drawing.Size(126, 73);
             this.btnWritetoJson.TabIndex = 2;
             this.btnWritetoJson.Tag = "true";
-            this.btnWritetoJson.Text = "WTJ";
+            this.btnWritetoJson.Text = "Write To json File";
             this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
             this.btnWritetoJson.UseVisualStyleBackColor = true;
             this.btnWritetoJson.Click += new System.EventHandler(this.ReadOrWriteToFile_Click);
             // 
             // btnReadFromJson
             // 
-            this.btnReadFromJson.Location = new System.Drawing.Point(6, 39);
+            this.btnReadFromJson.Location = new System.Drawing.Point(893, 179);
             this.btnReadFromJson.Name = "btnReadFromJson";
             this.btnReadFromJson.Size = new System.Drawing.Size(60, 71);
             this.btnReadFromJson.TabIndex = 2;
@@ -122,7 +124,6 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnWritetoJson);
-            this.groupBox3.Controls.Add(this.btnReadFromJson);
             this.groupBox3.Location = new System.Drawing.Point(591, 259);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(139, 132);
@@ -165,6 +166,7 @@
             this.btnTag.TabIndex = 1;
             this.btnTag.Text = "Tag";
             this.btnTag.UseVisualStyleBackColor = true;
+            this.btnTag.Click += new System.EventHandler(this.btnTag_Click);
             // 
             // cmbUserName
             // 
@@ -200,13 +202,17 @@
             // 
             // chcLstLabels
             // 
+            this.chcLstLabels.CheckOnClick = true;
             this.chcLstLabels.FormattingEnabled = true;
             this.chcLstLabels.Items.AddRange(new object[] {
+            "Belirsiz",
             "Sinirli",
             "Sevinçli",
             "Mutlu",
             "Üzgün",
-            "Kırılmış"});
+            "Kırılmış",
+            "Umutsuz",
+            "Mutsuz"});
             this.chcLstLabels.Location = new System.Drawing.Point(7, 22);
             this.chcLstLabels.Name = "chcLstLabels";
             this.chcLstLabels.Size = new System.Drawing.Size(95, 106);
@@ -231,8 +237,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 400);
+            this.ClientSize = new System.Drawing.Size(735, 400);
             this.Controls.Add(this.toggle1);
+            this.Controls.Add(this.btnReadFromJson);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbUserName);
