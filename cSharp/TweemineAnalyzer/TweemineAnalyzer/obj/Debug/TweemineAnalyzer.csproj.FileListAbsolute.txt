@@ -37,3 +37,15 @@ C:\Users\po288\OneDrive\Masaüstü\tweemine\cSharp\TweemineAnalyzer\TweemineAnal
 C:\Users\po288\OneDrive\Masaüstü\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Properties.Resources.resources
 C:\Users\po288\OneDrive\Masaüstü\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.toggle.resources
 C:\Users\po288\OneDrive\Masaüstü\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.GenerateResource.Cache
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.exe.config
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.exe
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.pdb
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.exe
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.pdb
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csprojResolveAssemblyReference.cache
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Form1.resources
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Properties.Resources.resources
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.toggle.resources
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.GenerateResource.Cache

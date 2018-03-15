@@ -55,7 +55,7 @@ namespace TweemineAnalyzer
             {
                 //if we dont have any data we can write current data and read from it
                 WriteToJsonFile(labeledTweetsPath, labeledTweetDataList.ToArray());
-                labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
+                labeledTweetDatas = labeledTweetDataList.ToArray();
             }
             //when this form loads then show me the first parsed tweet in the list
             NavigateLabeledData_Click(null, new EventArgs());
@@ -63,7 +63,6 @@ namespace TweemineAnalyzer
 
         private void NavigateLabeledData_Click(object sender, EventArgs e)
         {
-            //FIXME: we wont see the first data in the array when we click these navigation Buttons
             if(labeledTweetDatas==null )
             {
                 MessageBox.Show("You forgot to read from json??","Warning",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -187,12 +186,37 @@ namespace TweemineAnalyzer
             }
             else
             {
-
+                DeleteFeaturesFromLabeledData(e.Index);
+                UpdateShownData(0);
             }
 
 
         }
-        
+        private void DeleteFeaturesFromLabeledData(int newDataIndex)
+        {
+            LabeledTweetData labeled = labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatas.Length];
+            if (newDataIndex != -1)
+            {
+                string newLabels = "";
+                string newLabel = chcLstLabels.Items[newDataIndex].ToString(); 
+                if (labeled.labels != null)
+                {
+                    foreach (string item in labeled.labels)
+                    {
+                        if (newLabel != item)
+                            newLabels += item + ",";
+                    }
+                    newLabels = newLabels.TrimEnd(',');
+                    if (newLabels != string.Empty)
+                        labeled.labels = newLabels.Split(',');
+                    else
+                        labeled.labels = null;
+
+                }
+                if (cmbUserName.Text != string.Empty)
+                    labeled.user = cmbUserName.Text;
+            }
+        }
         private void AddFeaturesToLabeledData(int newDataIndex)
         {
             LabeledTweetData labeled = labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatas.Length];
