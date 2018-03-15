@@ -34,43 +34,31 @@ namespace TweemineAnalyzer
         {
             InitializeComponent();
             labeledTweetDataList = new List<LabeledTweetData>();
-            toggle1.State = true;
+           // toggle1.State = true;
         }
         #region ComponentsEvents
         private void Form1_Load(object sender, EventArgs e)
         {
             tweetDatas = ReadTweetsFromJsonFile(tweetsPath);
-            //when this form loads then show me the first tweet in the list
-            NavigateTweets_Click(null, new EventArgs());
-        }
-        private void Navigatebuttons_Click(object sender, EventArgs e)
-        {
-            if(toggle1.State==true)
+            foreach (TweetData item in tweetDatas)
             {
-                NavigateTweets_Click(sender, e);
+                //we are parsing every raw tweet data
+                ParseUnLabeledDatas();
+                currentTweetIndex++;
             }
-            else
-            {
-                NavigateLabeledData_Click(sender, e);
-            }
-        }
-        private void NavigateTweets_Click(object sender, EventArgs e)
-        {
-            currentLabeledDataIndex = 0;
-            int buttonVal = 0;
 
-            //we have a tag in every button for navigating tweets. so we can send them all here
-            if (sender != null)
-                buttonVal = int.Parse(((Button)sender).Tag.ToString());
-            currentTweetIndex += buttonVal;
-            //we need to check if we are under 0.
-            currentTweetIndex = currentTweetIndex < 0 ? tweetDatas.Length - 1 : currentTweetIndex;
-            //we can write asked tweet data. currentTweetIndex % tweetDatas.Length --> we can go over tweets so
-            //we can start from 0
-            if (tweetDatas.Length > 0)
-                lblTweetText.Text = tweetDatas[currentTweetIndex % tweetDatas.Length].Tweet;
-            else
-                lblTweetText.Text = "No Tweet data in the file";
+            //we are reading labeled datas and we are not overwriting it
+            //FIXME: after we parsed raw tweet data we need to append these datas on current labeled datas
+            //be careful about taking same old tweets everytime
+            labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
+            if (labeledTweetDatas == null || labeledTweetDatas.Length == 0)
+            {
+                //if we dont have any data we can write current data and read from it
+                WriteToJsonFile(labeledTweetsPath, labeledTweetDataList.ToArray());
+                labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
+            }
+            //when this form loads then show me the first parsed tweet in the list
+            NavigateLabeledData_Click(null, new EventArgs());
         }
 
         private void NavigateLabeledData_Click(object sender, EventArgs e)
@@ -92,7 +80,16 @@ namespace TweemineAnalyzer
             //we have a tag in every button for navigating tweets. so we can send them all here
             if (sender != null)
                 buttonVal = int.Parse(((Button)sender).Tag.ToString());
-            currentLabeledDataIndex += buttonVal;
+
+            UpdateShownData(buttonVal);
+           
+        }
+        //this shows the labeled tweet on appropriate label object
+        //increment takes values -1 0 1
+        private void UpdateShownData(int increment)
+        {
+            int labeledTweetDatasLength = labeledTweetDatas.Length;
+            currentLabeledDataIndex += increment;
             //we need to check if we are under 0.
             currentLabeledDataIndex = currentLabeledDataIndex < 0 ?
                 tweetDatas.Length - 1 : currentLabeledDataIndex;
@@ -100,32 +97,38 @@ namespace TweemineAnalyzer
             currentLabeledDataIndex = currentLabeledDataIndex % labeledTweetDatasLength;
 
             string rawTweet = "";
-            string labels="";
-            string user="None";
+            string labels = "";
+            string user = "None";
             int wordsLength = labeledTweetDatas[currentLabeledDataIndex].words.Length;
-            for (int i = 0; i <wordsLength ; i++)
+            for (int i = 0; i < wordsLength; i++)
             {
                 rawTweet += labeledTweetDatas[currentLabeledDataIndex].words[i] + " ";
             }
 
             ClearCheckedDataFromCheckedListBox(chcLstLabels);
-            int labelsLength = labeledTweetDatas[currentLabeledDataIndex].labels.Length;
-                for (int i = 0; i< labelsLength; i++)
+            //we already have this labels so we dont have to make changes on data thats why we unregister this event
+            UnregisterItemChekEvent(chcLstLabels_ItemCheck);
+            if (labeledTweetDatas[currentLabeledDataIndex].labels != null)
             {
-                string currentLabel = labeledTweetDatas[currentLabeledDataIndex].labels[i];
-                
-                
-                for (int j = 0; j < chcLstLabels.Items.Count; j++)
+                int labelsLength = labeledTweetDatas[currentLabeledDataIndex].labels.Length;
+                for (int i = 0; i < labelsLength; i++)
                 {
-                    if (chcLstLabels.Items[j].ToString() == currentLabel)
+                    string currentLabel = labeledTweetDatas[currentLabeledDataIndex].labels[i];
+
+
+                    for (int j = 0; j < chcLstLabels.Items.Count; j++)
                     {
-                        chcLstLabels.SetItemCheckState(j, CheckState.Checked);
-                        break;
+                        if (chcLstLabels.Items[j].ToString() == currentLabel)
+                        {
+                            chcLstLabels.SetItemCheckState(j, CheckState.Checked);
+                            break;
+                        }
+
                     }
-                 
-                } 
-                labels += currentLabel + ",";
+                    labels += currentLabel + ",";
+                }
             }
+            RegisterItemChekEvent(chcLstLabels_ItemCheck);
             user = labeledTweetDatas[currentLabeledDataIndex].user;
             labels = labels.TrimEnd(',');
             if (labeledTweetDatas.Length > 0)
@@ -141,9 +144,13 @@ namespace TweemineAnalyzer
                 lblTweetText.Text = "No labeled Tweet data in the file";
             }
         }
-
+        //when we click next data or prev data we need to clear every checked data in the list and 
+        //we need to check appropriate datas
         private void ClearCheckedDataFromCheckedListBox(CheckedListBox _chcLstLabels)
         {
+            //item check fires everytime we check or uncheck the object so we need to stop doing it while clearing data
+            //otherwise we will loose datas
+            UnregisterItemChekEvent(chcLstLabels_ItemCheck);
             for (int j = 0; j < _chcLstLabels.Items.Count; j++)
             {
                 if (_chcLstLabels.GetItemCheckState(j) == CheckState.Checked)
@@ -151,47 +158,65 @@ namespace TweemineAnalyzer
                     _chcLstLabels.SetItemCheckState(j, CheckState.Unchecked);
                 }
             }
+            RegisterItemChekEvent(chcLstLabels_ItemCheck);
         }
 
-        private void ReadOrWriteToFile_Click(object sender, EventArgs e)
+        private void WriteToFile_Click(object sender, EventArgs e)
         {
-            if (toggle1.State == true)
-            {
-                bool writeToFile = bool.Parse(((Button)sender).Tag.ToString());
+                WriteToJsonFile(labeledTweetsPath, labeledTweetDatas);
+                labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
+        }
+        private void RegisterItemChekEvent(ItemCheckEventHandler itemCheckEventHandler)
+        {
+            chcLstLabels.ItemCheck += itemCheckEventHandler;
+        }
+        private void UnregisterItemChekEvent(ItemCheckEventHandler itemCheckEventHandler)
+        {
+            chcLstLabels.ItemCheck -= itemCheckEventHandler;
+        }
+        private void chcLstLabels_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //FIXME we need to hanle unchecked state
+            //when we uncheck a data we need to update labels and shown text
 
-                if (writeToFile == true)
-                {
-                    //we need to write to json file labeled data
-                    WriteToJsonFile(labeledTweetsPath, labeledTweetDataList.ToArray());
-                }
-                else
-                {
-                    //read data from labeledTweets json file
-                    labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
-                }
+            if (e.NewValue == CheckState.Checked)
+            {
+                AddFeaturesToLabeledData(e.Index);
+                //show the data we changed
+                UpdateShownData(0);
             }
             else
             {
-                //we are writing the changed data to file. we are making changes in labeledTweetsPath
-                WriteToJsonFile(labeledTweetsPath, labeledTweetDatas);
+
             }
+
+
         }
-        private void btnLabeledTag_Click(object sender, EventArgs e)
+        
+        private void AddFeaturesToLabeledData(int newDataIndex)
         {
             LabeledTweetData labeled = labeledTweetDatas[currentLabeledDataIndex % labeledTweetDatas.Length];
             //we can only change label data and user data so we can update these datas
-            string newLables = "";
-
-            for (int i = 0; i < chcLstLabels.CheckedItems.Count; i++)
+            if (newDataIndex != -1)
             {
-                newLables += chcLstLabels.CheckedItems[i].ToString()+",";
+                string newLables = "";
+                string newLabel = chcLstLabels.Items[newDataIndex].ToString();
+                if (labeled.labels != null)
+                {
+                    foreach (string item in labeled.labels)
+                    {
+                        if (newLabel != item)
+                            newLables += item + ",";
+                    }
+                }
+                newLables += newLabel;
+                labeled.labels = newLables.Split(',');
             }
-            newLables = newLables.TrimEnd(',');
-            labeled.labels = newLables.Split(',');
-            labeled.user = cmbUserName.Text;
-
+            if (cmbUserName.Text != string.Empty)
+                labeled.user = cmbUserName.Text;
         }
-        private void buttonTag_Click(object sender, EventArgs e)
+
+        private void ParseLabeledDatas()
         {
             List<string> labels = new List<string>();
             foreach (var item in chcLstLabels.CheckedItems)
@@ -199,45 +224,18 @@ namespace TweemineAnalyzer
                 labels.Add(item.ToString());
             }
 
-            string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex%tweetDatas.Length].Tweet).ToArray();
+            string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex % tweetDatas.Length].Tweet).ToArray();
             // = cmbTags.Text;
             string userT = cmbUserName.Text;
             string[] labelsT = labels.ToArray();
 
             labeledTweetDataList.Add(new LabeledTweetData() { labels = labelsT, words = wordsT, user = userT });
         }
-        private void toggle1_ToggleChanged(bool val)
-        {
 
-            if (val == true)
-            {
-                currentLabeledDataIndex = 0;
-                ClearCheckedDataFromCheckedListBox(chcLstLabels);
-                grpDataNavigation.Text = "Tweets";
-            }
-            else
-            {
-                labeledTweetDatas = ReadLabeledDataFromJsonFile(labeledTweetsPath);
-                if (labeledTweetDatas == null || labeledTweetDatas.Length == 0)
-                {
-                    MessageBox.Show("There is no data in json file. Tag some tweets and save them in to labeledJson file");
-                    toggle1.State = true;
-                    return;
-                }
-                grpDataNavigation.Text = "Labeled Data";
-            }
-        }
-
-        private void btnTag_Click(object sender, EventArgs e)
+        private void ParseUnLabeledDatas()
         {
-            if (toggle1.State == true)
-            {
-                buttonTag_Click(sender, e);
-            }
-            else
-            {
-                btnLabeledTag_Click(sender, e);
-            }
+            string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex % tweetDatas.Length].Tweet).ToArray();
+            labeledTweetDataList.Add(new LabeledTweetData() { labels = null, words = wordsT, user = null });
         }
         #endregion
         #region FileReadWrite
@@ -299,9 +297,16 @@ namespace TweemineAnalyzer
                 textWriter.Close();
             }
         }
+
+
         #endregion
 
-       
+        private void cmbUserName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            AddFeaturesToLabeledData(-1);
+            UpdateShownData(0);
+        }
     }
     #region Classes
     class TweetData
