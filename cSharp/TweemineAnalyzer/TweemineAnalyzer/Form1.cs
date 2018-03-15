@@ -287,22 +287,28 @@ namespace TweemineAnalyzer
         LabeledTweetData[] ReadLabeledDataFromJsonFile(string path)
         {
             LabeledTweetData[] labeledTweets;
-            using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
+
+            try
             {
-                //Reading the json File
-                string context = reader.ReadToEnd();
-
-                //we have a string looks like "[\\{obj\\},\\{obj2\\}]" so we are removing things that json doesnt understand 
-                context = context.Replace("\\", string.Empty);
-                context = context.Trim('"');
-                //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
-                labeledTweets = JsonConvert.DeserializeObject<LabeledTweetData[]>(context, new JsonSerializerSettings
+                using (StreamReader reader = new StreamReader(path, Encoding.UTF8))
                 {
-                    NullValueHandling = NullValueHandling.Ignore
-                });
-                //close the file
-                reader.Close();
+                    //Reading the json File
+                    string context = reader.ReadToEnd();
 
+                    //we have a string looks like "[\\{obj\\},\\{obj2\\}]" so we are removing things that json doesnt understand 
+                    context = context.Replace("\\", string.Empty);
+                    context = context.Trim('"');
+                    //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
+                    labeledTweets = JsonConvert.DeserializeObject<LabeledTweetData[]>(context, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore
+                    });
+                    //close the file
+                    reader.Close();
+                }
+            } catch {
+                // if there is no labelled data, return null.
+                return null;
             }
 
             return labeledTweets;
