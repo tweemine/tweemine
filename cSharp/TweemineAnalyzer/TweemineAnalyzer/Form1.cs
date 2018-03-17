@@ -35,8 +35,6 @@ namespace TweemineAnalyzer
         #region ComponentsEvents
         private void Form1_Load(object sender, EventArgs e)
         {
-            //when this form loads then show me the first parsed tweet in the list
-            NavigateLabeledData_Click(null, new EventArgs());
         }
 
         void ParseTweets()
@@ -57,87 +55,87 @@ namespace TweemineAnalyzer
 
         private void NavigateLabeledData_Click(object sender, EventArgs e)
         {
-            //if(labeledTweetDatas==null )
-            //{
-            //    MessageBox.Show("You forgot to read from json??","Warning",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            //    return;
-            //}
-            //if( labeledTweetDatas.Length == 0)
-            //{
-            //    MessageBox.Show("you dont have any labeled data in json","Info",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            //    return;
-            //}
+            if(tweetDatas==null )
+            {
+                MessageBox.Show("You forgot to read from json??","Warning",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            if (tweetDatas.Length == 0)
+            {
+                MessageBox.Show("you dont have any labeled data in json", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             //currentTweetIndex = 0;
-            //int labeledTweetDatasLength = labeledTweetDatas.Length;
-            //int buttonVal = 0;
-            ////we have a tag in every button for navigating tweets. so we can send them all here
-            //if (sender != null)
-            //    buttonVal = int.Parse(((Button)sender).Tag.ToString());
+            //int tweetDatasLength = tweetDatas.Length;
+            int buttonVal = 0;
+            //we have a tag in every button for navigating tweets. so we can send them all here
+            if (sender != null)
+                buttonVal = int.Parse(((Button)sender).Tag.ToString());
 
-            //UpdateShownData(buttonVal);
-           
+            UpdateShownData(buttonVal);
+
         }
 
         //this shows the labeled tweet on appropriate label object
         //increment takes values -1 0 1
         private void UpdateShownData(int increment)
         {
-            //int labeledTweetDatasLength = labeledTweetDatas.Length;
-            //currentLabeledDataIndex += increment;
+            int tweetDatasLength = tweetDatas.Length;
+            currentTweetIndex += increment;
             ////we need to check if we are under 0.
-            //currentLabeledDataIndex = currentLabeledDataIndex < 0 ?
-            //    tweetDatas.Length - 1 : currentLabeledDataIndex;
+            currentTweetIndex = currentTweetIndex < 0 ?
+                tweetDatas.Length - 1 : currentTweetIndex;
 
-            //currentLabeledDataIndex = currentLabeledDataIndex % labeledTweetDatasLength;
+            currentTweetIndex = currentTweetIndex % tweetDatasLength;
 
-            //string rawTweet = "";
-            //string labels = "";
-            //string user = "None";
-            //int wordsLength = labeledTweetDatas[currentLabeledDataIndex].words.Length;
-            //for (int i = 0; i < wordsLength; i++)
-            //{
-            //    rawTweet += labeledTweetDatas[currentLabeledDataIndex].words[i] + " ";
-            //}
+            string rawTweet = "";
+            string labels = "";
+            string user = "None";
+            int wordsLength = tweetDatas[currentTweetIndex].words.Length;
+            for (int i = 0; i < wordsLength; i++)
+            {
+                rawTweet += tweetDatas[currentTweetIndex].words[i] + " ";
+            }
 
-            //ClearCheckedDataFromCheckedListBox(chcLstLabels);
+            ClearCheckedDataFromCheckedListBox(chcLstLabels);
             ////we already have this labels so we dont have to make changes on data thats why we unregister this event
-            //UnregisterItemChekEvent(chcLstLabels_ItemCheck);
-            //if (labeledTweetDatas[currentLabeledDataIndex].labels != null)
-            //{
-            //    int labelsLength = labeledTweetDatas[currentLabeledDataIndex].labels.Length;
-            //    for (int i = 0; i < labelsLength; i++)
-            //    {
-            //        string currentLabel = labeledTweetDatas[currentLabeledDataIndex].labels[i];
+            UnregisterItemChekEvent(chcLstLabels_ItemCheck);
+            if (tweetDatas[currentTweetIndex].labels != null)
+            {
+                int labelsLength = tweetDatas[currentTweetIndex].labels.Length;
+                for (int i = 0; i < labelsLength; i++)
+                {
+                    string currentLabel = tweetDatas[currentTweetIndex].labels[i];
 
 
-            //        for (int j = 0; j < chcLstLabels.Items.Count; j++)
-            //        {
-            //            if (chcLstLabels.Items[j].ToString() == currentLabel)
-            //            {
-            //                chcLstLabels.SetItemCheckState(j, CheckState.Checked);
-            //                break;
-            //            }
+                    for (int j = 0; j < chcLstLabels.Items.Count; j++)
+                    {
+                        if (chcLstLabels.Items[j].ToString() == currentLabel)
+                        {
+                            chcLstLabels.SetItemCheckState(j, CheckState.Checked);
+                            break;
+                        }
 
-            //        }
-            //        labels += currentLabel + ",";
-            //    }
-            //}
+                    }
+                    labels += currentLabel + ",";
+                }
+            }
 
-            //RegisterItemChekEvent(chcLstLabels_ItemCheck);
-            //user = labeledTweetDatas[currentLabeledDataIndex].user;
-            //labels = labels.TrimEnd(',');
-            //if (labeledTweetDatas.Length > 0)
-            //{
-            //    //we can write asked tweet data. currentTweetIndex % tweetDatas.Length --> we can go over tweets so
-            //    //we can start from 0
-            //    lblTweetText.Text = "Tweet :" + rawTweet +
-            //        "\n\nLabel:" + labels +
-            //        "\n\nUser :" + user;
-            //}
-            //else
-            //{
-            //    lblTweetText.Text = "No labeled Tweet data in the file";
-            //}
+            RegisterItemChekEvent(chcLstLabels_ItemCheck);
+            user = tweetDatas[currentTweetIndex].user;
+            labels = labels.TrimEnd(',');
+            if (tweetDatas.Length > 0)
+            {
+                //we can write asked tweet data. currentTweetIndex % tweetDatas.Length --> we can go over tweets so
+                //we can start from 0
+                lblTweetText.Text = "Tweet :" + rawTweet +
+                    "\n\nLabel:" + labels +
+                    "\n\nUser :" + user;
+            }
+            else
+            {
+                lblTweetText.Text = "No parsed Tweet data in the file";
+            }
         }
 
         //when we click next data or prev data we need to clear every checked data in the list and 
@@ -364,6 +362,7 @@ namespace TweemineAnalyzer
                     tweetDatas = ReadTweetsFromJsonFile(tweetsPath);
 
                     ParseTweets();
+                    NavigateLabeledData_Click(null, new EventArgs());
                 }
                 else
                 {
