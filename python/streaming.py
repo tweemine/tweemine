@@ -18,7 +18,8 @@ consumer_secret = "XXXXXXXXXXXXXXXXXXXXX"
 listOfData=[]
 f = open("tweets.json","w")
 
-filterList=[u'a',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz',u'hüzün',u'sakin'  ]
+#filterList=[u'a',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz',u'hüzün',u'sakin'  ]
+filterList = [u'a', u'e', u'i', u'b', u'o', u'k', u'd']
 
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
@@ -32,7 +33,7 @@ class StdOutListener(StreamListener):
         if(text.startswith('RT')):
             return
         
-        data = {'Tweet': text }
+        data = {'tweet': text, 'labeled': False, 'words': [], 'labels': [], 'user': '' }
         listOfData.append(data)
         print text
 
@@ -59,27 +60,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth,l,tweet_mode = 'extended',truncated = 'false')
     
-    stream.filter(track=filterList,languages = ['tr'])
-    
-
-
-
-
-
-
-
-    
-
-
-
-    
-
-
-
-
-
-
-
-
-        
-    
+stream.filter(track=filterList,languages = ['tr'])
