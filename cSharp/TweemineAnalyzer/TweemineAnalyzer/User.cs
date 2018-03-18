@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace TweemineAnalyzer
 {
-    public class TweetData
+    public class User
     {
-        public string tweet;
-        public bool labeled;
-        public string[] words;
-        public User[] users;
+        public string name;
+        public string[] labels;
     }
 }

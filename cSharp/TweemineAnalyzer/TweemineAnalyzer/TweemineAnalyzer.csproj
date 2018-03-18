@@ -65,6 +65,7 @@
       <DependentUpon>toggle.cs</DependentUpon>
     </Compile>
     <Compile Include="TweetData.cs" />
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

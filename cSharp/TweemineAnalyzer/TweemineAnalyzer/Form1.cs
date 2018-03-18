@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace TweemineAnalyzer
 {
@@ -24,6 +17,8 @@ namespace TweemineAnalyzer
         string tweetsPath;
 
         int currentTweetIndex = 0;
+
+        int userIndex = 0;
 
         #endregion
 
@@ -62,7 +57,6 @@ namespace TweemineAnalyzer
         {
             int tweetDatasLength = tweetDatas.Length;
             currentTweetIndex += increment;
- 
             
             ////we need to check if we are under 0.
             currentTweetIndex = currentTweetIndex < 0 ?
@@ -70,27 +64,29 @@ namespace TweemineAnalyzer
 
             currentTweetIndex = currentTweetIndex % tweetDatasLength;
 
+            TweetData currTweet = tweetDatas[currentTweetIndex];
+            User currUser = currTweet.users[userIndex];
+
             string rawTweet = "";
             string labels = "";
-            string user = "None";
-            int wordsLength = tweetDatas[currentTweetIndex].words.Length;
+            string user = "";
 
-
+            int wordsLength = currTweet.words.Length;
             for (int i = 0; i < wordsLength; i++)
             {
-                rawTweet += tweetDatas[currentTweetIndex].words[i] + " ";
+                rawTweet += currTweet.words[i] + " ";
             }
 
             ClearCheckedDataFromCheckedListBox(chcLstLabels);
 
-            // we already have this labels so we dont have to make changes on data thats why we unregister this event
+           // we already have this labels so we dont have to make changes on data thats why we unregister this event
             UnregisterItemCheckEvent(chcLstLabels_ItemCheck);
-            if (tweetDatas[currentTweetIndex].labels != null)
+            if (currUser.labels != null)
             {
-                int labelsLength = tweetDatas[currentTweetIndex].labels.Length;
+                int labelsLength = currUser.labels.Length;
                 for (int i = 0; i < labelsLength; i++)
                 {
-                    string currentLabel = tweetDatas[currentTweetIndex].labels[i];
+                    string currentLabel = currUser.labels[i];
 
                     for (int j = 0; j < chcLstLabels.Items.Count; j++)
                     {
@@ -108,8 +104,7 @@ namespace TweemineAnalyzer
             RegisterItemCheckEvent(chcLstLabels_ItemCheck);
             labels = labels.TrimEnd(',', ' ');
 
-            user = tweetDatas[currentTweetIndex].user;
-            cmbUserName.Text = user;            
+            cmbUserName.Text = currUser.name;            
 
             if (tweetDatas.Length > 0)
             {
@@ -117,7 +112,7 @@ namespace TweemineAnalyzer
                 //we can start from 0
                 lblTweetText.Text = "Tweet: " + rawTweet +
                     "\n\nLabel: " + labels +
-                    "\n\nUser: " + user;
+                    "\n\nUser: " + currUser.name;
             }
             else
             {
@@ -176,11 +171,12 @@ namespace TweemineAnalyzer
         private void DeleteFeaturesFromLabeledData(int newDataIndex)
         {
             TweetData currTweet = tweetDatas[currentTweetIndex];
+            User currUser = currTweet.users[userIndex];
 
             string newLabel = chcLstLabels.Items[newDataIndex].ToString();
-            List<string> newLabels = new List<string>(currTweet.labels);
+            List<string> newLabels = new List<string>(currUser.labels);
 
-            if (currTweet.labels != null || currTweet.labels.Length != 0)
+            if (currUser.labels != null || currUser.labels.Length != 0)
             {
                 newLabels.Remove(newLabel);
 
@@ -188,55 +184,27 @@ namespace TweemineAnalyzer
                     currTweet.labeled = false;
                 else
                     currTweet.labeled = true;
-
-                currTweet.labels = newLabels.ToArray();
             }
+
+            currUser.labels = newLabels.ToArray();
         }
 
         private void AddFeaturesToLabeledData(int newDataIndex)
         {
             TweetData currTweet = tweetDatas[currentTweetIndex];
-
+            User currUser = currTweet.users[userIndex];
             string newLabel = chcLstLabels.Items[newDataIndex].ToString();
-            List<string> newLabels = new List<string>(currTweet.labels);
 
-            if (currTweet.labels != null)
-            {
-                newLabels.Add(newLabel);
+            List<string> newLabels = (currUser.labels == null) ? new List<string>() : new List<string>(currUser.labels);
 
-                currTweet.labeled = true;
-                currTweet.labels = newLabels.ToArray();
-            }
-        }
-
-        private void ParseLabeledDatas()
-        {
-            //List<string> labels = new List<string>();
-            //foreach (var item in chcLstLabels.CheckedItems)
-            //{
-            //    labels.Add(item.ToString());
-            //}
-
-            //string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex % tweetDatas.Length].tweet).ToArray();
-            //// = cmbTags.Text;
-            //string userT = cmbUserName.Text;
-            //string[] labelsT = labels.ToArray();
-
-            //labeledTweetDataList.Add(new LabeledTweetData() { labels = labelsT, words = wordsT, user = userT });
-        }
-
-        private void ParseUnLabeledDatas()
-        {
-            //string[] wordsT = Parser.ParseTheText(tweetDatas[currentTweetIndex % tweetDatas.Length].tweet).ToArray();
-            //labeledTweetDataList.Add(new LabeledTweetData() { labels = null, words = wordsT, user = null });
+            newLabels.Add(newLabel);
+            currTweet.labeled = true;
+            currUser.labels = newLabels.ToArray();
         }
 
         private void cmbUserName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbUserName.Text == string.Empty)
-                return;
-
-            tweetDatas[currentTweetIndex].user = cmbUserName.Text;
+            userIndex = FindUserIndex();
             UpdateShownData(0);
         }
 
@@ -251,12 +219,23 @@ namespace TweemineAnalyzer
                     tweetsPath = openFileDialog.FileName;
                     tweetDatas = ReadTweetsFromJsonFile(tweetsPath);
 
-                    ParseTweets();
+                    // RegisterUsers() should be called before ParseTweets()
+                    // because we check words array is null or not in RegisterUsers().
+                    RegisterUsers();
+                    ParseTweets();           
+
+                    // save parsed tweets to json file.
+                    WriteToJsonFile(tweetsPath, tweetDatas);
+
+                    // Navigate to first tweet.
                     NavigateLabeledData_Click(null, new EventArgs());
+
+                    // Pick first user's labels.
+
                 }
                 else
                 {
-                    Console.WriteLine("Please choose a json file.");
+                    MessageBox.Show("Please choose a json file.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -306,6 +285,7 @@ namespace TweemineAnalyzer
         }
         #endregion
 
+        #region Some helper methods
         void ParseTweets()
         {
             foreach (TweetData data in tweetDatas)
@@ -318,8 +298,47 @@ namespace TweemineAnalyzer
                 }
             }
 
-            // save parsed tweets to json file.
-            WriteToJsonFile(tweetsPath, tweetDatas);
+            
         }
+
+        private void RegisterUsers()
+        {
+            List<User> users = new List<User>();
+
+            foreach (string user in cmbUserName.Items)
+            {
+                users.Add(new User()
+                {
+                    name = user,
+                    labels = null
+                });
+            }
+
+            for (int i = 0; i < tweetDatas.Length; i++)
+            {
+                //Console.WriteLine(tweetDatas[i].users[0].labels == null);
+                // If tweets are parsed before, we do not need to register users again.
+                if (tweetDatas[i].words != null && tweetDatas[i].words.Length > 0)
+                    continue;
+
+                tweetDatas[i].users = users.ToArray();
+            }
+        }
+
+        private int FindUserIndex()
+        {
+            string selectedUser = (string) cmbUserName.SelectedItem;
+            User[] users = tweetDatas[currentTweetIndex].users;
+
+            for (int i = 0; i < users.Length; i++)
+            {
+                if (users[i].name == selectedUser)
+                    return i;
+            }
+
+            // This should not be return never.
+            return -1;
+        }
+        #endregion
     }
 }
