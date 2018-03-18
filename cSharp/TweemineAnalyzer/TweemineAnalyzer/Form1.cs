@@ -11,6 +11,7 @@ namespace TweemineAnalyzer
     {
         #region Variables
 
+        string tagsPath = Path.Combine("..", "..", "..", "..", "..","tweets","tags.txt");
         //we need all read tweets so we need this glob. var.
         TweetData[] tweetDatas;
 
@@ -27,9 +28,19 @@ namespace TweemineAnalyzer
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            StreamReader stream = new StreamReader(tagsPath,Encoding.GetEncoding(1254));
+            while (!stream.EndOfStream)
+            {
+                chcLstLabels.Items.Add(stream.ReadLine());
+            }
+            stream.Close();
+        }
         #region ComponentsEvents
         private void NavigateLabeledData_Click(object sender, EventArgs e)
         {
+          
             if(tweetDatas == null )
             {
                 MessageBox.Show("You forgot to read from json??","Warning",MessageBoxButtons.OK,MessageBoxIcon.Error);
@@ -241,7 +252,18 @@ namespace TweemineAnalyzer
 
 
         }
+        private void btnAddTag_Click(object sender, EventArgs e)
+        {
+            if (txttag.Text == string.Empty)
+                return;
 
+            string data = txttag.Text;
+            StreamWriter writer = new StreamWriter(tagsPath, true);
+            writer.WriteLine(data);
+            chcLstLabels.Items.Add(data);
+            txttag.Clear();
+            writer.Close();
+        }
         #endregion
 
         #region FileReadWrite
@@ -339,6 +361,8 @@ namespace TweemineAnalyzer
             // This should not be return never.
             return -1;
         }
+
         #endregion
+
     }
 }

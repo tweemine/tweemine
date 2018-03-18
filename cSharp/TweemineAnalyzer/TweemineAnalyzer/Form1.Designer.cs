@@ -102,11 +102,11 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnWritetoJson);
-            this.groupBox3.Location = new System.Drawing.Point(541, 258);
+            this.groupBox3.Location = new System.Drawing.Point(620, 258);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(189, 132);
+            this.groupBox3.Size = new System.Drawing.Size(110, 132);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Labeled Data";
@@ -133,6 +133,7 @@
             this.btnAddTag.TabIndex = 3;
             this.btnAddTag.Text = "Add Tag";
             this.btnAddTag.UseVisualStyleBackColor = true;
+            this.btnAddTag.Click += new System.EventHandler(this.btnAddTag_Click);
             // 
             // txttag
             // 
@@ -172,7 +173,7 @@
             this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox5.Size = new System.Drawing.Size(117, 132);
+            this.groupBox5.Size = new System.Drawing.Size(197, 132);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Labels";
@@ -181,19 +182,10 @@
             // 
             this.chcLstLabels.CheckOnClick = true;
             this.chcLstLabels.FormattingEnabled = true;
-            this.chcLstLabels.Items.AddRange(new object[] {
-            "Belirsiz",
-            "Sinirli",
-            "Sevinçli",
-            "Mutlu",
-            "Üzgün",
-            "Kırılmış",
-            "Umutsuz",
-            "Mutsuz"});
             this.chcLstLabels.Location = new System.Drawing.Point(7, 22);
             this.chcLstLabels.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chcLstLabels.Name = "chcLstLabels";
-            this.chcLstLabels.Size = new System.Drawing.Size(95, 89);
+            this.chcLstLabels.Size = new System.Drawing.Size(172, 106);
             this.chcLstLabels.TabIndex = 2;
             this.chcLstLabels.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chcLstLabels_ItemCheck);
             // 
@@ -205,7 +197,7 @@
             // 
             this.openFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.openFileButton.Location = new System.Drawing.Point(579, 9);
-            this.openFileButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openFileButton.Margin = new System.Windows.Forms.Padding(4);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(151, 28);
             this.openFileButton.TabIndex = 8;
@@ -218,9 +210,9 @@
             this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
-            this.btnWritetoJson.Location = new System.Drawing.Point(38, 21);
+            this.btnWritetoJson.Location = new System.Drawing.Point(15, 35);
             this.btnWritetoJson.Name = "btnWritetoJson";
-            this.btnWritetoJson.Size = new System.Drawing.Size(114, 108);
+            this.btnWritetoJson.Size = new System.Drawing.Size(79, 72);
             this.btnWritetoJson.TabIndex = 9;
             this.btnWritetoJson.Text = "Write To json File";
             this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
@@ -243,6 +235,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Tweemine";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.grpDataNavigation.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
