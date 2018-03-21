@@ -33,6 +33,7 @@
             this.btnNextTweet = new System.Windows.Forms.Button();
             this.btnPrevTweet = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
             this.grpDataNavigation = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -44,16 +45,21 @@
             this.chcLstLabels = new System.Windows.Forms.CheckedListBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.openFileButton = new System.Windows.Forms.Button();
-            this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
+            this.btnDelTweet = new System.Windows.Forms.Button();
+            this.cntMnFile = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpDataNavigation.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.cntMnFile.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTweetText
             // 
             this.lblTweetText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTweetText.ContextMenuStrip = this.cntMnFile;
             this.lblTweetText.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblTweetText.Location = new System.Drawing.Point(16, 50);
             this.lblTweetText.Name = "lblTweetText";
@@ -65,7 +71,7 @@
             this.btnNextTweet.Location = new System.Drawing.Point(88, 21);
             this.btnNextTweet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNextTweet.Name = "btnNextTweet";
-            this.btnNextTweet.Size = new System.Drawing.Size(67, 90);
+            this.btnNextTweet.Size = new System.Drawing.Size(67, 49);
             this.btnNextTweet.TabIndex = 2;
             this.btnNextTweet.Tag = "1";
             this.btnNextTweet.Text = ">";
@@ -78,7 +84,7 @@
             this.btnPrevTweet.Location = new System.Drawing.Point(5, 21);
             this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrevTweet.Name = "btnPrevTweet";
-            this.btnPrevTweet.Size = new System.Drawing.Size(67, 90);
+            this.btnPrevTweet.Size = new System.Drawing.Size(67, 49);
             this.btnPrevTweet.TabIndex = 2;
             this.btnPrevTweet.Tag = "-1";
             this.btnPrevTweet.Text = "<";
@@ -86,8 +92,23 @@
             this.btnPrevTweet.UseVisualStyleBackColor = true;
             this.btnPrevTweet.Click += new System.EventHandler(this.NavigateLabeledData_Click);
             // 
+            // btnWritetoJson
+            // 
+            this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
+            this.btnWritetoJson.Location = new System.Drawing.Point(15, 35);
+            this.btnWritetoJson.Name = "btnWritetoJson";
+            this.btnWritetoJson.Size = new System.Drawing.Size(79, 72);
+            this.btnWritetoJson.TabIndex = 9;
+            this.btnWritetoJson.Text = "Write To json File";
+            this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
+            this.btnWritetoJson.UseVisualStyleBackColor = false;
+            this.btnWritetoJson.Click += new System.EventHandler(this.WriteToFile_Click);
+            // 
             // grpDataNavigation
             // 
+            this.grpDataNavigation.Controls.Add(this.btnDelTweet);
             this.grpDataNavigation.Controls.Add(this.btnNextTweet);
             this.grpDataNavigation.Controls.Add(this.btnPrevTweet);
             this.grpDataNavigation.Location = new System.Drawing.Point(240, 258);
@@ -205,25 +226,47 @@
             this.openFileButton.UseVisualStyleBackColor = true;
             this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
             // 
-            // btnWritetoJson
+            // btnDelTweet
             // 
-            this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
-            this.btnWritetoJson.Location = new System.Drawing.Point(15, 35);
-            this.btnWritetoJson.Name = "btnWritetoJson";
-            this.btnWritetoJson.Size = new System.Drawing.Size(79, 72);
-            this.btnWritetoJson.TabIndex = 9;
-            this.btnWritetoJson.Text = "Write To json File";
-            this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
-            this.btnWritetoJson.UseVisualStyleBackColor = false;
-            this.btnWritetoJson.Click += new System.EventHandler(this.WriteToFile_Click);
+            this.btnDelTweet.Location = new System.Drawing.Point(7, 74);
+            this.btnDelTweet.Name = "btnDelTweet";
+            this.btnDelTweet.Size = new System.Drawing.Size(148, 43);
+            this.btnDelTweet.TabIndex = 3;
+            this.btnDelTweet.Text = "Delete Tweet";
+            this.toolTip1.SetToolTip(this.btnDelTweet, "Delete this tweet from file. This wont be saving the file till you close the prog" +
+        "ram.");
+            this.btnDelTweet.UseVisualStyleBackColor = true;
+            this.btnDelTweet.Click += new System.EventHandler(this.btnDelTweet_Click);
+            // 
+            // cntMnFile
+            // 
+            this.cntMnFile.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cntMnFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.cntMnFile.Name = "cntMnFile";
+            this.cntMnFile.Size = new System.Drawing.Size(211, 80);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openFileButton_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.WriteToFile_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(748, 400);
+            this.ContextMenuStrip = this.cntMnFile;
             this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label2);
@@ -235,12 +278,14 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Tweemine";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grpDataNavigation.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
+            this.cntMnFile.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,6 +309,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button openFileButton;
         private CircleButton btnWritetoJson;
+        private System.Windows.Forms.Button btnDelTweet;
+        private System.Windows.Forms.ContextMenuStrip cntMnFile;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
 

@@ -1,9 +1,5 @@
-Belirsiz
-Sinirli
-Sevinçli
-Mutlu
-Üzgün
-Kýrýlmýþ
-Umutsuz
-Mutsuz
-
+Tarih
+Haber
+Spor
+Müzik
+DiðerGÃ¼ndem

@@ -10,6 +10,7 @@ namespace TweemineAnalyzer
     public partial class Form1 : Form
     {
         #region Variables
+        bool fileChanged=false;
 
         string tagsPath = Path.Combine("..", "..", "..", "..", "..","tweets","tags.txt");
         //we need all read tweets so we need this glob. var.
@@ -151,6 +152,7 @@ namespace TweemineAnalyzer
         private void WriteToFile_Click(object sender, EventArgs e)
         {
             WriteToJsonFile(tweetsPath, tweetDatas);
+            fileChanged = false;
         }
 
         private void RegisterItemCheckEvent(ItemCheckEventHandler itemCheckEventHandler)
@@ -165,7 +167,6 @@ namespace TweemineAnalyzer
 
         private void chcLstLabels_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            //FIXME we need to hanle unchecked state
             //when we uncheck a data we need to update labels and shown text
 
             Console.WriteLine(e.Index);
@@ -175,7 +176,9 @@ namespace TweemineAnalyzer
             else
                 DeleteFeaturesFromLabeledData(e.Index);
 
+            fileChanged = true;
             //show the data we changed
+
             UpdateShownData(0);
         }
 
@@ -364,5 +367,45 @@ namespace TweemineAnalyzer
 
         #endregion
 
+        private void btnDelTweet_Click(object sender, EventArgs e)
+        {
+            List<TweetData> tweets = new List<TweetData>(tweetDatas);
+            tweets.RemoveAt(currentTweetIndex);
+            tweetDatas = tweets.ToArray();
+            fileChanged = true;
+            UpdateShownData(0);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (fileChanged)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to save changed datas to file?", "Data Changed", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch (dialogResult)
+                {
+                    case DialogResult.None:
+                        break;
+                    case DialogResult.OK:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                    case DialogResult.Abort:
+                        break;
+                    case DialogResult.Retry:
+                        break;
+                    case DialogResult.Ignore:
+                        break;
+                    case DialogResult.Yes:
+                        WriteToJsonFile(tweetsPath, tweetDatas);
+                        break;
+                    case DialogResult.No:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
     }
 }
