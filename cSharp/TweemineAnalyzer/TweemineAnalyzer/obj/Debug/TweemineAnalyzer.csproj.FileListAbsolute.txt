@@ -54,6 +54,7 @@ D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.pdb
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\Newtonsoft.Json.dll
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\Newtonsoft.Json.xml
+D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Form1.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Properties.Resources.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.toggle.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.GenerateResource.cache
@@ -61,5 +62,3 @@ D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.CopyComplete
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.exe
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.pdb
-D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csprojResolveAssemblyReference.cache
-D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Form1.resources

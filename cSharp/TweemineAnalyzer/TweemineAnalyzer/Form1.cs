@@ -83,14 +83,16 @@ namespace TweemineAnalyzer
             User currUser = currTweet.users[userIndex];
 
             string rawTweet = "";
+            string tweet = "";
             string labels = "";
-            string user = "";
 
             int wordsLength = currTweet.words.Length;
             for (int i = 0; i < wordsLength; i++)
             {
-                rawTweet += currTweet.words[i] + " ";
+                tweet += currTweet.words[i] + " ";
             }
+
+            rawTweet = currTweet.tweet;
 
             ClearCheckedDataFromCheckedListBox(chcLstLabels);
 
@@ -125,7 +127,8 @@ namespace TweemineAnalyzer
             {
                 //we can write asked tweet data. currentTweetIndex % tweetDatas.Length --> we can go over tweets so
                 //we can start from 0
-                lblTweetText.Text = "Tweet: " + rawTweet +
+                lblTweetText.Text = "Raw tweet: " + rawTweet +
+                    "\n\nTweet: " + tweet +
                     "\n\nLabel: " + labels +
                     "\n\nUser: " + currUser.name;
             }
@@ -255,6 +258,7 @@ namespace TweemineAnalyzer
 
 
         }
+
         private void btnAddTag_Click(object sender, EventArgs e)
         {
             if (txttag.Text == string.Empty)
