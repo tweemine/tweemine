@@ -13,6 +13,8 @@ namespace TweemineAnalyzer
         bool fileChanged=false;
 
         string tagsPath = Path.Combine("..", "..", "..", "..", "..","tweets","tags.txt");
+        string txtFilePath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tweets.txt");
+
         //we need all read tweets so we need this glob. var.
         TweetData[] tweetDatas;
 
@@ -38,6 +40,7 @@ namespace TweemineAnalyzer
             }
             stream.Close();
         }
+
         #region ComponentsEvents
         private void NavigateLabeledData_Click(object sender, EventArgs e)
         {
@@ -243,9 +246,6 @@ namespace TweemineAnalyzer
 
                     // Navigate to first tweet.
                     NavigateLabeledData_Click(null, new EventArgs());
-
-                    // Pick first user's labels.
-
                 }
                 else
                 {
@@ -266,6 +266,47 @@ namespace TweemineAnalyzer
             chcLstLabels.Items.Add(data);
             txttag.Clear();
             writer.Close();
+        }
+
+        private void btnDelTweet_Click(object sender, EventArgs e)
+        {
+            List<TweetData> tweets = new List<TweetData>(tweetDatas);
+            tweets.RemoveAt(currentTweetIndex);
+            tweetDatas = tweets.ToArray();
+            fileChanged = true;
+            UpdateShownData(0);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (fileChanged)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to save changed datas to file?", "Data Changed", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch (dialogResult)
+                {
+                    case DialogResult.None:
+                        break;
+                    case DialogResult.OK:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                    case DialogResult.Abort:
+                        break;
+                    case DialogResult.Retry:
+                        break;
+                    case DialogResult.Ignore:
+                        break;
+                    case DialogResult.Yes:
+                        WriteToJsonFile(tweetsPath, tweetDatas);
+                        break;
+                    case DialogResult.No:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
         }
         #endregion
 
@@ -307,6 +348,33 @@ namespace TweemineAnalyzer
   
                 textWriter.Close();
             }
+        }
+
+        void WriteTweetsToTxtFile()
+        {
+            using (StreamWriter writer =
+            new StreamWriter(txtFilePath))
+            {
+                for(int i = 0; i < tweetDatas.Length; i++)
+                {
+                    string processedTweet = "";
+                    for(int j = 0; j < tweetDatas[i].words.Length; j++)
+                    {
+                        processedTweet += tweetDatas[i].words[j] + " ";
+                    }
+
+                    processedTweet.TrimEnd();
+
+                    writer.WriteLine(string.Format("raw tweet: {0}\n\n\n\n\n", tweetDatas[i].tweet));
+                    writer.WriteLine();
+                    writer.WriteLine(string.Format("processed tweet: {0}", processedTweet));
+                    writer.WriteLine();
+                    writer.WriteLine(string.Format("label: {0}", tweetDatas[i].users[0].labels));
+                    writer.WriteLine();
+                    writer.WriteLine();
+                }
+            }
+
         }
         #endregion
 
@@ -367,45 +435,6 @@ namespace TweemineAnalyzer
 
         #endregion
 
-        private void btnDelTweet_Click(object sender, EventArgs e)
-        {
-            List<TweetData> tweets = new List<TweetData>(tweetDatas);
-            tweets.RemoveAt(currentTweetIndex);
-            tweetDatas = tweets.ToArray();
-            fileChanged = true;
-            UpdateShownData(0);
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (fileChanged)
-            {
-                DialogResult dialogResult = MessageBox.Show("Would you like to save changed datas to file?", "Data Changed", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                switch (dialogResult)
-                {
-                    case DialogResult.None:
-                        break;
-                    case DialogResult.OK:
-                        break;
-                    case DialogResult.Cancel:
-                        e.Cancel = true;
-                        break;
-                    case DialogResult.Abort:
-                        break;
-                    case DialogResult.Retry:
-                        break;
-                    case DialogResult.Ignore:
-                        break;
-                    case DialogResult.Yes:
-                        WriteToJsonFile(tweetsPath, tweetDatas);
-                        break;
-                    case DialogResult.No:
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-        }
+        
     }
 }
