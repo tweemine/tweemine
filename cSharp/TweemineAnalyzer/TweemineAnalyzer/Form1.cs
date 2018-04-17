@@ -19,6 +19,7 @@ namespace TweemineAnalyzer
         TweetData[] tweetDatas;
 
         string tweetsPath;
+        string folderPath;
 
         int currentTweetIndex = 0;
 
@@ -26,14 +27,20 @@ namespace TweemineAnalyzer
 
         #endregion
 
+        #region Constructors
+
         public Form1()
         {
             InitializeComponent();
         }
+        
+        #endregion
+
+        #region ComponentsEvents
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StreamReader stream = new StreamReader(tagsPath,Encoding.GetEncoding(1254));
+            StreamReader stream = new StreamReader(tagsPath, Encoding.GetEncoding(1254));
             while (!stream.EndOfStream)
             {
                 chcLstLabels.Items.Add(stream.ReadLine());
@@ -41,7 +48,6 @@ namespace TweemineAnalyzer
             stream.Close();
         }
 
-        #region ComponentsEvents
         private void NavigateLabeledData_Click(object sender, EventArgs e)
         {
           
@@ -175,8 +181,6 @@ namespace TweemineAnalyzer
         {
             //when we uncheck a data we need to update labels and shown text
 
-            Console.WriteLine(e.Index);
-
             if (e.NewValue == CheckState.Checked)
                 AddFeaturesToLabeledData(e.Index);
             else
@@ -255,8 +259,6 @@ namespace TweemineAnalyzer
                     MessageBox.Show("Please choose a json file.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-
         }
 
         private void btnAddTag_Click(object sender, EventArgs e)
@@ -310,6 +312,28 @@ namespace TweemineAnalyzer
                         break;
                 }
 
+            }
+        }
+
+        private void combineButton_Click(object sender, EventArgs e)
+        {
+            // This are needed for selecting folders.
+            openFileDialog.ValidateNames = false;
+            openFileDialog.CheckFileExists = false;
+            openFileDialog.CheckPathExists = true;
+
+            string selectFolderStr = "Select_Folder";
+            openFileDialog.FileName = selectFolderStr;
+
+            DialogResult result = openFileDialog.ShowDialog();
+            
+            if (result == DialogResult.OK)
+            {
+                string path = openFileDialog.FileName;
+                path = path.Substring(0, path.Length - selectFolderStr.Length);
+                folderPath = path;
+
+                CombineAllJsonFiles(folderPath);
             }
         }
         #endregion
@@ -380,9 +404,30 @@ namespace TweemineAnalyzer
             }
 
         }
+        
+        void CombineAllJsonFiles(string path)
+        {
+            List<TweetData> allTweets = new List<TweetData>();
+            TweetData[] tweets = null;
+
+            string[] files = Directory.GetFiles(path);
+            foreach (string fileName in files)
+            {
+                if (fileName.EndsWith(".json") == false)
+                    continue;
+
+                tweets = ReadTweetsFromJsonFile(fileName);
+                allTweets.AddRange(tweets);
+            }
+
+            if (allTweets.Count != 0)
+                WriteToJsonFile(folderPath + "all_tweets.json", allTweets.ToArray());
+        }
+
         #endregion
 
-        #region Some helper methods
+        #region SomeHelperMethods
+
         void ParseTweets()
         {
             foreach (TweetData data in tweetDatas)
@@ -413,7 +458,6 @@ namespace TweemineAnalyzer
 
             for (int i = 0; i < tweetDatas.Length; i++)
             {
-                //Console.WriteLine(tweetDatas[i].users[0].labels == null);
                 // If tweets are parsed before, we do not need to register users again.
                 if (tweetDatas[i].words != null && tweetDatas[i].words.Length > 0)
                     continue;
@@ -436,9 +480,7 @@ namespace TweemineAnalyzer
             // This should not be return never.
             return -1;
         }
-
-        #endregion
-
         
+        #endregion
     }
 }

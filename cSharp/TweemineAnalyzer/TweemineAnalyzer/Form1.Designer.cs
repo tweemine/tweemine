@@ -48,6 +48,7 @@
             this.chcLstLabels = new System.Windows.Forms.CheckedListBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.openFileButton = new System.Windows.Forms.Button();
+            this.combineButton = new System.Windows.Forms.Button();
             this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
             this.cntMnFile.SuspendLayout();
             this.grpDataNavigation.SuspendLayout();
@@ -93,7 +94,7 @@
             // btnNextTweet
             // 
             this.btnNextTweet.Location = new System.Drawing.Point(66, 17);
-            this.btnNextTweet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNextTweet.Margin = new System.Windows.Forms.Padding(2);
             this.btnNextTweet.Name = "btnNextTweet";
             this.btnNextTweet.Size = new System.Drawing.Size(50, 40);
             this.btnNextTweet.TabIndex = 2;
@@ -106,7 +107,7 @@
             // btnPrevTweet
             // 
             this.btnPrevTweet.Location = new System.Drawing.Point(4, 17);
-            this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrevTweet.Name = "btnPrevTweet";
             this.btnPrevTweet.Size = new System.Drawing.Size(50, 40);
             this.btnPrevTweet.TabIndex = 2;
@@ -119,7 +120,7 @@
             // btnDelTweet
             // 
             this.btnDelTweet.Location = new System.Drawing.Point(5, 60);
-            this.btnDelTweet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelTweet.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelTweet.Name = "btnDelTweet";
             this.btnDelTweet.Size = new System.Drawing.Size(111, 35);
             this.btnDelTweet.TabIndex = 3;
@@ -135,9 +136,9 @@
             this.grpDataNavigation.Controls.Add(this.btnNextTweet);
             this.grpDataNavigation.Controls.Add(this.btnPrevTweet);
             this.grpDataNavigation.Location = new System.Drawing.Point(179, 331);
-            this.grpDataNavigation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpDataNavigation.Margin = new System.Windows.Forms.Padding(2);
             this.grpDataNavigation.Name = "grpDataNavigation";
-            this.grpDataNavigation.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpDataNavigation.Padding = new System.Windows.Forms.Padding(2);
             this.grpDataNavigation.Size = new System.Drawing.Size(121, 99);
             this.grpDataNavigation.TabIndex = 3;
             this.grpDataNavigation.TabStop = false;
@@ -147,9 +148,9 @@
             // 
             this.groupBox3.Controls.Add(this.btnWritetoJson);
             this.groupBox3.Location = new System.Drawing.Point(465, 331);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(82, 107);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
@@ -160,9 +161,9 @@
             this.groupBox4.Controls.Add(this.btnAddTag);
             this.groupBox4.Controls.Add(this.txttag);
             this.groupBox4.Location = new System.Drawing.Point(11, 331);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(164, 109);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
@@ -171,7 +172,7 @@
             // btnAddTag
             // 
             this.btnAddTag.Location = new System.Drawing.Point(28, 63);
-            this.btnAddTag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddTag.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddTag.Name = "btnAddTag";
             this.btnAddTag.Size = new System.Drawing.Size(88, 41);
             this.btnAddTag.TabIndex = 3;
@@ -182,7 +183,7 @@
             // txttag
             // 
             this.txttag.Location = new System.Drawing.Point(4, 32);
-            this.txttag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txttag.Margin = new System.Windows.Forms.Padding(2);
             this.txttag.Name = "txttag";
             this.txttag.Size = new System.Drawing.Size(155, 20);
             this.txttag.TabIndex = 2;
@@ -195,7 +196,7 @@
             "Mehmet Ali",
             "Melih"});
             this.cmbUserName.Location = new System.Drawing.Point(50, 10);
-            this.cmbUserName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbUserName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbUserName.Name = "cmbUserName";
             this.cmbUserName.Size = new System.Drawing.Size(145, 21);
             this.cmbUserName.TabIndex = 5;
@@ -215,9 +216,9 @@
             // 
             this.groupBox5.Controls.Add(this.chcLstLabels);
             this.groupBox5.Location = new System.Drawing.Point(313, 331);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(148, 107);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
@@ -228,7 +229,7 @@
             this.chcLstLabels.CheckOnClick = true;
             this.chcLstLabels.FormattingEnabled = true;
             this.chcLstLabels.Location = new System.Drawing.Point(5, 18);
-            this.chcLstLabels.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chcLstLabels.Margin = new System.Windows.Forms.Padding(2);
             this.chcLstLabels.Name = "chcLstLabels";
             this.chcLstLabels.Size = new System.Drawing.Size(130, 79);
             this.chcLstLabels.TabIndex = 2;
@@ -241,13 +242,24 @@
             // openFileButton
             // 
             this.openFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openFileButton.Location = new System.Drawing.Point(433, 7);
+            this.openFileButton.Location = new System.Drawing.Point(313, 8);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(113, 23);
             this.openFileButton.TabIndex = 8;
             this.openFileButton.Text = "Choose Tweet File";
             this.openFileButton.UseVisualStyleBackColor = true;
             this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
+            // 
+            // combineButton
+            // 
+            this.combineButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.combineButton.Location = new System.Drawing.Point(435, 8);
+            this.combineButton.Name = "combineButton";
+            this.combineButton.Size = new System.Drawing.Size(113, 23);
+            this.combineButton.TabIndex = 9;
+            this.combineButton.Text = "Combine All Tweets";
+            this.combineButton.UseVisualStyleBackColor = true;
+            this.combineButton.Click += new System.EventHandler(this.combineButton_Click);
             // 
             // btnWritetoJson
             // 
@@ -270,6 +282,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(560, 451);
             this.ContextMenuStrip = this.cntMnFile;
+            this.Controls.Add(this.combineButton);
             this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.label2);
@@ -278,7 +291,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grpDataNavigation);
             this.Controls.Add(this.lblTweetText);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Tweemine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -316,6 +329,7 @@
         private System.Windows.Forms.ContextMenuStrip cntMnFile;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Button combineButton;
     }
 }
 

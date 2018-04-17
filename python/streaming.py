@@ -18,8 +18,11 @@ consumer_secret = "XXXXXXXXXXXXXXXXXXXXX"
 listOfData=[]
 f = open("tweets.json","w")
 
-filterList=[u'a',u'üzgün',u'sinirli',u'agresif',u'hüzünlü',u'mutsuz',u'hüzün',u'sakin'  ]
-#filterList = [u'a', u'e', u'i', u'b', u'o', u'k', u'd']
+sport    = [ u'gol', u'hakem', u'turnuva', u'raket', u'galatasaray', u'lig', u'nba', u'uefa', u'puan durumu' ]
+news     = [ u'son dakika', u'haber', u'muhabir', u'nato' ]
+history  = [ u'osmanlı', u'ortaçağ', u'm.ö.', u'm.s.', u'yılında', u'uygarlığı' ]
+tvSeries = [ u'dizi', u'film', u'gişe', u'imdb', u'spoiler', u'twd', u'himym' ]
+music    = [ u'dinledim', u'spotify', u'playlist', u'şarkı', u'akor' ]
 
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
@@ -36,6 +39,7 @@ class StdOutListener(StreamListener):
         data = {'tweet': text, 'labeled': False, 'words': [], 'users': []}
         listOfData.append(data)
         print text
+        print "\n"
 
         if len(listOfData) >= 20:
             sys.exitfunc()
@@ -60,4 +64,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth,l,tweet_mode = 'extended',truncated = 'false')
     
-stream.filter(track=filterList,languages = ['tr'])
+stream.filter( track = sport, languages = ['tr'] )
