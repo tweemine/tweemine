@@ -19,7 +19,7 @@ namespace TweemineAnalyzer
         TweetData[] tweetDatas;
 
         string tweetsPath;
-        string folderPath;
+      //  string folderPath;
 
         int currentTweetIndex = 0;
 
@@ -317,23 +317,10 @@ namespace TweemineAnalyzer
 
         private void combineButton_Click(object sender, EventArgs e)
         {
-            // This are needed for selecting folders.
-            openFileDialog.ValidateNames = false;
-            openFileDialog.CheckFileExists = false;
-            openFileDialog.CheckPathExists = true;
-
-            string selectFolderStr = "Select_Folder";
-            openFileDialog.FileName = selectFolderStr;
-
-            DialogResult result = openFileDialog.ShowDialog();
-            
+            DialogResult result = folderBD.ShowDialog();
             if (result == DialogResult.OK)
             {
-                string path = openFileDialog.FileName;
-                path = path.Substring(0, path.Length - selectFolderStr.Length);
-                folderPath = path;
-
-                CombineAllJsonFiles(folderPath);
+                CombineAllJsonFiles(folderBD.SelectedPath);
             }
         }
         #endregion
@@ -410,18 +397,20 @@ namespace TweemineAnalyzer
             List<TweetData> allTweets = new List<TweetData>();
             TweetData[] tweets = null;
 
-            string[] files = Directory.GetFiles(path);
+            string[] files = Directory.GetFiles(path, "*.json");
+
             foreach (string fileName in files)
             {
-                if (fileName.EndsWith(".json") == false)
-                    continue;
+                //if (fileName.EndsWith(".json") == false)
+                //    continue;
 
                 tweets = ReadTweetsFromJsonFile(fileName);
+                if (fileName != "all_tweets.json")
+                    File.Delete(fileName);
                 allTweets.AddRange(tweets);
             }
-
             if (allTweets.Count != 0)
-                WriteToJsonFile(folderPath + "all_tweets.json", allTweets.ToArray());
+                WriteToJsonFile(Path.Combine(path, "all_tweets.json"), allTweets.ToArray());
         }
 
         #endregion

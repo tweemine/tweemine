@@ -9,14 +9,16 @@ import codecs
 import tweepy
 import atexit
 import sys
+import random
 
-access_token = "XXXXXXXXXXXX-XXXXXXXXXXXXX"
-access_token_secret = "XXXXXXXXXXXXXXXXXXXX"
-consumer_key = "XXXXXXXXXXXXXXXXXX"
-consumer_secret = "XXXXXXXXXXXXXXXXXXXXX"
+access_token = "2730466444-k6CP3c6oh3ilGUeksuF8pgFZZULdJu5VGLbZt3e"
+access_token_secret = "pcOZhhtBQLeKtUZolR4u0Mo6urJR9aYPDxsVXmwQ1hWBZ"
+consumer_key = "ik6fmv37Gg21e4dHRV54B2VcO"
+consumer_secret = "b34sTvlrbBFslkbnfVkJoxjunfV8cILw5m8fou8BAeMdtvPryp"
 
 listOfData=[]
-f = open("tweets.json","w")
+nameofFile=str(random.randint(0,1000))+" "+str(random.randint(0,1000));
+f = open("..\\tweets\\"+str(nameofFile)+".json","w")
 
 sport    = [ u'gol', u'hakem', u'turnuva', u'raket', u'galatasaray', u'lig', u'nba', u'uefa', u'puan durumu' ]
 news     = [ u'son dakika', u'haber', u'muhabir', u'nato' ]
@@ -41,7 +43,7 @@ class StdOutListener(StreamListener):
         print text
         print "\n"
 
-        if len(listOfData) >= 20:
+        if len(listOfData) >= 10:
             sys.exitfunc()
 
             
@@ -64,4 +66,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth,l,tweet_mode = 'extended',truncated = 'false')
     
-stream.filter( track = sport, languages = ['tr'] )
+stream.filter( track = news, languages = ['tr'] )

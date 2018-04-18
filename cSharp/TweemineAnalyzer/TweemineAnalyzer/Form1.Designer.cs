@@ -49,6 +49,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.openFileButton = new System.Windows.Forms.Button();
             this.combineButton = new System.Windows.Forms.Button();
+            this.folderBD = new System.Windows.Forms.FolderBrowserDialog();
             this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
             this.cntMnFile.SuspendLayout();
             this.grpDataNavigation.SuspendLayout();
@@ -62,10 +63,9 @@
             this.lblTweetText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblTweetText.ContextMenuStrip = this.cntMnFile;
             this.lblTweetText.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblTweetText.Location = new System.Drawing.Point(12, 41);
-            this.lblTweetText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTweetText.Location = new System.Drawing.Point(16, 50);
             this.lblTweetText.Name = "lblTweetText";
-            this.lblTweetText.Size = new System.Drawing.Size(536, 277);
+            this.lblTweetText.Size = new System.Drawing.Size(714, 340);
             this.lblTweetText.TabIndex = 0;
             // 
             // cntMnFile
@@ -75,28 +75,28 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.cntMnFile.Name = "cntMnFile";
-            this.cntMnFile.Size = new System.Drawing.Size(104, 48);
+            this.cntMnFile.Size = new System.Drawing.Size(115, 52);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openFileButton_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.WriteToFile_Click);
             // 
             // btnNextTweet
             // 
-            this.btnNextTweet.Location = new System.Drawing.Point(66, 17);
-            this.btnNextTweet.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNextTweet.Location = new System.Drawing.Point(88, 21);
+            this.btnNextTweet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNextTweet.Name = "btnNextTweet";
-            this.btnNextTweet.Size = new System.Drawing.Size(50, 40);
+            this.btnNextTweet.Size = new System.Drawing.Size(67, 49);
             this.btnNextTweet.TabIndex = 2;
             this.btnNextTweet.Tag = "1";
             this.btnNextTweet.Text = ">";
@@ -106,10 +106,10 @@
             // 
             // btnPrevTweet
             // 
-            this.btnPrevTweet.Location = new System.Drawing.Point(4, 17);
-            this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPrevTweet.Location = new System.Drawing.Point(5, 21);
+            this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrevTweet.Name = "btnPrevTweet";
-            this.btnPrevTweet.Size = new System.Drawing.Size(50, 40);
+            this.btnPrevTweet.Size = new System.Drawing.Size(67, 49);
             this.btnPrevTweet.TabIndex = 2;
             this.btnPrevTweet.Tag = "-1";
             this.btnPrevTweet.Text = "<";
@@ -119,10 +119,10 @@
             // 
             // btnDelTweet
             // 
-            this.btnDelTweet.Location = new System.Drawing.Point(5, 60);
-            this.btnDelTweet.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDelTweet.Location = new System.Drawing.Point(7, 74);
+            this.btnDelTweet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelTweet.Name = "btnDelTweet";
-            this.btnDelTweet.Size = new System.Drawing.Size(111, 35);
+            this.btnDelTweet.Size = new System.Drawing.Size(148, 43);
             this.btnDelTweet.TabIndex = 3;
             this.btnDelTweet.Text = "Delete Tweet";
             this.toolTip1.SetToolTip(this.btnDelTweet, "Delete this tweet from file. This wont be saving the file till you close the prog" +
@@ -135,11 +135,11 @@
             this.grpDataNavigation.Controls.Add(this.btnDelTweet);
             this.grpDataNavigation.Controls.Add(this.btnNextTweet);
             this.grpDataNavigation.Controls.Add(this.btnPrevTweet);
-            this.grpDataNavigation.Location = new System.Drawing.Point(179, 331);
-            this.grpDataNavigation.Margin = new System.Windows.Forms.Padding(2);
+            this.grpDataNavigation.Location = new System.Drawing.Point(239, 407);
+            this.grpDataNavigation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpDataNavigation.Name = "grpDataNavigation";
-            this.grpDataNavigation.Padding = new System.Windows.Forms.Padding(2);
-            this.grpDataNavigation.Size = new System.Drawing.Size(121, 99);
+            this.grpDataNavigation.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.grpDataNavigation.Size = new System.Drawing.Size(161, 122);
             this.grpDataNavigation.TabIndex = 3;
             this.grpDataNavigation.TabStop = false;
             this.grpDataNavigation.Text = "Tweets";
@@ -147,11 +147,11 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnWritetoJson);
-            this.groupBox3.Location = new System.Drawing.Point(465, 331);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Location = new System.Drawing.Point(620, 407);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(82, 107);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Size = new System.Drawing.Size(109, 132);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Labeled Data";
@@ -160,21 +160,21 @@
             // 
             this.groupBox4.Controls.Add(this.btnAddTag);
             this.groupBox4.Controls.Add(this.txttag);
-            this.groupBox4.Location = new System.Drawing.Point(11, 331);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Location = new System.Drawing.Point(15, 407);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(164, 109);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox4.Size = new System.Drawing.Size(219, 134);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Label Data";
             // 
             // btnAddTag
             // 
-            this.btnAddTag.Location = new System.Drawing.Point(28, 63);
-            this.btnAddTag.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddTag.Location = new System.Drawing.Point(37, 78);
+            this.btnAddTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddTag.Name = "btnAddTag";
-            this.btnAddTag.Size = new System.Drawing.Size(88, 41);
+            this.btnAddTag.Size = new System.Drawing.Size(117, 50);
             this.btnAddTag.TabIndex = 3;
             this.btnAddTag.Text = "Add Tag";
             this.btnAddTag.UseVisualStyleBackColor = true;
@@ -182,44 +182,41 @@
             // 
             // txttag
             // 
-            this.txttag.Location = new System.Drawing.Point(4, 32);
-            this.txttag.Margin = new System.Windows.Forms.Padding(2);
+            this.txttag.Location = new System.Drawing.Point(5, 39);
+            this.txttag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txttag.Name = "txttag";
-            this.txttag.Size = new System.Drawing.Size(155, 20);
+            this.txttag.Size = new System.Drawing.Size(205, 22);
             this.txttag.TabIndex = 2;
             // 
             // cmbUserName
             // 
             this.cmbUserName.FormattingEnabled = true;
             this.cmbUserName.Items.AddRange(new object[] {
-            "Şamil SOFTSAM",
-            "Mehmet Ali",
             "Melih"});
-            this.cmbUserName.Location = new System.Drawing.Point(50, 10);
-            this.cmbUserName.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbUserName.Location = new System.Drawing.Point(67, 12);
+            this.cmbUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbUserName.Name = "cmbUserName";
-            this.cmbUserName.Size = new System.Drawing.Size(145, 21);
+            this.cmbUserName.Size = new System.Drawing.Size(192, 24);
             this.cmbUserName.TabIndex = 5;
             this.cmbUserName.SelectedIndexChanged += new System.EventHandler(this.cmbUserName_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 12);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(12, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(46, 17);
             this.label2.TabIndex = 6;
             this.label2.Text = "User :";
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.chcLstLabels);
-            this.groupBox5.Location = new System.Drawing.Point(313, 331);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox5.Location = new System.Drawing.Point(417, 407);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(148, 107);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox5.Size = new System.Drawing.Size(197, 132);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Labels";
@@ -228,10 +225,10 @@
             // 
             this.chcLstLabels.CheckOnClick = true;
             this.chcLstLabels.FormattingEnabled = true;
-            this.chcLstLabels.Location = new System.Drawing.Point(5, 18);
-            this.chcLstLabels.Margin = new System.Windows.Forms.Padding(2);
+            this.chcLstLabels.Location = new System.Drawing.Point(7, 22);
+            this.chcLstLabels.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chcLstLabels.Name = "chcLstLabels";
-            this.chcLstLabels.Size = new System.Drawing.Size(130, 79);
+            this.chcLstLabels.Size = new System.Drawing.Size(172, 89);
             this.chcLstLabels.TabIndex = 2;
             this.chcLstLabels.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chcLstLabels_ItemCheck);
             // 
@@ -242,9 +239,10 @@
             // openFileButton
             // 
             this.openFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openFileButton.Location = new System.Drawing.Point(313, 8);
+            this.openFileButton.Location = new System.Drawing.Point(417, 10);
+            this.openFileButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(113, 23);
+            this.openFileButton.Size = new System.Drawing.Size(151, 28);
             this.openFileButton.TabIndex = 8;
             this.openFileButton.Text = "Choose Tweet File";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -253,9 +251,10 @@
             // combineButton
             // 
             this.combineButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.combineButton.Location = new System.Drawing.Point(435, 8);
+            this.combineButton.Location = new System.Drawing.Point(580, 10);
+            this.combineButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.combineButton.Name = "combineButton";
-            this.combineButton.Size = new System.Drawing.Size(113, 23);
+            this.combineButton.Size = new System.Drawing.Size(151, 28);
             this.combineButton.TabIndex = 9;
             this.combineButton.Text = "Combine All Tweets";
             this.combineButton.UseVisualStyleBackColor = true;
@@ -266,10 +265,10 @@
             this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
-            this.btnWritetoJson.Location = new System.Drawing.Point(11, 28);
-            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(2);
+            this.btnWritetoJson.Location = new System.Drawing.Point(15, 34);
+            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnWritetoJson.Name = "btnWritetoJson";
-            this.btnWritetoJson.Size = new System.Drawing.Size(59, 58);
+            this.btnWritetoJson.Size = new System.Drawing.Size(79, 71);
             this.btnWritetoJson.TabIndex = 9;
             this.btnWritetoJson.Text = "Write To json File";
             this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
@@ -278,9 +277,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 451);
+            this.ClientSize = new System.Drawing.Size(747, 555);
             this.ContextMenuStrip = this.cntMnFile;
             this.Controls.Add(this.combineButton);
             this.Controls.Add(this.openFileButton);
@@ -291,7 +290,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grpDataNavigation);
             this.Controls.Add(this.lblTweetText);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Tweemine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -330,6 +329,7 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Button combineButton;
+        private System.Windows.Forms.FolderBrowserDialog folderBD;
     }
 }
 
