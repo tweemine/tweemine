@@ -122,7 +122,19 @@ namespace NeuralNetwork
 			return error;
 		}
 
-		public static double Sigmoid(double x)
+        public static double Tanh(double x)
+        {
+            return 2f / (1f + Math.Exp(-2f * x)) - 1f;
+        }
+
+        public static double DerTanh(double x)
+        {
+            double tanh = Tanh(x);
+
+            return 1f - tanh * tanh;
+        }
+
+        public static double Sigmoid(double x)
 		{
 			return 1.0 / (1.0 + Math.Exp(-x));
 		}
