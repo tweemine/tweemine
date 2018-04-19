@@ -191,8 +191,6 @@
             // cmbUserName
             // 
             this.cmbUserName.FormattingEnabled = true;
-            this.cmbUserName.Items.AddRange(new object[] {
-            "Melih"});
             this.cmbUserName.Location = new System.Drawing.Point(67, 12);
             this.cmbUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbUserName.Name = "cmbUserName";
@@ -224,7 +222,6 @@
             // chcLstLabels
             // 
             this.chcLstLabels.CheckOnClick = true;
-            this.chcLstLabels.FormattingEnabled = true;
             this.chcLstLabels.Location = new System.Drawing.Point(7, 22);
             this.chcLstLabels.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chcLstLabels.Name = "chcLstLabels";
@@ -240,7 +237,7 @@
             // 
             this.openFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.openFileButton.Location = new System.Drawing.Point(417, 10);
-            this.openFileButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.openFileButton.Margin = new System.Windows.Forms.Padding(4);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(151, 28);
             this.openFileButton.TabIndex = 8;
@@ -252,13 +249,17 @@
             // 
             this.combineButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.combineButton.Location = new System.Drawing.Point(580, 10);
-            this.combineButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.combineButton.Margin = new System.Windows.Forms.Padding(4);
             this.combineButton.Name = "combineButton";
             this.combineButton.Size = new System.Drawing.Size(151, 28);
             this.combineButton.TabIndex = 9;
             this.combineButton.Text = "Combine All Tweets";
             this.combineButton.UseVisualStyleBackColor = true;
             this.combineButton.Click += new System.EventHandler(this.combineButton_Click);
+            // 
+            // folderBD
+            // 
+            this.folderBD.Description = "Select a folder that includes multiple json files to combine.";
             // 
             // btnWritetoJson
             // 
@@ -290,11 +291,13 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grpDataNavigation);
             this.Controls.Add(this.lblTweetText);
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Tweemine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.cntMnFile.ResumeLayout(false);
             this.grpDataNavigation.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);

@@ -469,7 +469,19 @@ namespace TweemineAnalyzer
             // This should not be return never.
             return -1;
         }
-        
+
         #endregion
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Left)
+            {
+                NavigateLabeledData_Click(btnPrevTweet, new EventArgs());
+            }
+            else if(e.KeyCode == Keys.Right)
+            {
+                NavigateLabeledData_Click(btnNextTweet, new EventArgs());
+            }
+        }
     }
 }
