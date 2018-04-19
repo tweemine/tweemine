@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace TweemineAnalyzer
 {
     public partial class Trainer : Form
     {
+        string filePath = "";
         public Trainer()
         {
             InitializeComponent();
@@ -88,6 +90,7 @@ namespace TweemineAnalyzer
             if(result == DialogResult.OK)
             {
                 txtFileName.Text = openFileDialog.SafeFileName;
+                filePath = openFileDialog.FileName;
             }
         }
     }

@@ -103,9 +103,9 @@
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnBrowse.Location = new System.Drawing.Point(326, 111);
+            this.btnBrowse.Location = new System.Drawing.Point(325, 105);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(80, 22);
+            this.btnBrowse.Size = new System.Drawing.Size(80, 35);
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = false;
@@ -267,6 +267,7 @@
             this.tbHiddenNeuronCount.LargeChange = 20;
             this.tbHiddenNeuronCount.Location = new System.Drawing.Point(221, 69);
             this.tbHiddenNeuronCount.Maximum = 100;
+            this.tbHiddenNeuronCount.Minimum = 10;
             this.tbHiddenNeuronCount.Name = "tbHiddenNeuronCount";
             this.tbHiddenNeuronCount.Size = new System.Drawing.Size(104, 51);
             this.tbHiddenNeuronCount.SmallChange = 2;
@@ -274,6 +275,7 @@
             this.tbHiddenNeuronCount.Tag = "HN";
             this.tbHiddenNeuronCount.TickFrequency = 10;
             this.tbHiddenNeuronCount.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbHiddenNeuronCount.Value = 10;
             this.tbHiddenNeuronCount.Scroll += new System.EventHandler(this.TrackBars_Scroll);
             // 
             // tbLearningRate
