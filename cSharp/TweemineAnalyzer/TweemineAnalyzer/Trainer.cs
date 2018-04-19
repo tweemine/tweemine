@@ -18,10 +18,6 @@ namespace TweemineAnalyzer
             pnlResults.Visible = false;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
         private void BtnAnnandResultButton_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
@@ -73,6 +69,26 @@ namespace TweemineAnalyzer
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void TrackBars_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar = ((TrackBar)sender);
+            if (trackBar.Tag.ToString() == "LR")
+                lblLearningRate.Text = ((trackBar.Value / 100.0f)).ToString();
+            else if (trackBar.Tag.ToString() == "HN")
+                lblHiddenNeuronCount.Text = trackBar.Value.ToString();
+            else
+                lblTestCount.Text = trackBar.Value.ToString()+" %";
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog.ShowDialog();
+            if(result == DialogResult.OK)
+            {
+                txtFileName.Text = openFileDialog.SafeFileName;
+            }
         }
     }
 }
