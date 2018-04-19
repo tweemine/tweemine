@@ -253,6 +253,8 @@ namespace TweemineAnalyzer
 
                     // Navigate to first tweet.
                     NavigateLabeledData_Click(null, new EventArgs());
+
+                    Analyser.Analyse(tweetDatas);
                 }
                 else
                 {
@@ -321,6 +323,18 @@ namespace TweemineAnalyzer
             if (result == DialogResult.OK)
             {
                 CombineAllJsonFiles(folderBD.SelectedPath);
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                NavigateLabeledData_Click(btnPrevTweet, new EventArgs());
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+                NavigateLabeledData_Click(btnNextTweet, new EventArgs());
             }
         }
         #endregion
@@ -470,18 +484,6 @@ namespace TweemineAnalyzer
             return -1;
         }
 
-        #endregion
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Left)
-            {
-                NavigateLabeledData_Click(btnPrevTweet, new EventArgs());
-            }
-            else if(e.KeyCode == Keys.Right)
-            {
-                NavigateLabeledData_Click(btnNextTweet, new EventArgs());
-            }
-        }
+        #endregion  
     }
 }

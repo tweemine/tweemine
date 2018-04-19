@@ -14,33 +14,17 @@ namespace TweemineAnalyzer
 
         public static void Analyse(TweetData[] tweets)
         {
-            Word[] oldWords = ReadWordsFromJson();
-            Word[] analysedWords = AnalyseWords(tweets, oldWords);
+            Word[] analysedWords = AnalyseWords(tweets);
             Array.Sort(analysedWords);
 
             WriteWordsToJson(analysedWords);
         }
 
-        private static Word[] AnalyseWords(TweetData[] tweets, Word[] oldWords)
+        private static Word[] AnalyseWords(TweetData[] tweets)
         {
             Dictionary<string, Word> wordDict = new Dictionary<string, Word>();
 
-            int maxId = 0;
-
-            if (oldWords != null)
-            {
-                for (int i = 0; i < oldWords.Length; i++)
-                {
-                    Word word = oldWords[i];
-                    wordDict.Add(word.word, word);
-
-                    if (word.id > maxId)
-                        maxId = word.id;
-                }
-            }
-
-            // Initialize id with maxId + 1
-            int id = ++maxId;
+            int id = 1;
 
             for(int i = 0; i < tweets.Length; i++)
             {

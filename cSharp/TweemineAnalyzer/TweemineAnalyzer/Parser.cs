@@ -10,7 +10,8 @@ namespace TweemineAnalyzer
     {
         public static List<string> ParseTheText(string txt)
         {
-            int minWordLength = 3;
+            int minWordLength = 4;
+            int maxWordLength = 7;
 
             List<string> matchDataList = new List<string>();
             string[] data = txt.Split(' ');
@@ -46,8 +47,11 @@ namespace TweemineAnalyzer
                 {
                     if (string.IsNullOrEmpty(curr_word) == false)
                     {
-                        if (curr_word.Length <= minWordLength)
+                        if (curr_word.Length < minWordLength)
                             continue;
+
+                        if (curr_word.Length > maxWordLength)
+                            curr_word = curr_word.Substring(0, maxWordLength);
 
                         // We convert characters to lower. e.g: "NiCe" == "nice"
                         matchDataList.Add(curr_word.ToLower());
