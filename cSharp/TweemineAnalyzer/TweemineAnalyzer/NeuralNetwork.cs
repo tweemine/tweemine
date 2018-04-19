@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NeuralNetwork
+namespace TweemineNeuralNetwork
 {
 	public class NeuralNetwork
 	{

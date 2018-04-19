@@ -49,6 +49,8 @@ C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer
 C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Properties.Resources.resources
 C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.toggle.resources
 C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.GenerateResource.Cache
+C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Trainer.resources
+C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Trainer.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.exe.config
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.exe
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\TweemineAnalyzer.pdb
@@ -57,11 +59,9 @@ D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Form1.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Properties.Resources.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.toggle.resources
+D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.TrainerForm.resources
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.GenerateResource.cache
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.CoreCompileInputs.cache
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.CopyComplete
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.exe
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.pdb
-D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csprojResolveAssemblyReference.cache
-C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Trainer.resources
-C:\Users\po288\OneDrive\Masaüstü\DataMinProje\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Trainer.resources

@@ -10,16 +10,18 @@ namespace TweemineAnalyzer
     public partial class Form1 : Form
     {
         #region Variables
+
         bool fileChanged=false;
 
         string tagsPath = Path.Combine("..", "..", "..", "..", "..","tweets","tags.txt");
         string txtFilePath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tweets.txt");
 
-        //we need all read tweets so we need this glob. var.
+        // we need all read tweets so we need this glob. var.
         TweetData[] tweetDatas;
 
+        string[] labels;
+
         string tweetsPath;
-      //  string folderPath;
 
         int currentTweetIndex = 0;
 
@@ -33,19 +35,25 @@ namespace TweemineAnalyzer
         {
             InitializeComponent();
         }
-        
+
         #endregion
 
         #region ComponentsEvents
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            List<string> labelList = new List<string>();
+
             StreamReader stream = new StreamReader(tagsPath, Encoding.GetEncoding(1254));
             while (!stream.EndOfStream)
             {
-                chcLstLabels.Items.Add(stream.ReadLine());
+                string label = stream.ReadLine();
+                labelList.Add(label);
+                chcLstLabels.Items.Add(label);
             }
             stream.Close();
+
+            labels = labelList.ToArray();
         }
 
         private void NavigateLabeledData_Click(object sender, EventArgs e)
@@ -254,7 +262,14 @@ namespace TweemineAnalyzer
                     // Navigate to first tweet.
                     NavigateLabeledData_Click(null, new EventArgs());
 
-                    Analyser.Analyse(tweetDatas);
+
+
+
+                    // This code is here for testing.
+
+                    Analyser analyser = new Analyser(tweetDatas, labels);
+                    analyser.Analyse();
+                    analyser.Test();
                 }
                 else
                 {

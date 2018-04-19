@@ -1,6 +1,6 @@
 ﻿namespace TweemineAnalyzer
 {
-    partial class Trainer
+    partial class TrainerForm
     {
         /// <summary>
         /// Required designer variable.

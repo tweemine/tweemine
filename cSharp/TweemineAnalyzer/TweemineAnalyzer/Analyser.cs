@@ -10,24 +10,62 @@ namespace TweemineAnalyzer
 {
     class Analyser
     {
+        #region Variables
+
         private static string wordsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "words.json");
 
-        public static void Analyse(TweetData[] tweets)
-        {
-            Word[] analysedWords = AnalyseWords(tweets);
-            Array.Sort(analysedWords);
+        private Dictionary<string, Word> wordDict;
+        private TweetData[] tweets;
+        private Word[]      words;
+        private string[]    labels;
 
-            WriteWordsToJson(analysedWords);
+        // Max word count per tweet. This needed for Neural Network.
+        private int maxWordPerTweet;
+
+        // Unique word count
+        private int uniqueWordCount;
+
+        // Total label count
+        private int labelCount;
+
+        // Tweet count
+        private int tweetCount;
+
+        #endregion
+
+        #region Constructor
+
+        public Analyser(TweetData[] tweets, string[] labels)
+        {
+            this.tweets     = tweets;
+            this.tweetCount = tweets.Length;
+            this.labels     = labels;
+            this.labelCount = labels.Length;
+            this.wordDict   = new Dictionary<string, Word>();
         }
 
-        private static Word[] AnalyseWords(TweetData[] tweets)
-        {
-            Dictionary<string, Word> wordDict = new Dictionary<string, Word>();
+        #endregion
 
+        #region Analyser Methods
+
+        public void Analyse()
+        {
+            // We keep words because later we may want to save it.
+            words = AnalyseWords();
+            Array.Sort(words);
+
+            this.uniqueWordCount = words.Length;
+        }
+
+        private Word[] AnalyseWords()
+        {
             int id = 1;
 
             for(int i = 0; i < tweets.Length; i++)
             {
+                if (tweets[i].words.Length > maxWordPerTweet)
+                    maxWordPerTweet = tweets[i].words.Length;
+
                 for(int j = 0; j < tweets[i].words.Length; j++)
                 {
                     string word = tweets[i].words[j];
@@ -51,6 +89,10 @@ namespace TweemineAnalyzer
             return wordList.ToArray();
         }
 
+        #endregion
+
+        #region Read-Write
+
         private static void WriteWordsToJson(object obj)
         {
             using (TextWriter textWriter = new StreamWriter(wordsPath))
@@ -64,7 +106,6 @@ namespace TweemineAnalyzer
 
                 textWriter.Close();
             }
-
         }
 
         private static Word[] ReadWordsFromJson()
@@ -89,5 +130,58 @@ namespace TweemineAnalyzer
 
             return wordArr;
         }
+
+        #endregion
+
+        #region Get Set Methods
+
+        public int GetUniqueWordCount()
+        {
+            return this.uniqueWordCount;
+        }
+
+        public int GetTweetCount()
+        {
+            return this.tweetCount;
+        }
+
+        public int GetMaxWordPerTweet()
+        {
+            return maxWordPerTweet;
+        }
+
+        public int GetLabelCount()
+        {
+            return this.labelCount;
+        }
+
+        public Dictionary<string, Word> GetWordDictionary()
+        {
+            return this.wordDict;
+        }
+
+        public TweetData[] GetTweets()
+        {
+            return this.tweets;
+        }
+
+        public string[] GetLabels()
+        {
+            return this.labels;
+        }
+
+        #endregion
+
+        #region Test
+
+        public void Test()
+        {
+            Console.WriteLine("tweetCount: " + tweetCount);
+            Console.WriteLine("labelCount: " + labelCount);
+            Console.WriteLine("uniqueWordCount: " + uniqueWordCount);
+            Console.WriteLine("maxWordPerTweet: " + maxWordPerTweet);
+        }
+
+        #endregion
     }
 }
