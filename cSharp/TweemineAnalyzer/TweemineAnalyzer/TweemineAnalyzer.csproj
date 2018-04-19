@@ -69,6 +69,12 @@
     <Compile Include="toggle.Designer.cs">
       <DependentUpon>toggle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Trainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trainer.Designer.cs">
+      <DependentUpon>Trainer.cs</DependentUpon>
+    </Compile>
     <Compile Include="TweetData.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Word.cs" />
@@ -86,6 +92,9 @@
     </Compile>
     <EmbeddedResource Include="toggle.resx">
       <DependentUpon>toggle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trainer.resx">
+      <DependentUpon>Trainer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
