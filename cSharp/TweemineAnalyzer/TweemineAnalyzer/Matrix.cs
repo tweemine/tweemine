@@ -293,6 +293,22 @@ namespace TweemineNeuralNetwork
 			return mapped;
 		}
 
+        // Normalise
+        public static Matrix Normalise(Matrix m, double oldMin, double oldMax, double newMin, double newMax)
+        {
+            Matrix normalised = new Matrix(m.rows, m.cols);
+
+            for(int i = 0; i < m.rows; i++)
+            {
+                for(int j = 0; j < m.cols; j++)
+                {
+                    normalised.data[i, j] = (m.data[i, j] - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+                }
+            }
+
+            return normalised;
+        }
+
 		// Randomize numbers in matrix
 		public void Randomize()
 		{

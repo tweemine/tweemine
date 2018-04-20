@@ -15,6 +15,7 @@ namespace TweemineAnalyzer
         private static string wordsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "words.json");
 
         private Dictionary<string, Word> wordDict;
+        private Dictionary<string, int> labelDict;
         private TweetData[] tweets;
         private Word[]      words;
         private string[]    labels;
@@ -42,6 +43,7 @@ namespace TweemineAnalyzer
             this.labels     = labels;
             this.labelCount = labels.Length;
             this.wordDict   = new Dictionary<string, Word>();
+            this.labelDict = new Dictionary<string, int>();
         }
 
         #endregion
@@ -55,6 +57,12 @@ namespace TweemineAnalyzer
             Array.Sort(words);
 
             this.uniqueWordCount = words.Length;
+
+            int idx = 0;
+            foreach(string label in labels)
+            {
+                labelDict.Add(label, idx++);
+            }
         }
 
         private Word[] AnalyseWords()
@@ -158,6 +166,11 @@ namespace TweemineAnalyzer
         public Dictionary<string, Word> GetWordDictionary()
         {
             return this.wordDict;
+        }
+
+        public Dictionary<string, int> GetLabelDictioanary()
+        {
+            return this.labelDict;
         }
 
         public TweetData[] GetTweets()
