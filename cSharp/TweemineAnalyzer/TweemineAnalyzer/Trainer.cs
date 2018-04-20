@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using TweemineNeuralNetwork;
 
 namespace TweemineAnalyzer
@@ -31,13 +32,14 @@ namespace TweemineAnalyzer
             );
         }
 
-        public void Train()
+        public void Train(ProgressBar progressBar)
         {
             double[] inputArr;
             double[] outputArr;
 
             for(int i = 0; i < this.trainingTweets.Length; i++)
             {
+                progressBar.Value++;
                 inputArr = new double[nn.inputNodes];
                 outputArr = new double[nn.outputNodes];
 
@@ -80,15 +82,17 @@ namespace TweemineAnalyzer
             }
         }
 
-        public List<List<int>> Test()
+        public List<List<int>> Test(ProgressBar progressBar)
         {
             List<List<int>> correctIndex = new List<List<int>>();
             // Implement me.
             double[] inputArr;
             double[] outputArr;
+            int corrects=0;
 
             for (int i = 0; i < this.testingTweets.Length; i++)
             {
+                progressBar.Value++;
                 inputArr = new double[nn.inputNodes];
                 outputArr = new double[nn.outputNodes];
 
@@ -130,13 +134,18 @@ namespace TweemineAnalyzer
                 List<int> lst = new List<int>();
                 for (int j = 0; j < labels.Length; j++)
                 {
-                    if (result[j] > 0.5)
+                    if (result[j] >= 0.7)
+                    {
                         lst.Add(j);
+                        if (labels[j] == testingTweets[i].users[0].labels[0])
+                            corrects++;
+                    }
                 }
                 correctIndex.Add(lst);
                     //result ı kontrol et
 
                 }
+            analyser.Accuracy = ((double)corrects / testingTweets.Length)*100;
             return correctIndex;
         }
 

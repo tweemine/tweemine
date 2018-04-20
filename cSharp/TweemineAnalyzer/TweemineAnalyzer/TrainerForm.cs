@@ -29,7 +29,7 @@ namespace TweemineAnalyzer
             labels = _labels;
             lblLearningRate.Text = ((tbLearningRate.Value / 100.0f)).ToString();
             lblHiddenNeuronCount.Text = tbHiddenNeuronCount.Value.ToString();
-            lblTestCount.Text = tbTestCount.Value.ToString() + " %";
+            lblTestPercent.Text = tbTestCount.Value.ToString() + " %";
             txtFileName.Text = fileName;
             filePath = defaultTweetPath;
         }
@@ -53,7 +53,7 @@ namespace TweemineAnalyzer
             labels = labelList.ToArray();
             lblLearningRate.Text = ((tbLearningRate.Value / 100.0f)).ToString();
             lblHiddenNeuronCount.Text = tbHiddenNeuronCount.Value.ToString();
-            lblTestCount.Text = tbTestCount.Value.ToString() + " %";
+            lblTestPercent.Text = tbTestCount.Value.ToString() + " %";
             txtFileName.Text = defaultTweetPath;
             filePath = defaultTweetPath;
             
@@ -123,7 +123,7 @@ namespace TweemineAnalyzer
             else if (trackBar.Tag.ToString() == "HN")
                 lblHiddenNeuronCount.Text = trackBar.Value.ToString();
             else
-                lblTestCount.Text = trackBar.Value.ToString()+" %";
+                lblTestPercent.Text = trackBar.Value.ToString()+" %";
         }
         
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -185,10 +185,12 @@ namespace TweemineAnalyzer
             ParseTweets(ref twData);
             Analyser analyser = new Analyser(twData, labels,tbTestCount.Value,chckPickRandomly.Checked);
             analyser.Analyse();
+            progressBar.Value = 0;
+            progressBar.Maximum = twData.Length;
             trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
-            trainer.Train();
+            trainer.Train(progressBar);
 
-            List<List<int>> list = trainer.Test();
+            List<List<int>> list = trainer.Test(progressBar);
 
 
             richtxtAnnResult.Text = "";
@@ -210,6 +212,17 @@ namespace TweemineAnalyzer
                 richtxtAnnResult.AppendText("------------------------------------------------\n\n");
             }
 
+            ShowInfo(analyser);
+        }
+
+        private void ShowInfo(Analyser analyser)
+        {
+            lblHiddenShowCount.Text = tbHiddenNeuronCount.Value.ToString();
+            lblInputCount.Text = analyser.MaxWordPerTweet.ToString();
+            lblOutputCount.Text = labels.Length.ToString();
+            lblTestingCount.Text = analyser.TestingTweets.Length.ToString();
+            lblTrainingCount.Text = analyser.TrainingTweets.Length.ToString();
+            lblAccuracy.Text = analyser.Accuracy.ToString();
         }
     }
 }

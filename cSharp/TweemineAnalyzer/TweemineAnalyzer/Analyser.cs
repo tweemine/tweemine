@@ -216,6 +216,7 @@ namespace TweemineAnalyzer
         #endregion
 
         #region Properties
+        public double Accuracy { get; set; }
         public int UniqueWordCount
         {
             get
