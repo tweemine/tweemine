@@ -184,6 +184,7 @@
             this.btnTrainTest.TabIndex = 5;
             this.btnTrainTest.Text = "Train and Test";
             this.btnTrainTest.UseVisualStyleBackColor = false;
+            this.btnTrainTest.Click += new System.EventHandler(this.btnTrainTest_Click);
             // 
             // grpTrainingSettings
             // 
@@ -524,7 +525,7 @@
             this.openFileDialog.FileName = "Dosya Seçiniz";
             this.openFileDialog.RestoreDirectory = true;
             // 
-            // Trainer
+            // TrainerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -537,7 +538,7 @@
             this.Controls.Add(this.pnlResults);
             this.Controls.Add(this.pnlANNInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Trainer";
+            this.Name = "TrainerForm";
             this.Text = "Trainer";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);

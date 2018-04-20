@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,32 @@ namespace TweemineAnalyzer
 {
     public partial class TrainerForm : Form
     {
+        Trainer trainer;
         string filePath = "";
+        string[] labels;
+        string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
+        public TrainerForm(string[] _labels)
+        {
+            InitializeComponent();
+            pnlResults.Visible = false;
+            labels = _labels;
+        }
         public TrainerForm()
         {
             InitializeComponent();
             pnlResults.Visible = false;
+            //You have to read labels from file
+            List<string> labelList = new List<string>();
+
+            StreamReader stream = new StreamReader(tagsPath, Encoding.GetEncoding(1254));
+            while (!stream.EndOfStream)
+            {
+                string label = stream.ReadLine();
+                labelList.Add(label);
+            }
+            stream.Close();
+
+            labels = labelList.ToArray();
         }
 
         private void BtnAnnandResultButton_Click(object sender, EventArgs e)
@@ -92,6 +114,54 @@ namespace TweemineAnalyzer
                 txtFileName.Text = openFileDialog.SafeFileName;
                 filePath = openFileDialog.FileName;
             }
+        }
+        /// <summary>
+        /// reads tweets from a file
+        /// </summary>
+        /// <param name="path">file path</param>
+        TweetData[] ReadTweetsFromJsonFile(string path)
+        {
+            TweetData[] tweetDataArr;
+
+            //we wont need text reader after this scope so I am being sure GC has collected this ref.
+            using (TextReader textReader = new StreamReader(path, Encoding.UTF8))
+            {
+                //Reading the json File
+                string context = textReader.ReadToEnd();
+
+                //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
+                tweetDataArr = JsonConvert.DeserializeObject<TweetData[]>(context);
+
+                //close the file
+                textReader.Close();
+            }
+
+            return tweetDataArr;
+        }
+        void ParseTweets(ref TweetData[] tweetDatas)
+        {
+            foreach (TweetData data in tweetDatas)
+            {
+                // If tweet is not parsed, we'll parse it for first time here. 
+                if (data.words == null || data.words.Length == 0)
+                {
+                    string[] parsedTweet = Parser.ParseTheText(data.tweet).ToArray();
+                    data.words = parsedTweet;
+                }
+            }
+        }
+        private void btnTrainTest_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtFileName.Text))
+            {
+                MessageBox.Show("you have to choose a file to train....");
+                return;
+            }
+            TweetData[] twData = ReadTweetsFromJsonFile(filePath);
+            ParseTweets(ref twData);
+            Analyser analyser = new Analyser(twData, labels);
+            trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
+            trainer.Train();
         }
     }
 }

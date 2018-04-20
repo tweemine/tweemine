@@ -457,8 +457,6 @@ namespace TweemineAnalyzer
                     data.words = parsedTweet;
                 }
             }
-
-            
         }
 
         private void RegisterUsers()

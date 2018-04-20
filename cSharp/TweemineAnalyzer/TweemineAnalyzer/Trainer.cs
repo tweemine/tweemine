@@ -55,7 +55,7 @@ namespace TweemineAnalyzer
                 }
 
                 // Normalise before training.
-                inputArr = Normalise(
+                inputArr = Normalize(
                     inputArr,
                     0,
                     analyser.GetTweetCount(),
@@ -63,7 +63,7 @@ namespace TweemineAnalyzer
                     1f
                 );
 
-                outputArr = Normalise(
+                outputArr = Normalize(
                     inputArr,
                     0f,
                     analyser.GetLabelCount() - 1f,
@@ -82,16 +82,16 @@ namespace TweemineAnalyzer
             // Implement me.
         }
 
-        private double[] Normalise(double[] arr, double oldMin, double oldMax, double newMin, double newMax)
+        private double[] Normalize(double[] arr, double oldMin, double oldMax, double newMin, double newMax)
         {
-            double[] normalised = new double[arr.Length];
+            double[] normalized = new double[arr.Length];
 
             for(int i = 0; i < arr.Length; i++)
             {
-                normalised[i] = (arr[i] - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+                normalized[i] = (arr[i] - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
             }
 
-            return normalised;
+            return normalized;
         }
     }
 }
