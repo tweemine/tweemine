@@ -17,9 +17,12 @@ namespace TweemineAnalyzer
         private Dictionary<string, Word> wordDict;
         private Dictionary<string, int> labelDict;
         private TweetData[] tweets;
-        private Word[]      words;
-        private string[]    labels;
+        private TweetData[] trainingTweets;
+        private TweetData[] testingTweets;
+        private Word[] words;
+        private string[] labels;
 
+        public TweetData[] Testings { get { return testingTweets; } }
         // Max word count per tweet. This needed for Neural Network.
         private int maxWordPerTweet;
 
@@ -32,20 +35,91 @@ namespace TweemineAnalyzer
         // Tweet count
         private int tweetCount;
 
+        //if the training data and testing data is random or not
+        private bool isRandom;
+        //what is the percentage of the testing data
+        private int percentage;
+
+        int testingCount;
+        int trainingCount;
+
+
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public Analyser(TweetData[] tweets, string[] labels)
         {
-            this.tweets     = tweets;
+            this.tweets = tweets;
             this.tweetCount = tweets.Length;
-            this.labels     = labels;
+            this.labels = labels;
             this.labelCount = labels.Length;
-            this.wordDict   = new Dictionary<string, Word>();
+            this.wordDict = new Dictionary<string, Word>();
             this.labelDict = new Dictionary<string, int>();
         }
+        public Analyser(TweetData[] tweets, string[] labels, int _percentage = 10, bool _isRandom = false)
+        {
+            this.tweets = tweets;
+            this.tweetCount = tweets.Length;
+            this.labels = labels;
+            this.labelCount = labels.Length;
+            this.wordDict = new Dictionary<string, Word>();
+            this.labelDict = new Dictionary<string, int>();
+            percentage = _percentage;
+            isRandom = _isRandom;
 
+            testingCount = (tweets.Length * percentage) / 100;
+            trainingCount = tweets.Length - testingCount;
+
+            TrainingTweets = new TweetData[trainingCount];
+            TestingTweets = new TweetData[testingCount];
+            SeperateTweets();
+
+        }
+
+        #endregion
+        #region Helpers
+        /// <summary>
+        /// seperates tweets as training and testing data
+        /// </summary>
+        private void SeperateTweets()
+        {
+            List<TweetData> trainingList = new List<TweetData>();
+            List<TweetData> testingList = new List<TweetData>();
+            for (int i = 0; i < tweets.Length; i++)
+            {
+                if (isRandom)
+                {
+                    Random random = new Random();
+                    double rndVal = random.NextDouble();
+                    if (rndVal > 0.7)
+                    {
+                        //training
+                        if (trainingList.Count > trainingCount)
+                            testingList.Add(tweets[i]);
+                        else
+                            trainingList.Add(tweets[i]);
+                    }
+                    else
+                    {
+                        if (testingList.Count > testingCount)
+                            trainingList.Add(tweets[i]);
+                        else
+                            testingList.Add(tweets[i]);
+                    } 
+                }
+                else
+                {
+                    if (trainingList.Count < trainingCount)
+                        trainingList.Add(tweets[i]);
+                    else
+                        testingList.Add(tweets[i]);
+                    
+                }
+            }
+            TrainingTweets = trainingList.ToArray();
+            TestingTweets  = testingList.ToArray(); 
+        }
         #endregion
 
         #region Analyser Methods
@@ -59,7 +133,7 @@ namespace TweemineAnalyzer
             this.uniqueWordCount = words.Length;
 
             int idx = 0;
-            foreach(string label in labels)
+            foreach (string label in labels)
             {
                 labelDict.Add(label, idx++);
             }
@@ -69,15 +143,15 @@ namespace TweemineAnalyzer
         {
             int id = 1;
 
-            for(int i = 0; i < tweets.Length; i++)
+            for (int i = 0; i < tweets.Length; i++)
             {
                 if (tweets[i].words.Length > maxWordPerTweet)
                     maxWordPerTweet = tweets[i].words.Length;
 
-                for(int j = 0; j < tweets[i].words.Length; j++)
+                for (int j = 0; j < tweets[i].words.Length; j++)
                 {
                     string word = tweets[i].words[j];
-                    if(wordDict.ContainsKey(word) == true)
+                    if (wordDict.ContainsKey(word) == true)
                     {
                         wordDict[word].count++;
                     }
@@ -89,7 +163,7 @@ namespace TweemineAnalyzer
             }
 
             List<Word> wordList = new List<Word>();
-            foreach(KeyValuePair<string, Word> p in wordDict)
+            foreach (KeyValuePair<string, Word> p in wordDict)
             {
                 wordList.Add(p.Value);
             }
@@ -141,47 +215,86 @@ namespace TweemineAnalyzer
 
         #endregion
 
-        #region Get Set Methods
-
-        public int GetUniqueWordCount()
+        #region Properties
+        public int UniqueWordCount
         {
-            return this.uniqueWordCount;
+            get
+            {
+                return uniqueWordCount;
+            }
         }
 
-        public int GetTweetCount()
+        public int TweetCount
         {
-            return this.tweetCount;
+            get
+            {
+                return this.tweetCount;
+            }
+        }
+        public int MaxWordPerTweet
+        {
+            get
+            {
+                return maxWordPerTweet;
+            }
         }
 
-        public int GetMaxWordPerTweet()
+
+        public int LabelCount
         {
-            return maxWordPerTweet;
+            get
+            {
+                return this.labelCount;
+            }
+        }
+        public Dictionary<string, Word> WordDictionary
+        {
+            get
+            {
+                return this.wordDict;
+            }
         }
 
-        public int GetLabelCount()
+        public Dictionary<string, int> LabelDictioanary
         {
-            return this.labelCount;
+            get
+            {
+                return this.labelDict;
+            }
         }
 
-        public Dictionary<string, Word> GetWordDictionary()
+        public TweetData[] TrainingTweets
         {
-            return this.wordDict;
+            get
+            {
+                return this.trainingTweets;
+            }
+            protected set { trainingTweets = value; }
+        }
+        public TweetData[] Tweets
+        {
+            get
+            {
+                return this.tweets;
+            }
+        }
+        public TweetData[] TestingTweets
+        {
+            get
+            {
+                return this.testingTweets;
+            }
+            protected set { testingTweets = value; }
+        }
+        public string[] Labels
+        {
+            get
+            {
+                return this.labels;
+            }
         }
 
-        public Dictionary<string, int> GetLabelDictioanary()
-        {
-            return this.labelDict;
-        }
 
-        public TweetData[] GetTweets()
-        {
-            return this.tweets;
-        }
-
-        public string[] GetLabels()
-        {
-            return this.labels;
-        }
 
         #endregion
 

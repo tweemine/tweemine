@@ -23,6 +23,9 @@ namespace TweemineAnalyzer
             InitializeComponent();
             pnlResults.Visible = false;
             labels = _labels;
+            lblLearningRate.Text = ((tbLearningRate.Value / 100.0f)).ToString();
+            lblHiddenNeuronCount.Text = tbHiddenNeuronCount.Value.ToString();
+            lblTestCount.Text = tbTestCount.Value.ToString() + " %";
         }
         public TrainerForm()
         {
@@ -40,7 +43,11 @@ namespace TweemineAnalyzer
             stream.Close();
 
             labels = labelList.ToArray();
+            lblLearningRate.Text = ((tbLearningRate.Value / 100.0f)).ToString();
+            lblHiddenNeuronCount.Text = tbHiddenNeuronCount.Value.ToString();
+            lblTestCount.Text = tbTestCount.Value.ToString() + " %";
         }
+
 
         private void BtnAnnandResultButton_Click(object sender, EventArgs e)
         {
@@ -105,7 +112,7 @@ namespace TweemineAnalyzer
             else
                 lblTestCount.Text = trackBar.Value.ToString()+" %";
         }
-
+        
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog.ShowDialog();
@@ -159,9 +166,21 @@ namespace TweemineAnalyzer
             }
             TweetData[] twData = ReadTweetsFromJsonFile(filePath);
             ParseTweets(ref twData);
-            Analyser analyser = new Analyser(twData, labels);
+            Analyser analyser = new Analyser(twData, labels,tbTestCount.Value,chckPickRandomly.Checked);
+            analyser.Analyse();
             trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
             trainer.Train();
+            List<List<int>> list = trainer.Test();
+            for (int i = 0; i < analyser.TestingTweets.Length; i++)
+            {
+                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n");
+                for (int j = 0; j < list[i].Count; j++)
+                {
+                    string val = labels[list[i][j]];
+                    richtxtAnnResult.AppendText( val+ "\n");
+                }
+            }
+
         }
     }
 }

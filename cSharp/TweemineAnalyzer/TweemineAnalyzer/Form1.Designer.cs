@@ -37,6 +37,7 @@
             this.btnPrevTweet = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnDelTweet = new System.Windows.Forms.Button();
+            this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
             this.grpDataNavigation = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -50,7 +51,7 @@
             this.openFileButton = new System.Windows.Forms.Button();
             this.combineButton = new System.Windows.Forms.Button();
             this.folderBD = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
+            this.btntrain = new System.Windows.Forms.Button();
             this.cntMnFile.SuspendLayout();
             this.grpDataNavigation.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -129,6 +130,21 @@
         "ram.");
             this.btnDelTweet.UseVisualStyleBackColor = true;
             this.btnDelTweet.Click += new System.EventHandler(this.btnDelTweet_Click);
+            // 
+            // btnWritetoJson
+            // 
+            this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
+            this.btnWritetoJson.Location = new System.Drawing.Point(15, 34);
+            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnWritetoJson.Name = "btnWritetoJson";
+            this.btnWritetoJson.Size = new System.Drawing.Size(79, 71);
+            this.btnWritetoJson.TabIndex = 9;
+            this.btnWritetoJson.Text = "Write To json File";
+            this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
+            this.btnWritetoJson.UseVisualStyleBackColor = false;
+            this.btnWritetoJson.Click += new System.EventHandler(this.WriteToFile_Click);
             // 
             // grpDataNavigation
             // 
@@ -236,10 +252,10 @@
             // openFileButton
             // 
             this.openFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openFileButton.Location = new System.Drawing.Point(417, 10);
+            this.openFileButton.Location = new System.Drawing.Point(345, 8);
             this.openFileButton.Margin = new System.Windows.Forms.Padding(4);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(151, 28);
+            this.openFileButton.Size = new System.Drawing.Size(133, 28);
             this.openFileButton.TabIndex = 8;
             this.openFileButton.Text = "Choose Tweet File";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -248,10 +264,10 @@
             // combineButton
             // 
             this.combineButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.combineButton.Location = new System.Drawing.Point(580, 10);
+            this.combineButton.Location = new System.Drawing.Point(486, 8);
             this.combineButton.Margin = new System.Windows.Forms.Padding(4);
             this.combineButton.Name = "combineButton";
-            this.combineButton.Size = new System.Drawing.Size(151, 28);
+            this.combineButton.Size = new System.Drawing.Size(140, 28);
             this.combineButton.TabIndex = 9;
             this.combineButton.Text = "Combine All Tweets";
             this.combineButton.UseVisualStyleBackColor = true;
@@ -261,20 +277,18 @@
             // 
             this.folderBD.Description = "Select a folder that includes multiple json files to combine.";
             // 
-            // btnWritetoJson
+            // btntrain
             // 
-            this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
-            this.btnWritetoJson.Location = new System.Drawing.Point(15, 34);
-            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnWritetoJson.Name = "btnWritetoJson";
-            this.btnWritetoJson.Size = new System.Drawing.Size(79, 71);
-            this.btnWritetoJson.TabIndex = 9;
-            this.btnWritetoJson.Text = "Write To json File";
-            this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
-            this.btnWritetoJson.UseVisualStyleBackColor = false;
-            this.btnWritetoJson.Click += new System.EventHandler(this.WriteToFile_Click);
+            this.btntrain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btntrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btntrain.Location = new System.Drawing.Point(635, 8);
+            this.btntrain.Margin = new System.Windows.Forms.Padding(4);
+            this.btntrain.Name = "btntrain";
+            this.btntrain.Size = new System.Drawing.Size(99, 28);
+            this.btntrain.TabIndex = 10;
+            this.btntrain.Text = "Train and Test";
+            this.btntrain.UseVisualStyleBackColor = true;
+            this.btntrain.Click += new System.EventHandler(this.btntrain_Click);
             // 
             // Form1
             // 
@@ -282,6 +296,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(747, 555);
             this.ContextMenuStrip = this.cntMnFile;
+            this.Controls.Add(this.btntrain);
             this.Controls.Add(this.combineButton);
             this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.groupBox5);
@@ -333,6 +348,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Button combineButton;
         private System.Windows.Forms.FolderBrowserDialog folderBD;
+        private System.Windows.Forms.Button btntrain;
     }
 }
 

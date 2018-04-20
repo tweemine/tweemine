@@ -54,6 +54,8 @@ namespace TweemineAnalyzer
             stream.Close();
 
             labels = labelList.ToArray();
+
+
         }
 
         private void NavigateLabeledData_Click(object sender, EventArgs e)
@@ -497,6 +499,13 @@ namespace TweemineAnalyzer
             return -1;
         }
 
-        #endregion  
+        #endregion
+
+        private void btntrain_Click(object sender, EventArgs e)
+        {
+            TrainerForm trainerForm = new TrainerForm(labels);
+            this.Hide();
+            trainerForm.Show();
+        }
     }
 }

@@ -213,7 +213,7 @@
             this.tbTestCount.Tag = "TC";
             this.tbTestCount.TickFrequency = 10;
             this.tbTestCount.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbTestCount.Value = 10;
+            this.tbTestCount.Value = 30;
             this.tbTestCount.Scroll += new System.EventHandler(this.TrackBars_Scroll);
             // 
             // chckPickRandomly
@@ -271,12 +271,11 @@
             this.tbHiddenNeuronCount.Minimum = 10;
             this.tbHiddenNeuronCount.Name = "tbHiddenNeuronCount";
             this.tbHiddenNeuronCount.Size = new System.Drawing.Size(104, 51);
-            this.tbHiddenNeuronCount.SmallChange = 2;
             this.tbHiddenNeuronCount.TabIndex = 0;
             this.tbHiddenNeuronCount.Tag = "HN";
             this.tbHiddenNeuronCount.TickFrequency = 10;
             this.tbHiddenNeuronCount.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.tbHiddenNeuronCount.Value = 10;
+            this.tbHiddenNeuronCount.Value = 30;
             this.tbHiddenNeuronCount.Scroll += new System.EventHandler(this.TrackBars_Scroll);
             // 
             // tbLearningRate
@@ -287,11 +286,11 @@
             this.tbLearningRate.Maximum = 100;
             this.tbLearningRate.Name = "tbLearningRate";
             this.tbLearningRate.Size = new System.Drawing.Size(104, 51);
-            this.tbLearningRate.SmallChange = 2;
             this.tbLearningRate.TabIndex = 0;
             this.tbLearningRate.Tag = "LR";
             this.tbLearningRate.TickFrequency = 10;
             this.tbLearningRate.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.tbLearningRate.Value = 5;
             this.tbLearningRate.Scroll += new System.EventHandler(this.TrackBars_Scroll);
             // 
             // label3
@@ -518,7 +517,7 @@
             this.richtxtAnnResult.ReadOnly = true;
             this.richtxtAnnResult.Size = new System.Drawing.Size(504, 576);
             this.richtxtAnnResult.TabIndex = 0;
-            this.richtxtAnnResult.Text = "ANN Results";
+            this.richtxtAnnResult.Text = "";
             // 
             // openFileDialog
             // 
