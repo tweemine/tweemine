@@ -14,10 +14,14 @@ namespace TweemineAnalyzer
 {
     public partial class TrainerForm : Form
     {
+        static string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
+        static string fileName = "all_tweets.json";
+        static string defaultTweetPath = Path.Combine("..", "..", "..", "..", "..", "tweets", fileName);
+
         Trainer trainer;
         string filePath = "";
-        string[] labels;
-        string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
+        string[] labels;   
+
         public TrainerForm(string[] _labels)
         {
             InitializeComponent();
@@ -26,10 +30,14 @@ namespace TweemineAnalyzer
             lblLearningRate.Text = ((tbLearningRate.Value / 100.0f)).ToString();
             lblHiddenNeuronCount.Text = tbHiddenNeuronCount.Value.ToString();
             lblTestCount.Text = tbTestCount.Value.ToString() + " %";
+            txtFileName.Text = fileName;
+            filePath = defaultTweetPath;
         }
+
         public TrainerForm()
         {
             InitializeComponent();
+
             pnlResults.Visible = false;
             //You have to read labels from file
             List<string> labelList = new List<string>();
@@ -46,6 +54,9 @@ namespace TweemineAnalyzer
             lblLearningRate.Text = ((tbLearningRate.Value / 100.0f)).ToString();
             lblHiddenNeuronCount.Text = tbHiddenNeuronCount.Value.ToString();
             lblTestCount.Text = tbTestCount.Value.ToString() + " %";
+            txtFileName.Text = defaultTweetPath;
+            filePath = defaultTweetPath;
+            
         }
 
 
@@ -68,6 +79,7 @@ namespace TweemineAnalyzer
 
             }
         }
+
         private bool mouseDown;
         private Point lastLocation;
 
@@ -92,6 +104,7 @@ namespace TweemineAnalyzer
         {
             mouseDown = false;
         }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -122,6 +135,7 @@ namespace TweemineAnalyzer
                 filePath = openFileDialog.FileName;
             }
         }
+       
         /// <summary>
         /// reads tweets from a file
         /// </summary>
@@ -145,6 +159,7 @@ namespace TweemineAnalyzer
 
             return tweetDataArr;
         }
+
         void ParseTweets(ref TweetData[] tweetDatas)
         {
             foreach (TweetData data in tweetDatas)
@@ -157,28 +172,42 @@ namespace TweemineAnalyzer
                 }
             }
         }
+
         private void btnTrainTest_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtFileName.Text))
+            if(string.IsNullOrEmpty(filePath))
             {
                 MessageBox.Show("you have to choose a file to train....");
                 return;
             }
+
             TweetData[] twData = ReadTweetsFromJsonFile(filePath);
             ParseTweets(ref twData);
             Analyser analyser = new Analyser(twData, labels,tbTestCount.Value,chckPickRandomly.Checked);
             analyser.Analyse();
             trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
             trainer.Train();
+
             List<List<int>> list = trainer.Test();
+
+
+            richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
             {
-                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n");
+                richtxtAnnResult.AppendText("Tweet:\n\n");
+                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
+                
+
+                richtxtAnnResult.AppendText("Prediction: ");
                 for (int j = 0; j < list[i].Count; j++)
                 {
+                    // We may want to percentage of prediction
                     string val = labels[list[i][j]];
-                    richtxtAnnResult.AppendText( val+ "\n");
+                    richtxtAnnResult.AppendText(val + " ");
                 }
+
+                richtxtAnnResult.AppendText("\n\n");
+                richtxtAnnResult.AppendText("------------------------------------------------\n\n");
             }
 
         }

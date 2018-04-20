@@ -65,3 +65,4 @@ D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.exe
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.pdb
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.TrainerForm.resources
+D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csprojResolveAssemblyReference.cache

@@ -82,18 +82,20 @@
             // txtFileName
             // 
             this.txtFileName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFileName.Location = new System.Drawing.Point(79, 112);
+            this.txtFileName.Location = new System.Drawing.Point(59, 91);
+            this.txtFileName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(241, 22);
+            this.txtFileName.Size = new System.Drawing.Size(181, 20);
             this.txtFileName.TabIndex = 0;
             // 
             // label0
             // 
             this.label0.AutoSize = true;
             this.label0.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label0.Location = new System.Drawing.Point(14, 110);
+            this.label0.Location = new System.Drawing.Point(10, 89);
+            this.label0.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label0.Name = "label0";
-            this.label0.Size = new System.Drawing.Size(59, 20);
+            this.label0.Size = new System.Drawing.Size(46, 17);
             this.label0.TabIndex = 1;
             this.label0.Text = "File  :";
             // 
@@ -103,9 +105,10 @@
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnBrowse.Location = new System.Drawing.Point(325, 105);
+            this.btnBrowse.Location = new System.Drawing.Point(244, 85);
+            this.btnBrowse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(80, 35);
+            this.btnBrowse.Size = new System.Drawing.Size(60, 28);
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = false;
@@ -127,8 +130,9 @@
             this.panel1.Controls.Add(this.label0);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(415, 615);
+            this.panel1.Size = new System.Drawing.Size(311, 500);
             this.panel1.TabIndex = 3;
             // 
             // btnResultInfo
@@ -138,9 +142,10 @@
             this.btnResultInfo.FlatAppearance.BorderSize = 0;
             this.btnResultInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResultInfo.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnResultInfo.Location = new System.Drawing.Point(348, 49);
+            this.btnResultInfo.Location = new System.Drawing.Point(261, 40);
+            this.btnResultInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnResultInfo.Name = "btnResultInfo";
-            this.btnResultInfo.Size = new System.Drawing.Size(67, 34);
+            this.btnResultInfo.Size = new System.Drawing.Size(50, 28);
             this.btnResultInfo.TabIndex = 8;
             this.btnResultInfo.Tag = "2";
             this.btnResultInfo.Text = "Results";
@@ -154,9 +159,10 @@
             this.btnAnnInfo.FlatAppearance.BorderSize = 0;
             this.btnAnnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnnInfo.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnAnnInfo.Location = new System.Drawing.Point(348, 9);
+            this.btnAnnInfo.Location = new System.Drawing.Point(261, 7);
+            this.btnAnnInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAnnInfo.Name = "btnAnnInfo";
-            this.btnAnnInfo.Size = new System.Drawing.Size(67, 34);
+            this.btnAnnInfo.Size = new System.Drawing.Size(50, 28);
             this.btnAnnInfo.TabIndex = 7;
             this.btnAnnInfo.Tag = "1";
             this.btnAnnInfo.Text = "ANN";
@@ -165,9 +171,10 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(4, 543);
+            this.progressBar.Location = new System.Drawing.Point(3, 441);
+            this.progressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(402, 45);
+            this.progressBar.Size = new System.Drawing.Size(302, 37);
             this.progressBar.TabIndex = 6;
             this.toolTip1.SetToolTip(this.progressBar, "%70");
             this.progressBar.Value = 70;
@@ -178,9 +185,10 @@
             this.btnTrainTest.FlatAppearance.BorderSize = 0;
             this.btnTrainTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrainTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnTrainTest.Location = new System.Drawing.Point(63, 457);
+            this.btnTrainTest.Location = new System.Drawing.Point(47, 371);
+            this.btnTrainTest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnTrainTest.Name = "btnTrainTest";
-            this.btnTrainTest.Size = new System.Drawing.Size(297, 71);
+            this.btnTrainTest.Size = new System.Drawing.Size(223, 58);
             this.btnTrainTest.TabIndex = 5;
             this.btnTrainTest.Text = "Train and Test";
             this.btnTrainTest.UseVisualStyleBackColor = false;
@@ -192,9 +200,11 @@
             this.grpTrainingSettings.Controls.Add(this.chckPickRandomly);
             this.grpTrainingSettings.Controls.Add(this.label4);
             this.grpTrainingSettings.Controls.Add(this.lblTestCount);
-            this.grpTrainingSettings.Location = new System.Drawing.Point(17, 299);
+            this.grpTrainingSettings.Location = new System.Drawing.Point(13, 243);
+            this.grpTrainingSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpTrainingSettings.Name = "grpTrainingSettings";
-            this.grpTrainingSettings.Size = new System.Drawing.Size(388, 131);
+            this.grpTrainingSettings.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpTrainingSettings.Size = new System.Drawing.Size(291, 106);
             this.grpTrainingSettings.TabIndex = 4;
             this.grpTrainingSettings.TabStop = false;
             this.grpTrainingSettings.Text = "Training Settings";
@@ -203,11 +213,12 @@
             // 
             this.tbTestCount.AutoSize = false;
             this.tbTestCount.LargeChange = 10;
-            this.tbTestCount.Location = new System.Drawing.Point(166, 37);
+            this.tbTestCount.Location = new System.Drawing.Point(124, 30);
+            this.tbTestCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbTestCount.Maximum = 50;
             this.tbTestCount.Minimum = 10;
             this.tbTestCount.Name = "tbTestCount";
-            this.tbTestCount.Size = new System.Drawing.Size(137, 51);
+            this.tbTestCount.Size = new System.Drawing.Size(103, 41);
             this.tbTestCount.SmallChange = 5;
             this.tbTestCount.TabIndex = 0;
             this.tbTestCount.Tag = "TC";
@@ -220,9 +231,10 @@
             // 
             this.chckPickRandomly.AutoSize = true;
             this.chckPickRandomly.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chckPickRandomly.Location = new System.Drawing.Point(226, 103);
+            this.chckPickRandomly.Location = new System.Drawing.Point(170, 84);
+            this.chckPickRandomly.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chckPickRandomly.Name = "chckPickRandomly";
-            this.chckPickRandomly.Size = new System.Drawing.Size(138, 22);
+            this.chckPickRandomly.Size = new System.Drawing.Size(115, 18);
             this.chckPickRandomly.TabIndex = 1;
             this.chckPickRandomly.Text = "Pick Randomly";
             this.chckPickRandomly.UseVisualStyleBackColor = true;
@@ -231,9 +243,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(6, 51);
+            this.label4.Location = new System.Drawing.Point(4, 41);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(154, 20);
+            this.label4.Size = new System.Drawing.Size(129, 17);
             this.label4.TabIndex = 1;
             this.label4.Text = "Test count as %:";
             // 
@@ -241,9 +254,10 @@
             // 
             this.lblTestCount.AutoSize = true;
             this.lblTestCount.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblTestCount.Location = new System.Drawing.Point(318, 51);
+            this.lblTestCount.Location = new System.Drawing.Point(238, 41);
+            this.lblTestCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTestCount.Name = "lblTestCount";
-            this.lblTestCount.Size = new System.Drawing.Size(55, 20);
+            this.lblTestCount.Size = new System.Drawing.Size(46, 17);
             this.lblTestCount.TabIndex = 1;
             this.lblTestCount.Text = "10 %";
             // 
@@ -255,9 +269,11 @@
             this.grpAnnSettings.Controls.Add(this.lblLearningRate);
             this.grpAnnSettings.Controls.Add(this.lblHiddenNeuronCount);
             this.grpAnnSettings.Controls.Add(this.label2);
-            this.grpAnnSettings.Location = new System.Drawing.Point(17, 140);
+            this.grpAnnSettings.Location = new System.Drawing.Point(13, 114);
+            this.grpAnnSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grpAnnSettings.Name = "grpAnnSettings";
-            this.grpAnnSettings.Size = new System.Drawing.Size(388, 137);
+            this.grpAnnSettings.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpAnnSettings.Size = new System.Drawing.Size(291, 111);
             this.grpAnnSettings.TabIndex = 3;
             this.grpAnnSettings.TabStop = false;
             this.grpAnnSettings.Text = "ANN Settings";
@@ -266,11 +282,12 @@
             // 
             this.tbHiddenNeuronCount.AutoSize = false;
             this.tbHiddenNeuronCount.LargeChange = 20;
-            this.tbHiddenNeuronCount.Location = new System.Drawing.Point(221, 69);
+            this.tbHiddenNeuronCount.Location = new System.Drawing.Point(166, 56);
+            this.tbHiddenNeuronCount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbHiddenNeuronCount.Maximum = 100;
             this.tbHiddenNeuronCount.Minimum = 10;
             this.tbHiddenNeuronCount.Name = "tbHiddenNeuronCount";
-            this.tbHiddenNeuronCount.Size = new System.Drawing.Size(104, 51);
+            this.tbHiddenNeuronCount.Size = new System.Drawing.Size(78, 41);
             this.tbHiddenNeuronCount.TabIndex = 0;
             this.tbHiddenNeuronCount.Tag = "HN";
             this.tbHiddenNeuronCount.TickFrequency = 10;
@@ -282,10 +299,11 @@
             // 
             this.tbLearningRate.AutoSize = false;
             this.tbLearningRate.LargeChange = 20;
-            this.tbLearningRate.Location = new System.Drawing.Point(221, 12);
+            this.tbLearningRate.Location = new System.Drawing.Point(166, 10);
+            this.tbLearningRate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbLearningRate.Maximum = 100;
             this.tbLearningRate.Name = "tbLearningRate";
-            this.tbLearningRate.Size = new System.Drawing.Size(104, 51);
+            this.tbLearningRate.Size = new System.Drawing.Size(78, 41);
             this.tbLearningRate.TabIndex = 0;
             this.tbLearningRate.Tag = "LR";
             this.tbLearningRate.TickFrequency = 10;
@@ -297,9 +315,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.Location = new System.Drawing.Point(6, 85);
+            this.label3.Location = new System.Drawing.Point(4, 69);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(209, 20);
+            this.label3.Size = new System.Drawing.Size(171, 17);
             this.label3.TabIndex = 1;
             this.label3.Text = "Hidden Neuron Count :";
             // 
@@ -307,9 +326,10 @@
             // 
             this.lblLearningRate.AutoSize = true;
             this.lblLearningRate.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblLearningRate.Location = new System.Drawing.Point(327, 30);
+            this.lblLearningRate.Location = new System.Drawing.Point(245, 24);
+            this.lblLearningRate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLearningRate.Name = "lblLearningRate";
-            this.lblLearningRate.Size = new System.Drawing.Size(20, 20);
+            this.lblLearningRate.Size = new System.Drawing.Size(17, 17);
             this.lblLearningRate.TabIndex = 1;
             this.lblLearningRate.Text = "0";
             // 
@@ -317,9 +337,10 @@
             // 
             this.lblHiddenNeuronCount.AutoSize = true;
             this.lblHiddenNeuronCount.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblHiddenNeuronCount.Location = new System.Drawing.Point(330, 85);
+            this.lblHiddenNeuronCount.Location = new System.Drawing.Point(248, 69);
+            this.lblHiddenNeuronCount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHiddenNeuronCount.Name = "lblHiddenNeuronCount";
-            this.lblHiddenNeuronCount.Size = new System.Drawing.Size(20, 20);
+            this.lblHiddenNeuronCount.Size = new System.Drawing.Size(17, 17);
             this.lblHiddenNeuronCount.TabIndex = 1;
             this.lblHiddenNeuronCount.Text = "0";
             // 
@@ -327,9 +348,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(73, 30);
+            this.label2.Location = new System.Drawing.Point(55, 24);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 20);
+            this.label2.Size = new System.Drawing.Size(116, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Learning Rate :";
             // 
@@ -337,9 +359,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(159, 66);
+            this.label1.Location = new System.Drawing.Point(119, 54);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
+            this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Train and Test";
             // 
@@ -347,9 +370,10 @@
             // 
             this.label.AutoSize = true;
             this.label.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label.Location = new System.Drawing.Point(105, 36);
+            this.label.Location = new System.Drawing.Point(79, 29);
+            this.label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(215, 20);
+            this.label.Size = new System.Drawing.Size(176, 17);
             this.label.TabIndex = 1;
             this.label.Text = "Tweemine Text Analyzer";
             // 
@@ -359,9 +383,10 @@
             this.pnlANNInfo.Controls.Add(this.groupBox3);
             this.pnlANNInfo.Controls.Add(this.label11);
             this.pnlANNInfo.Controls.Add(this.label10);
-            this.pnlANNInfo.Location = new System.Drawing.Point(432, 36);
+            this.pnlANNInfo.Location = new System.Drawing.Point(324, 29);
+            this.pnlANNInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlANNInfo.Name = "pnlANNInfo";
-            this.pnlANNInfo.Size = new System.Drawing.Size(504, 576);
+            this.pnlANNInfo.Size = new System.Drawing.Size(378, 468);
             this.pnlANNInfo.TabIndex = 4;
             // 
             // groupBox3
@@ -372,9 +397,11 @@
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(90, 130);
+            this.groupBox3.Location = new System.Drawing.Point(68, 106);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(304, 100);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(228, 81);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ANN Info";
@@ -383,9 +410,10 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label17.Location = new System.Drawing.Point(75, 72);
+            this.label17.Location = new System.Drawing.Point(56, 58);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(26, 17);
+            this.label17.Size = new System.Drawing.Size(21, 13);
             this.label17.TabIndex = 0;
             this.label17.Text = "70";
             // 
@@ -393,9 +421,10 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.Location = new System.Drawing.Point(12, 72);
+            this.label14.Location = new System.Drawing.Point(9, 58);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(62, 17);
+            this.label14.Size = new System.Drawing.Size(51, 13);
             this.label14.TabIndex = 0;
             this.label14.Text = "Hidden:";
             // 
@@ -403,9 +432,10 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label16.Location = new System.Drawing.Point(75, 47);
+            this.label16.Location = new System.Drawing.Point(56, 38);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(17, 17);
+            this.label16.Size = new System.Drawing.Size(14, 13);
             this.label16.TabIndex = 0;
             this.label16.Text = "8";
             // 
@@ -413,9 +443,10 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label13.Location = new System.Drawing.Point(5, 47);
+            this.label13.Location = new System.Drawing.Point(4, 38);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(69, 17);
+            this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 0;
             this.label13.Text = "Output :";
             // 
@@ -423,9 +454,10 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label15.Location = new System.Drawing.Point(75, 22);
+            this.label15.Location = new System.Drawing.Point(56, 18);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(44, 17);
+            this.label15.Size = new System.Drawing.Size(35, 13);
             this.label15.TabIndex = 0;
             this.label15.Text = "1000";
             // 
@@ -433,9 +465,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.Location = new System.Drawing.Point(17, 22);
+            this.label12.Location = new System.Drawing.Point(13, 18);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(57, 17);
+            this.label12.Size = new System.Drawing.Size(46, 13);
             this.label12.TabIndex = 0;
             this.label12.Text = "Input :";
             // 
@@ -443,9 +476,10 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label11.Location = new System.Drawing.Point(191, 84);
+            this.label11.Location = new System.Drawing.Point(143, 68);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(94, 17);
+            this.label11.Size = new System.Drawing.Size(77, 13);
             this.label11.TabIndex = 1;
             this.label11.Text = "System Info";
             // 
@@ -453,9 +487,10 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.Location = new System.Drawing.Point(137, 54);
+            this.label10.Location = new System.Drawing.Point(103, 44);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(215, 20);
+            this.label10.Size = new System.Drawing.Size(176, 17);
             this.label10.TabIndex = 1;
             this.label10.Text = "Tweemine Text Analyzer";
             // 
@@ -467,9 +502,10 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnClose.ForeColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(888, 0);
+            this.btnClose.Location = new System.Drawing.Point(914, 0);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(51, 26);
+            this.btnClose.Size = new System.Drawing.Size(38, 21);
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "X";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -483,9 +519,10 @@
             this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinimize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnMinimize.Location = new System.Drawing.Point(845, 0);
+            this.btnMinimize.Location = new System.Drawing.Point(882, 0);
+            this.btnMinimize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(42, 26);
+            this.btnMinimize.Size = new System.Drawing.Size(32, 21);
             this.btnMinimize.TabIndex = 2;
             this.btnMinimize.Text = "-";
             this.btnMinimize.UseVisualStyleBackColor = false;
@@ -494,18 +531,20 @@
             // pnlPicker
             // 
             this.pnlPicker.BackColor = System.Drawing.Color.BlueViolet;
-            this.pnlPicker.Location = new System.Drawing.Point(415, 9);
+            this.pnlPicker.Location = new System.Drawing.Point(311, 7);
+            this.pnlPicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPicker.Name = "pnlPicker";
-            this.pnlPicker.Size = new System.Drawing.Size(11, 34);
+            this.pnlPicker.Size = new System.Drawing.Size(8, 28);
             this.pnlPicker.TabIndex = 4;
             // 
             // pnlResults
             // 
             this.pnlResults.BackColor = System.Drawing.Color.Snow;
             this.pnlResults.Controls.Add(this.richtxtAnnResult);
-            this.pnlResults.Location = new System.Drawing.Point(435, 39);
+            this.pnlResults.Location = new System.Drawing.Point(326, 29);
+            this.pnlResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlResults.Name = "pnlResults";
-            this.pnlResults.Size = new System.Drawing.Size(504, 576);
+            this.pnlResults.Size = new System.Drawing.Size(615, 471);
             this.pnlResults.TabIndex = 5;
             // 
             // richtxtAnnResult
@@ -513,9 +552,11 @@
             this.richtxtAnnResult.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richtxtAnnResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richtxtAnnResult.Location = new System.Drawing.Point(0, 0);
+            this.richtxtAnnResult.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richtxtAnnResult.MaximumSize = new System.Drawing.Size(650, 460);
             this.richtxtAnnResult.Name = "richtxtAnnResult";
             this.richtxtAnnResult.ReadOnly = true;
-            this.richtxtAnnResult.Size = new System.Drawing.Size(504, 576);
+            this.richtxtAnnResult.Size = new System.Drawing.Size(615, 460);
             this.richtxtAnnResult.TabIndex = 0;
             this.richtxtAnnResult.Text = "";
             // 
@@ -526,10 +567,10 @@
             // 
             // TrainerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(939, 615);
+            this.ClientSize = new System.Drawing.Size(952, 500);
             this.Controls.Add(this.pnlPicker);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.panel1);
@@ -537,6 +578,7 @@
             this.Controls.Add(this.pnlResults);
             this.Controls.Add(this.pnlANNInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TrainerForm";
             this.Text = "Trainer";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
