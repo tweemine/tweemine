@@ -14,10 +14,10 @@ import sys
 import random
 
 #Variables that contains the user credentials to access Twitter API 
-access_token = "2387554910-QZOusvtVxaaXU0dIPEO0ij247D8heARHfM26yHy"
-access_token_secret = "ovYb0LAjxFM6HqIKMulpJEP16tbDZvMqIoAuPEON4eoT3"
-consumer_key = "OnccjMQNxxJw9x5T1UC9BiJ6l"
-consumer_secret = "gmI2qwpTTLw2stqw9Jfh9N3PfIEewtDa1ky7omACUY9jbxtJFV"
+access_token = "xxxx"
+access_token_secret = "sss"
+consumer_key = "xxxx"
+consumer_secret = "xxxxx"
 listOfData=[]
 nameofFile=str(random.randint(0,1000))+" "+str(random.randint(0,1000));
 f = open("..\\tweets\\"+str(nameofFile)+".json","w")
