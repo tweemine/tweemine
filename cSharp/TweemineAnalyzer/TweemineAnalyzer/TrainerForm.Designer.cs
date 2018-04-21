@@ -77,6 +77,8 @@
             this.pnlResults = new System.Windows.Forms.Panel();
             this.richtxtAnnResult = new System.Windows.Forms.RichTextBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.grpTrainingSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTestCount)).BeginInit();
@@ -92,17 +94,18 @@
             // txtFileName
             // 
             this.txtFileName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFileName.Location = new System.Drawing.Point(79, 112);
+            this.txtFileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.txtFileName.Location = new System.Drawing.Point(79, 106);
             this.txtFileName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(241, 22);
+            this.txtFileName.Size = new System.Drawing.Size(241, 28);
             this.txtFileName.TabIndex = 0;
             // 
             // label0
             // 
             this.label0.AutoSize = true;
             this.label0.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label0.Location = new System.Drawing.Point(13, 110);
+            this.label0.Location = new System.Drawing.Point(13, 111);
             this.label0.Name = "label0";
             this.label0.Size = new System.Drawing.Size(59, 20);
             this.label0.TabIndex = 1;
@@ -114,7 +117,7 @@
             this.btnBrowse.FlatAppearance.BorderSize = 0;
             this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnBrowse.Location = new System.Drawing.Point(325, 105);
+            this.btnBrowse.Location = new System.Drawing.Point(325, 104);
             this.btnBrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(80, 34);
@@ -126,8 +129,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.btnResultInfo);
-            this.panel1.Controls.Add(this.btnAnnInfo);
             this.panel1.Controls.Add(this.progressBar);
             this.panel1.Controls.Add(this.btnTrainTest);
             this.panel1.Controls.Add(this.grpTrainingSettings);
@@ -152,10 +153,10 @@
             this.btnResultInfo.FlatAppearance.BorderSize = 0;
             this.btnResultInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResultInfo.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnResultInfo.Location = new System.Drawing.Point(348, 49);
+            this.btnResultInfo.Location = new System.Drawing.Point(522, 0);
             this.btnResultInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnResultInfo.Name = "btnResultInfo";
-            this.btnResultInfo.Size = new System.Drawing.Size(67, 34);
+            this.btnResultInfo.Size = new System.Drawing.Size(75, 56);
             this.btnResultInfo.TabIndex = 8;
             this.btnResultInfo.Tag = "2";
             this.btnResultInfo.Text = "Results";
@@ -169,10 +170,10 @@
             this.btnAnnInfo.FlatAppearance.BorderSize = 0;
             this.btnAnnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnnInfo.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnAnnInfo.Location = new System.Drawing.Point(348, 9);
+            this.btnAnnInfo.Location = new System.Drawing.Point(441, 0);
             this.btnAnnInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAnnInfo.Name = "btnAnnInfo";
-            this.btnAnnInfo.Size = new System.Drawing.Size(67, 34);
+            this.btnAnnInfo.Size = new System.Drawing.Size(75, 56);
             this.btnAnnInfo.TabIndex = 7;
             this.btnAnnInfo.Tag = "1";
             this.btnAnnInfo.Text = "ANN";
@@ -194,7 +195,7 @@
             this.btnTrainTest.FlatAppearance.BorderSize = 0;
             this.btnTrainTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrainTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnTrainTest.Location = new System.Drawing.Point(66, 603);
+            this.btnTrainTest.Location = new System.Drawing.Point(59, 607);
             this.btnTrainTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTrainTest.Name = "btnTrainTest";
             this.btnTrainTest.Size = new System.Drawing.Size(283, 71);
@@ -209,11 +210,11 @@
             this.grpTrainingSettings.Controls.Add(this.chckPickRandomly);
             this.grpTrainingSettings.Controls.Add(this.label4);
             this.grpTrainingSettings.Controls.Add(this.lblTestPercent);
-            this.grpTrainingSettings.Location = new System.Drawing.Point(27, 458);
+            this.grpTrainingSettings.Location = new System.Drawing.Point(17, 473);
             this.grpTrainingSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpTrainingSettings.Name = "grpTrainingSettings";
             this.grpTrainingSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grpTrainingSettings.Size = new System.Drawing.Size(374, 130);
+            this.grpTrainingSettings.Size = new System.Drawing.Size(388, 130);
             this.grpTrainingSettings.TabIndex = 4;
             this.grpTrainingSettings.TabStop = false;
             this.grpTrainingSettings.Text = "Training Settings";
@@ -240,7 +241,7 @@
             // 
             this.chckPickRandomly.AutoSize = true;
             this.chckPickRandomly.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chckPickRandomly.Location = new System.Drawing.Point(227, 103);
+            this.chckPickRandomly.Location = new System.Drawing.Point(220, 104);
             this.chckPickRandomly.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chckPickRandomly.Name = "chckPickRandomly";
             this.chckPickRandomly.Size = new System.Drawing.Size(138, 22);
@@ -262,7 +263,7 @@
             // 
             this.lblTestPercent.AutoSize = true;
             this.lblTestPercent.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblTestPercent.Location = new System.Drawing.Point(317, 50);
+            this.lblTestPercent.Location = new System.Drawing.Point(303, 50);
             this.lblTestPercent.Name = "lblTestPercent";
             this.lblTestPercent.Size = new System.Drawing.Size(55, 20);
             this.lblTestPercent.TabIndex = 1;
@@ -271,11 +272,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnLoadAnn);
-            this.groupBox1.Location = new System.Drawing.Point(26, 295);
+            this.groupBox1.Location = new System.Drawing.Point(17, 311);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.groupBox1.Size = new System.Drawing.Size(379, 146);
+            this.groupBox1.Size = new System.Drawing.Size(388, 146);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ANN Settings";
@@ -286,10 +287,10 @@
             this.btnLoadAnn.FlatAppearance.BorderSize = 0;
             this.btnLoadAnn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLoadAnn.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnLoadAnn.Location = new System.Drawing.Point(40, 25);
+            this.btnLoadAnn.Location = new System.Drawing.Point(83, 45);
             this.btnLoadAnn.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnLoadAnn.Name = "btnLoadAnn";
-            this.btnLoadAnn.Size = new System.Drawing.Size(298, 87);
+            this.btnLoadAnn.Size = new System.Drawing.Size(223, 69);
             this.btnLoadAnn.TabIndex = 5;
             this.btnLoadAnn.Text = "Load ANN";
             this.btnLoadAnn.UseVisualStyleBackColor = false;
@@ -303,7 +304,7 @@
             this.grpAnnSettings.Controls.Add(this.lblLearningRate);
             this.grpAnnSettings.Controls.Add(this.lblHiddenNeuronCount);
             this.grpAnnSettings.Controls.Add(this.label2);
-            this.grpAnnSettings.Location = new System.Drawing.Point(17, 140);
+            this.grpAnnSettings.Location = new System.Drawing.Point(17, 162);
             this.grpAnnSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpAnnSettings.Name = "grpAnnSettings";
             this.grpAnnSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -412,10 +413,10 @@
             this.pnlANNInfo.Controls.Add(this.label11);
             this.pnlANNInfo.Controls.Add(this.label10);
             this.pnlANNInfo.Controls.Add(this.btnSaveANN);
-            this.pnlANNInfo.Location = new System.Drawing.Point(432, 36);
+            this.pnlANNInfo.Location = new System.Drawing.Point(432, 90);
             this.pnlANNInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlANNInfo.Name = "pnlANNInfo";
-            this.pnlANNInfo.Size = new System.Drawing.Size(820, 576);
+            this.pnlANNInfo.Size = new System.Drawing.Size(820, 641);
             this.pnlANNInfo.TabIndex = 4;
             // 
             // groupBox3
@@ -633,20 +634,20 @@
             // pnlPicker
             // 
             this.pnlPicker.BackColor = System.Drawing.Color.BlueViolet;
-            this.pnlPicker.Location = new System.Drawing.Point(415, 9);
+            this.pnlPicker.Location = new System.Drawing.Point(441, 60);
             this.pnlPicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlPicker.Name = "pnlPicker";
-            this.pnlPicker.Size = new System.Drawing.Size(11, 34);
+            this.pnlPicker.Size = new System.Drawing.Size(74, 10);
             this.pnlPicker.TabIndex = 4;
             // 
             // pnlResults
             // 
             this.pnlResults.BackColor = System.Drawing.Color.Snow;
             this.pnlResults.Controls.Add(this.richtxtAnnResult);
-            this.pnlResults.Location = new System.Drawing.Point(435, 36);
+            this.pnlResults.Location = new System.Drawing.Point(432, 84);
             this.pnlResults.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlResults.Name = "pnlResults";
-            this.pnlResults.Size = new System.Drawing.Size(820, 580);
+            this.pnlResults.Size = new System.Drawing.Size(820, 645);
             this.pnlResults.TabIndex = 5;
             // 
             // richtxtAnnResult
@@ -667,13 +668,51 @@
             this.openFileDialog.FileName = "Dosya Seçiniz";
             this.openFileDialog.RestoreDirectory = true;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Verdana", 7F);
+            this.button1.Location = new System.Drawing.Point(603, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 56);
+            this.button1.TabIndex = 7;
+            this.button1.Tag = "3";
+            this.button1.Text = "something";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.BtnAnnandResultButton_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.Color.SlateBlue;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.button2.Location = new System.Drawing.Point(684, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 56);
+            this.button2.TabIndex = 8;
+            this.button2.Tag = "4";
+            this.button2.Text = "Something";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.BtnAnnandResultButton_Click);
+            // 
             // TrainerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(1269, 742);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnResultInfo);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlPicker);
+            this.Controls.Add(this.btnAnnInfo);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnClose);
@@ -755,5 +794,7 @@
         private System.Windows.Forms.Button btnSaveANN;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLoadAnn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

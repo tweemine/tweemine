@@ -65,7 +65,7 @@ namespace TweemineAnalyzer
         private void BtnAnnandResultButton_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
-            pnlPicker.Top = button.Top;
+            pnlPicker.Left = button.Left;
             pnlPicker.BackColor = button.BackColor;
 
             if (button.Tag.ToString() == "1")
