@@ -38,7 +38,8 @@ class StdOutListener(StreamListener):
         if(text.startswith('RT')):
             return
         
-        data = {'tweet': text, 'labeled': False, 'words': [], 'users': ["Default"]}
+      #  data = {'tweet': text, 'labeled': False, 'words': [], 'users': ["Default"]}
+        data = {'tweet': text, 'labeled': False, 'words': [], 'users': [{'name':"Default",'labels':None}]}
         listOfData.append(data)
         print text
         print "\n"
