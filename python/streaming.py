@@ -11,10 +11,10 @@ import atexit
 import sys
 import random
 
-access_token = "2730466444-k6CP3c6oh3ilGUeksuF8pgFZZULdJu5VGLbZt3e"
-access_token_secret = "pcOZhhtBQLeKtUZolR4u0Mo6urJR9aYPDxsVXmwQ1hWBZ"
-consumer_key = "ik6fmv37Gg21e4dHRV54B2VcO"
-consumer_secret = "b34sTvlrbBFslkbnfVkJoxjunfV8cILw5m8fou8BAeMdtvPryp"
+access_token = "xxxx-xxxx"
+access_token_secret = "xx"
+consumer_key = "xxx"
+consumer_secret = "xxx"
 
 listOfData=[]
 nameofFile=str(random.randint(0,1000))+" "+str(random.randint(0,1000));
@@ -38,7 +38,8 @@ class StdOutListener(StreamListener):
         if(text.startswith('RT')):
             return
         
-        data = {'tweet': text, 'labeled': False, 'words': [], 'users': ["Default"]}
+      #  data = {'tweet': text, 'labeled': False, 'words': [], 'users': ["Default"]}
+        data = {'tweet': text, 'labeled': False, 'words': [], 'users': [{'name':"Default",'labels':None}]}
         listOfData.append(data)
         print text
         print "\n"
