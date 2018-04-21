@@ -264,14 +264,7 @@ namespace TweemineAnalyzer
                     // Navigate to first tweet.
                     NavigateLabeledData_Click(null, new EventArgs());
 
-
-
-
-                    // This code is here for testing.
-
-                    Analyser analyser = new Analyser(tweetDatas, labels);
-                    analyser.Analyse();
-                    analyser.Test();
+                    FillTweetInfo();
                 }
                 else
                 {
@@ -447,6 +440,27 @@ namespace TweemineAnalyzer
         #endregion
 
         #region SomeHelperMethods
+
+        void FillTweetInfo()
+        {
+            Analyser analyser = new Analyser(tweetDatas, labels);
+            analyser.Analyse();
+
+            tweetInfo.Text = "";
+
+            if (analyser.LabelFreq.Count == 0)
+                return;
+
+            for(int i = 0; i < labels.Length; i++)
+            {
+                if (analyser.LabelFreq.ContainsKey(labels[i]) == true)
+                    tweetInfo.Text += labels[i] + ": " + analyser.LabelFreq[labels[i]] + "\n";
+                else
+                    tweetInfo.Text += labels[i] + ": 0" + "\n";
+            }
+
+            tweetInfo.Text += "\nTotal: " + analyser.Tweets.Length + "\n";
+        }
 
         void ParseTweets()
         {

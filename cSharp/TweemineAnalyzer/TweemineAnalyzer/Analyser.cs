@@ -16,11 +16,13 @@ namespace TweemineAnalyzer
 
         private Dictionary<string, Word> wordDict;
         private Dictionary<string, int> labelDict;
+        private Dictionary<string, int> labelFreq;
         private TweetData[] tweets;
         private TweetData[] trainingTweets;
         private TweetData[] testingTweets;
         private Word[] words;
         private string[] labels;
+        
 
         public TweetData[] Testings { get { return testingTweets; } }
         // Max word count per tweet. This needed for Neural Network.
@@ -56,6 +58,7 @@ namespace TweemineAnalyzer
             this.labelCount = labels.Length;
             this.wordDict = new Dictionary<string, Word>();
             this.labelDict = new Dictionary<string, int>();
+            this.labelFreq = new Dictionary<string, int>();
         }
         public Analyser(TweetData[] tweets, string[] labels, int _percentage = 10, bool _isRandom = false)
         {
@@ -65,6 +68,9 @@ namespace TweemineAnalyzer
             this.labelCount = labels.Length;
             this.wordDict = new Dictionary<string, Word>();
             this.labelDict = new Dictionary<string, int>();
+            this.labelFreq = new Dictionary<string, int>();
+
+
             percentage = _percentage;
             isRandom = _isRandom;
 
@@ -78,6 +84,7 @@ namespace TweemineAnalyzer
         }
 
         #endregion
+        
         #region Helpers
         /// <summary>
         /// seperates tweets as training and testing data
@@ -137,6 +144,8 @@ namespace TweemineAnalyzer
             {
                 labelDict.Add(label, idx++);
             }
+
+            GetLabelFreq();
         }
 
         private Word[] AnalyseWords()
@@ -169,6 +178,21 @@ namespace TweemineAnalyzer
             }
 
             return wordList.ToArray();
+        }
+
+        private void GetLabelFreq()
+        {
+            for(int i = 0; i < tweets.Length; i++)
+            {
+                if (tweets[i].users[0].labels == null)
+                    continue;
+
+                string label = tweets[i].users[0].labels[0];
+                if (labelFreq.ContainsKey(label) == false)
+                    labelFreq.Add(label, 1);                
+                else
+                    labelFreq[label]++;
+            }
         }
 
         #endregion
@@ -295,6 +319,13 @@ namespace TweemineAnalyzer
             }
         }
 
+        public Dictionary<string, int> LabelFreq
+        {
+            get
+            {
+                return this.labelFreq;
+            }
+        }
 
 
         #endregion
