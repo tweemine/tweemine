@@ -97,7 +97,7 @@
             // btnNextTweet
             // 
             this.btnNextTweet.Location = new System.Drawing.Point(66, 32);
-            this.btnNextTweet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNextTweet.Margin = new System.Windows.Forms.Padding(2);
             this.btnNextTweet.Name = "btnNextTweet";
             this.btnNextTweet.Size = new System.Drawing.Size(50, 40);
             this.btnNextTweet.TabIndex = 2;
@@ -110,7 +110,7 @@
             // btnPrevTweet
             // 
             this.btnPrevTweet.Location = new System.Drawing.Point(5, 32);
-            this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPrevTweet.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrevTweet.Name = "btnPrevTweet";
             this.btnPrevTweet.Size = new System.Drawing.Size(50, 40);
             this.btnPrevTweet.TabIndex = 2;
@@ -123,7 +123,7 @@
             // btnDelTweet
             // 
             this.btnDelTweet.Location = new System.Drawing.Point(5, 85);
-            this.btnDelTweet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelTweet.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelTweet.Name = "btnDelTweet";
             this.btnDelTweet.Size = new System.Drawing.Size(111, 35);
             this.btnDelTweet.TabIndex = 3;
@@ -139,7 +139,7 @@
             this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
             this.btnWritetoJson.Location = new System.Drawing.Point(11, 28);
-            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(2);
             this.btnWritetoJson.Name = "btnWritetoJson";
             this.btnWritetoJson.Size = new System.Drawing.Size(59, 58);
             this.btnWritetoJson.TabIndex = 9;
@@ -154,9 +154,9 @@
             this.grpDataNavigation.Controls.Add(this.btnNextTweet);
             this.grpDataNavigation.Controls.Add(this.btnPrevTweet);
             this.grpDataNavigation.Location = new System.Drawing.Point(179, 331);
-            this.grpDataNavigation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpDataNavigation.Margin = new System.Windows.Forms.Padding(2);
             this.grpDataNavigation.Name = "grpDataNavigation";
-            this.grpDataNavigation.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grpDataNavigation.Padding = new System.Windows.Forms.Padding(2);
             this.grpDataNavigation.Size = new System.Drawing.Size(121, 124);
             this.grpDataNavigation.TabIndex = 3;
             this.grpDataNavigation.TabStop = false;
@@ -166,9 +166,9 @@
             // 
             this.groupBox3.Controls.Add(this.btnWritetoJson);
             this.groupBox3.Location = new System.Drawing.Point(465, 331);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(82, 107);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
@@ -179,9 +179,9 @@
             this.groupBox4.Controls.Add(this.btnAddTag);
             this.groupBox4.Controls.Add(this.txttag);
             this.groupBox4.Location = new System.Drawing.Point(11, 331);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox4.Size = new System.Drawing.Size(164, 124);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
@@ -190,7 +190,7 @@
             // btnAddTag
             // 
             this.btnAddTag.Location = new System.Drawing.Point(5, 79);
-            this.btnAddTag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddTag.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddTag.Name = "btnAddTag";
             this.btnAddTag.Size = new System.Drawing.Size(155, 41);
             this.btnAddTag.TabIndex = 3;
@@ -201,7 +201,7 @@
             // txttag
             // 
             this.txttag.Location = new System.Drawing.Point(4, 32);
-            this.txttag.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txttag.Margin = new System.Windows.Forms.Padding(2);
             this.txttag.Name = "txttag";
             this.txttag.Size = new System.Drawing.Size(155, 20);
             this.txttag.TabIndex = 2;
@@ -213,7 +213,7 @@
             this.cmbUserName.Items.AddRange(new object[] {
             "Default"});
             this.cmbUserName.Location = new System.Drawing.Point(50, 10);
-            this.cmbUserName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbUserName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbUserName.Name = "cmbUserName";
             this.cmbUserName.Size = new System.Drawing.Size(145, 21);
             this.cmbUserName.TabIndex = 5;
@@ -233,9 +233,9 @@
             // 
             this.groupBox5.Controls.Add(this.chcLstLabels);
             this.groupBox5.Location = new System.Drawing.Point(313, 331);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(148, 124);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
@@ -245,9 +245,9 @@
             // 
             this.chcLstLabels.CheckOnClick = true;
             this.chcLstLabels.Location = new System.Drawing.Point(4, 20);
-            this.chcLstLabels.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chcLstLabels.Margin = new System.Windows.Forms.Padding(2);
             this.chcLstLabels.Name = "chcLstLabels";
-            this.chcLstLabels.Size = new System.Drawing.Size(130, 79);
+            this.chcLstLabels.Size = new System.Drawing.Size(130, 94);
             this.chcLstLabels.TabIndex = 2;
             this.chcLstLabels.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chcLstLabels_ItemCheck);
             // 
@@ -322,7 +322,7 @@
             this.Controls.Add(this.grpDataNavigation);
             this.Controls.Add(this.lblTweetText);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Tweemine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
