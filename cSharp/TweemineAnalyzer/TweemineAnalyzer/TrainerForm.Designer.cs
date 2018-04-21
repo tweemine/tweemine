@@ -42,6 +42,8 @@
             this.chckPickRandomly = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTestPercent = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLoadAnn = new System.Windows.Forms.Button();
             this.grpAnnSettings = new System.Windows.Forms.GroupBox();
             this.tbHiddenNeuronCount = new System.Windows.Forms.TrackBar();
             this.tbLearningRate = new System.Windows.Forms.TrackBar();
@@ -67,6 +69,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnSaveANN = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -77,6 +80,7 @@
             this.panel1.SuspendLayout();
             this.grpTrainingSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTestCount)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.grpAnnSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbHiddenNeuronCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLearningRate)).BeginInit();
@@ -127,6 +131,7 @@
             this.panel1.Controls.Add(this.progressBar);
             this.panel1.Controls.Add(this.btnTrainTest);
             this.panel1.Controls.Add(this.grpTrainingSettings);
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.grpAnnSettings);
             this.panel1.Controls.Add(this.txtFileName);
             this.panel1.Controls.Add(this.btnBrowse);
@@ -137,7 +142,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(415, 615);
+            this.panel1.Size = new System.Drawing.Size(415, 754);
             this.panel1.TabIndex = 3;
             // 
             // btnResultInfo
@@ -176,7 +181,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(4, 543);
+            this.progressBar.Location = new System.Drawing.Point(4, 675);
             this.progressBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(403, 46);
@@ -189,7 +194,7 @@
             this.btnTrainTest.FlatAppearance.BorderSize = 0;
             this.btnTrainTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrainTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnTrainTest.Location = new System.Drawing.Point(63, 457);
+            this.btnTrainTest.Location = new System.Drawing.Point(63, 589);
             this.btnTrainTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTrainTest.Name = "btnTrainTest";
             this.btnTrainTest.Size = new System.Drawing.Size(297, 71);
@@ -204,7 +209,7 @@
             this.grpTrainingSettings.Controls.Add(this.chckPickRandomly);
             this.grpTrainingSettings.Controls.Add(this.label4);
             this.grpTrainingSettings.Controls.Add(this.lblTestPercent);
-            this.grpTrainingSettings.Location = new System.Drawing.Point(17, 299);
+            this.grpTrainingSettings.Location = new System.Drawing.Point(17, 431);
             this.grpTrainingSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpTrainingSettings.Name = "grpTrainingSettings";
             this.grpTrainingSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -263,6 +268,33 @@
             this.lblTestPercent.TabIndex = 1;
             this.lblTestPercent.Text = "10 %";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnLoadAnn);
+            this.groupBox1.Location = new System.Drawing.Point(17, 149);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(388, 119);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "ANN Settings";
+            // 
+            // btnLoadAnn
+            // 
+            this.btnLoadAnn.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnLoadAnn.FlatAppearance.BorderSize = 0;
+            this.btnLoadAnn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoadAnn.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnLoadAnn.Location = new System.Drawing.Point(46, 30);
+            this.btnLoadAnn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLoadAnn.Name = "btnLoadAnn";
+            this.btnLoadAnn.Size = new System.Drawing.Size(304, 71);
+            this.btnLoadAnn.TabIndex = 5;
+            this.btnLoadAnn.Text = "Load ANN";
+            this.btnLoadAnn.UseVisualStyleBackColor = false;
+            this.btnLoadAnn.Click += new System.EventHandler(this.btnLoadAnn_Click);
+            // 
             // grpAnnSettings
             // 
             this.grpAnnSettings.Controls.Add(this.tbHiddenNeuronCount);
@@ -271,7 +303,7 @@
             this.grpAnnSettings.Controls.Add(this.lblLearningRate);
             this.grpAnnSettings.Controls.Add(this.lblHiddenNeuronCount);
             this.grpAnnSettings.Controls.Add(this.label2);
-            this.grpAnnSettings.Location = new System.Drawing.Point(17, 140);
+            this.grpAnnSettings.Location = new System.Drawing.Point(17, 272);
             this.grpAnnSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpAnnSettings.Name = "grpAnnSettings";
             this.grpAnnSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -379,10 +411,11 @@
             this.pnlANNInfo.Controls.Add(this.groupBox3);
             this.pnlANNInfo.Controls.Add(this.label11);
             this.pnlANNInfo.Controls.Add(this.label10);
+            this.pnlANNInfo.Controls.Add(this.btnSaveANN);
             this.pnlANNInfo.Location = new System.Drawing.Point(432, 36);
             this.pnlANNInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlANNInfo.Name = "pnlANNInfo";
-            this.pnlANNInfo.Size = new System.Drawing.Size(504, 576);
+            this.pnlANNInfo.Size = new System.Drawing.Size(825, 576);
             this.pnlANNInfo.TabIndex = 4;
             // 
             // groupBox3
@@ -399,7 +432,7 @@
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.lblInputCount);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(91, 130);
+            this.groupBox3.Location = new System.Drawing.Point(267, 189);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -414,9 +447,9 @@
             this.lblHiddenShowCount.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblHiddenShowCount.Location = new System.Drawing.Point(75, 71);
             this.lblHiddenShowCount.Name = "lblHiddenShowCount";
-            this.lblHiddenShowCount.Size = new System.Drawing.Size(26, 17);
+            this.lblHiddenShowCount.Size = new System.Drawing.Size(17, 17);
             this.lblHiddenShowCount.TabIndex = 0;
-            this.lblHiddenShowCount.Text = "70";
+            this.lblHiddenShowCount.Text = "0";
             // 
             // label14
             // 
@@ -436,7 +469,7 @@
             this.lblOutputCount.Name = "lblOutputCount";
             this.lblOutputCount.Size = new System.Drawing.Size(17, 17);
             this.lblOutputCount.TabIndex = 0;
-            this.lblOutputCount.Text = "8";
+            this.lblOutputCount.Text = "0";
             // 
             // label13
             // 
@@ -454,9 +487,9 @@
             this.lblAccuracy.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblAccuracy.Location = new System.Drawing.Point(196, 71);
             this.lblAccuracy.Name = "lblAccuracy";
-            this.lblAccuracy.Size = new System.Drawing.Size(55, 17);
+            this.lblAccuracy.Size = new System.Drawing.Size(37, 17);
             this.lblAccuracy.TabIndex = 0;
-            this.lblAccuracy.Text = "100 %";
+            this.lblAccuracy.Text = "0 %";
             // 
             // label9
             // 
@@ -474,9 +507,9 @@
             this.lblTestingCount.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblTestingCount.Location = new System.Drawing.Point(196, 47);
             this.lblTestingCount.Name = "lblTestingCount";
-            this.lblTestingCount.Size = new System.Drawing.Size(44, 17);
+            this.lblTestingCount.Size = new System.Drawing.Size(17, 17);
             this.lblTestingCount.TabIndex = 0;
-            this.lblTestingCount.Text = "1000";
+            this.lblTestingCount.Text = "0";
             // 
             // label7
             // 
@@ -494,9 +527,9 @@
             this.lblTrainingCount.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblTrainingCount.Location = new System.Drawing.Point(196, 22);
             this.lblTrainingCount.Name = "lblTrainingCount";
-            this.lblTrainingCount.Size = new System.Drawing.Size(44, 17);
+            this.lblTrainingCount.Size = new System.Drawing.Size(17, 17);
             this.lblTrainingCount.TabIndex = 0;
-            this.lblTrainingCount.Text = "1000";
+            this.lblTrainingCount.Text = "0";
             // 
             // label5
             // 
@@ -514,9 +547,9 @@
             this.lblInputCount.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblInputCount.Location = new System.Drawing.Point(75, 22);
             this.lblInputCount.Name = "lblInputCount";
-            this.lblInputCount.Size = new System.Drawing.Size(44, 17);
+            this.lblInputCount.Size = new System.Drawing.Size(17, 17);
             this.lblInputCount.TabIndex = 0;
-            this.lblInputCount.Text = "1000";
+            this.lblInputCount.Text = "0";
             // 
             // label12
             // 
@@ -532,7 +565,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label11.Location = new System.Drawing.Point(191, 84);
+            this.label11.Location = new System.Drawing.Point(367, 143);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(94, 17);
             this.label11.TabIndex = 1;
@@ -542,11 +575,26 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.Location = new System.Drawing.Point(137, 54);
+            this.label10.Location = new System.Drawing.Point(313, 113);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(215, 20);
             this.label10.TabIndex = 1;
             this.label10.Text = "Tweemine Text Analyzer";
+            // 
+            // btnSaveANN
+            // 
+            this.btnSaveANN.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnSaveANN.FlatAppearance.BorderSize = 0;
+            this.btnSaveANN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveANN.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSaveANN.Location = new System.Drawing.Point(267, 310);
+            this.btnSaveANN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSaveANN.Name = "btnSaveANN";
+            this.btnSaveANN.Size = new System.Drawing.Size(304, 71);
+            this.btnSaveANN.TabIndex = 5;
+            this.btnSaveANN.Text = "Save ANN Settings";
+            this.btnSaveANN.UseVisualStyleBackColor = false;
+            this.btnSaveANN.Click += new System.EventHandler(this.btnSaveANN_Click);
             // 
             // btnClose
             // 
@@ -624,7 +672,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Snow;
-            this.ClientSize = new System.Drawing.Size(1269, 615);
+            this.ClientSize = new System.Drawing.Size(1269, 754);
             this.Controls.Add(this.pnlPicker);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.panel1);
@@ -643,6 +691,7 @@
             this.grpTrainingSettings.ResumeLayout(false);
             this.grpTrainingSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTestCount)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.grpAnnSettings.ResumeLayout(false);
             this.grpAnnSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbHiddenNeuronCount)).EndInit();
@@ -703,5 +752,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lblTrainingCount;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnSaveANN;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnLoadAnn;
     }
 }

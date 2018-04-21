@@ -9,11 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TweemineNeuralNetwork;
 
 namespace TweemineAnalyzer
 {
     public partial class TrainerForm : Form
     {
+        string nnPath = Path.Combine("..", "..", "..", "..", "..", "tweets","NNConfig","NN.json");
         static string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
         static string fileName = "all_tweets.json";
         static string defaultTweetPath = Path.Combine("..", "..", "..", "..", "..", "tweets", fileName);
@@ -114,7 +116,7 @@ namespace TweemineAnalyzer
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
+        bool trackbarschanged = true;
         private void TrackBars_Scroll(object sender, EventArgs e)
         {
             TrackBar trackBar = ((TrackBar)sender);
@@ -124,6 +126,13 @@ namespace TweemineAnalyzer
                 lblHiddenNeuronCount.Text = trackBar.Value.ToString();
             else
                 lblTestPercent.Text = trackBar.Value.ToString()+" %";
+            if (trackbarschanged == false)
+            {
+                btnTrainTest.Text = "Train and Test";
+                btnTrainTest.Click += btnTrainTest_Click;
+                btnTrainTest.Click -= btnTest_Click;
+                trackbarschanged = true;
+            }
         }
         
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -135,31 +144,6 @@ namespace TweemineAnalyzer
                 filePath = openFileDialog.FileName;
             }
         }
-       
-        /// <summary>
-        /// reads tweets from a file
-        /// </summary>
-        /// <param name="path">file path</param>
-        TweetData[] ReadTweetsFromJsonFile(string path)
-        {
-            TweetData[] tweetDataArr;
-
-            //we wont need text reader after this scope so I am being sure GC has collected this ref.
-            using (TextReader textReader = new StreamReader(path, Encoding.UTF8))
-            {
-                //Reading the json File
-                string context = textReader.ReadToEnd();
-
-                //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
-                tweetDataArr = JsonConvert.DeserializeObject<TweetData[]>(context);
-
-                //close the file
-                textReader.Close();
-            }
-
-            return tweetDataArr;
-        }
-
         void ParseTweets(ref TweetData[] tweetDatas)
         {
             foreach (TweetData data in tweetDatas)
@@ -181,7 +165,7 @@ namespace TweemineAnalyzer
                 return;
             }
 
-            TweetData[] twData = ReadTweetsFromJsonFile(filePath);
+            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
             ParseTweets(ref twData);
             Analyser analyser = new Analyser(twData, labels,tbTestCount.Value,chckPickRandomly.Checked);
             analyser.Analyse();
@@ -223,6 +207,81 @@ namespace TweemineAnalyzer
             lblTestingCount.Text = analyser.TestingTweets.Length.ToString();
             lblTrainingCount.Text = analyser.TrainingTweets.Length.ToString();
             lblAccuracy.Text = analyser.Accuracy.ToString();
+        }
+     
+        private void ShowInfoLoadedNNFromFile(NeuralNetwork neuralNetwork)
+        {
+            tbHiddenNeuronCount.Value = neuralNetwork.HiddenNodes;
+            lblHiddenNeuronCount.Text = neuralNetwork.HiddenNodes.ToString();
+            tbLearningRate.Value = (int)(neuralNetwork.LearningRate * 100);
+            lblLearningRate.Text = (tbLearningRate.Value/100.0).ToString();
+            lblHiddenShowCount.Text = neuralNetwork.HiddenNodes.ToString();
+            lblInputCount.Text = neuralNetwork.InputNodes.ToString();
+            lblOutputCount.Text = neuralNetwork.OutputNodes.ToString();
+        }
+
+        private void btnSaveANN_Click(object sender, EventArgs e)
+        {
+            JsonFileController.WriteToJsonFile(Path.Combine(nnPath), trainer.Neuralnetwork);
+        }
+
+        private void btnLoadAnn_Click(object sender, EventArgs e)
+        {
+            NeuralNetwork neuralNetwork = JsonFileController.ReadDataFromJsonFile<NeuralNetwork>(nnPath);
+
+            trainer = new Trainer(null, neuralNetwork.HiddenNodes,neuralNetwork.LearningRate);
+            trainer.Neuralnetwork = neuralNetwork;
+
+            btnTrainTest.Text = "TEST";
+            btnTrainTest.Click -= btnTrainTest_Click;
+            btnTrainTest.Click += btnTest_Click;
+
+            ShowInfoLoadedNNFromFile(trainer.Neuralnetwork);
+
+            trackbarschanged = false;
+
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                MessageBox.Show("you have to choose a file to train....");
+                return;
+            }
+
+            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
+            ParseTweets(ref twData);
+            Analyser analyser = new Analyser(twData, labels,100, chckPickRandomly.Checked);
+            analyser.Analyse();
+            progressBar.Value = 0;
+            progressBar.Maximum = twData.Length;
+            trainer.Analyser = analyser;
+
+
+            List<List<int>> list = trainer.Test(progressBar);
+
+
+            richtxtAnnResult.Text = "";
+            for (int i = 0; i < analyser.TestingTweets.Length; i++)
+            {
+                richtxtAnnResult.AppendText("Tweet:\n\n");
+                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
+
+
+                richtxtAnnResult.AppendText("Prediction: ");
+                for (int j = 0; j < list[i].Count; j++)
+                {
+                    // We may want to percentage of prediction
+                    string val = labels[list[i][j]];
+                    richtxtAnnResult.AppendText(val + " ");
+                }
+
+                richtxtAnnResult.AppendText("\n\n");
+                richtxtAnnResult.AppendText("------------------------------------------------\n\n");
+            }
+
+            ShowInfo(trainer.Analyser);
         }
     }
 }

@@ -1,21 +1,44 @@
 ﻿using System;
-
+using Newtonsoft.Json;
 namespace TweemineNeuralNetwork
 {
 	public class NeuralNetwork
 	{
-		public int inputNodes;
-		public int hiddenNodes;
-		public int outputNodes;
+        private int inputNodes;
+        private int hiddenNodes;
+        private int outputNodes;
 
-		double learningRate;
+        double learningRate;
 
-		public Matrix weights_ih;
-		public Matrix weights_ho;
-		public Matrix bias_h;
-		public Matrix bias_o;
+        private Matrix weights_ih;
+        private Matrix weights_ho;
+        private Matrix bias_h;
+        private Matrix bias_o;
 
-		public NeuralNetwork(int inputNodes, int hiddenNodes, int outputNodes, double learningRate)
+        public double LearningRate { get => learningRate;  set => learningRate = value; }
+        public int InputNodes { get => inputNodes;   set => inputNodes = value; }
+        public int HiddenNodes { get => hiddenNodes;   set => hiddenNodes = value; }
+        public int OutputNodes { get => outputNodes;   set => outputNodes = value; }
+        public Matrix Weights_ih { get => weights_ih;   set => weights_ih = value; }
+        public Matrix Weights_ho { get => weights_ho;   set => weights_ho = value; }
+        public Matrix Bias_h { get => bias_h;   set => bias_h = value; }
+        public Matrix Bias_o { get => bias_o;   set => bias_o = value; }
+        public NeuralNetwork()
+        {
+            //Console.WriteLine(InputNodes);
+            //weights_ih = new Matrix(hiddenNodes, inputNodes);
+            //weights_ho = new Matrix(outputNodes, hiddenNodes);
+            //weights_ih.Randomize();
+            //weights_ho.Randomize();
+
+            //bias_h = new Matrix(this.hiddenNodes, 1);
+            //bias_o = new Matrix(this.outputNodes, 1);
+            //bias_h.Randomize();
+            //bias_o.Randomize();
+            
+            
+        }
+        public NeuralNetwork(int inputNodes, int hiddenNodes, int outputNodes, double learningRate)
 		{
 			this.inputNodes  = inputNodes;
 			this.hiddenNodes = hiddenNodes;
@@ -41,7 +64,7 @@ namespace TweemineNeuralNetwork
 			this.outputNodes = nn.outputNodes;
 
 			this.learningRate = nn.learningRate;
-
+            
 			this.weights_ih = new Matrix(nn.weights_ih);
 			this.weights_ho = new Matrix(nn.weights_ho);
 			this.bias_h = new Matrix(nn.bias_h);

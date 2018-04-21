@@ -173,7 +173,7 @@ namespace TweemineAnalyzer
 
         private void WriteToFile_Click(object sender, EventArgs e)
         {
-            WriteToJsonFile(tweetsPath, tweetDatas);
+            JsonFileController.WriteToJsonFile(tweetsPath, tweetDatas);
             fileChanged = false;
         }
 
@@ -251,15 +251,15 @@ namespace TweemineAnalyzer
                 if (openFileDialog.SafeFileName.EndsWith(".json"))
                 {
                     tweetsPath = openFileDialog.FileName;
-                    tweetDatas = ReadTweetsFromJsonFile(tweetsPath);
+                    tweetDatas = JsonFileController.ReadDataFromJsonFile<TweetData[]>(tweetsPath);
 
                     // RegisterUsers() should be called before ParseTweets()
                     // because we check words array is null or not in RegisterUsers().
                     RegisterUsers();
-                    ParseTweets();           
+                    ParseTweets();
 
                     // save parsed tweets to json file.
-                    WriteToJsonFile(tweetsPath, tweetDatas);
+                    JsonFileController.WriteToJsonFile(tweetsPath, tweetDatas);
 
                     // Navigate to first tweet.
                     NavigateLabeledData_Click(null, new EventArgs());
@@ -323,7 +323,7 @@ namespace TweemineAnalyzer
                     case DialogResult.Ignore:
                         break;
                     case DialogResult.Yes:
-                        WriteToJsonFile(tweetsPath, tweetDatas);
+                        JsonFileController.WriteToJsonFile(tweetsPath, tweetDatas);
                         break;
                     case DialogResult.No:
                         break;
@@ -339,7 +339,7 @@ namespace TweemineAnalyzer
             DialogResult result = folderBD.ShowDialog();
             if (result == DialogResult.OK)
             {
-                CombineAllJsonFiles(folderBD.SelectedPath);
+               JsonFileController.CombineAllJsonFiles(folderBD.SelectedPath);
             }
         }
 
@@ -354,96 +354,6 @@ namespace TweemineAnalyzer
                 NavigateLabeledData_Click(btnNextTweet, new EventArgs());
             }
         }
-        #endregion
-
-        #region FileReadWrite
-        /// <summary>
-        /// reads tweets from a file
-        /// </summary>
-        /// <param name="path">file path</param>
-        TweetData[] ReadTweetsFromJsonFile(string path)
-        {
-            TweetData[] tweetDataArr;
-
-            //we wont need text reader after this scope so I am being sure GC has collected this ref.
-            using (TextReader textReader = new StreamReader(path, Encoding.UTF8))
-            {
-                //Reading the json File
-                string context = textReader.ReadToEnd();
-
-                //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
-                tweetDataArr = JsonConvert.DeserializeObject<TweetData[]>(context);    
-
-                //close the file
-                textReader.Close();
-            }
-
-            return tweetDataArr;
-        }
-
-        void WriteToJsonFile(string path, object obj)
-        {
-            using (TextWriter textWriter = new StreamWriter(path))
-            {
-                //create a new json serializer object for serialazation
-                JsonSerializer jsonSerializer = new JsonSerializer();
-                
-                //serialize data
-                string jsonText = JsonConvert.SerializeObject(obj);
-                textWriter.Write(jsonText);
-  
-                textWriter.Close();
-            }
-        }
-
-        void WriteTweetsToTxtFile()
-        {
-            using (StreamWriter writer =
-            new StreamWriter(txtFilePath))
-            {
-                for(int i = 0; i < tweetDatas.Length; i++)
-                {
-                    string processedTweet = "";
-                    for(int j = 0; j < tweetDatas[i].words.Length; j++)
-                    {
-                        processedTweet += tweetDatas[i].words[j] + " ";
-                    }
-
-                    processedTweet.TrimEnd();
-
-                    writer.WriteLine(string.Format("raw tweet: {0}\n\n\n\n\n", tweetDatas[i].tweet));
-                    writer.WriteLine();
-                    writer.WriteLine(string.Format("processed tweet: {0}", processedTweet));
-                    writer.WriteLine();
-                    writer.WriteLine(string.Format("label: {0}", tweetDatas[i].users[0].labels));
-                    writer.WriteLine();
-                    writer.WriteLine();
-                }
-            }
-
-        }
-        
-        void CombineAllJsonFiles(string path)
-        {
-            List<TweetData> allTweets = new List<TweetData>();
-            TweetData[] tweets = null;
-
-            string[] files = Directory.GetFiles(path, "*.json");
-
-            foreach (string fileName in files)
-            {
-                //if (fileName.EndsWith(".json") == false)
-                //    continue;
-
-                tweets = ReadTweetsFromJsonFile(fileName);
-                if (fileName != "all_tweets.json")
-                    File.Delete(fileName);
-                allTweets.AddRange(tweets);
-            }
-            if (allTweets.Count != 0)
-                WriteToJsonFile(Path.Combine(path, "all_tweets.json"), allTweets.ToArray());
-        }
-
         #endregion
 
         #region SomeHelperMethods

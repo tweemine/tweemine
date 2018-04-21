@@ -10,6 +10,13 @@ namespace TweemineNeuralNetwork
 
 		static Random randomize = new Random();
 
+        public int Rows { get => rows; set => rows = value; }
+        public int Cols { get => cols; set => cols = value; }
+
+        public Matrix()
+        {
+
+        }
 		public Matrix (int rows, int cols)
 		{
 			this.rows = rows;

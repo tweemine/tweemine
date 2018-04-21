@@ -15,21 +15,35 @@ namespace TweemineAnalyzer
         TweetData[]              testingTweets;
         string[]                 labels;
 
-        public Trainer(Analyser _analyser, int _hiddenNodes, double _learningRate)
+        public NeuralNetwork Neuralnetwork { get => nn; set => nn = value; }
+        public Analyser Analyser { get => analyser; set { analyser = value; SetAnalyser(value); } }
+
+        void SetAnalyser(Analyser _analyser)
         {
-            analyser = _analyser;
             trainingTweets = _analyser.TrainingTweets;
             testingTweets = _analyser.TestingTweets;
             labels = _analyser.Labels;
             wordDict = _analyser.WordDictionary;
             labelDict = _analyser.LabelDictioanary;
-           
-            nn = new NeuralNetwork(
-                _analyser.MaxWordPerTweet,
-                _hiddenNodes,
-                _analyser.LabelCount,
-                _learningRate
-            );
+        }
+        public Trainer(Analyser _analyser, int _hiddenNodes, double _learningRate)
+        {
+            analyser = _analyser;
+            if (analyser != null)
+            {
+                trainingTweets = _analyser.TrainingTweets;
+                testingTweets = _analyser.TestingTweets;
+                labels = _analyser.Labels;
+                wordDict = _analyser.WordDictionary;
+                labelDict = _analyser.LabelDictioanary;
+
+                nn = new NeuralNetwork(
+                    _analyser.MaxWordPerTweet,
+                    _hiddenNodes,
+                    _analyser.LabelCount,
+                    _learningRate
+                );
+            }
         }
 
         public void Train(ProgressBar progressBar)
@@ -40,8 +54,8 @@ namespace TweemineAnalyzer
             for(int i = 0; i < this.trainingTweets.Length; i++)
             {
                 progressBar.Value++;
-                inputArr = new double[nn.inputNodes];
-                outputArr = new double[nn.outputNodes];
+                inputArr = new double[nn.InputNodes];
+                outputArr = new double[nn.OutputNodes];
 
                 // Set words for input array.
                 string[] words = this.trainingTweets[i].words;
@@ -90,11 +104,11 @@ namespace TweemineAnalyzer
             double[] outputArr;
             int corrects=0;
 
-            for (int i = 0; i < this.testingTweets.Length; i++)
+            for (int i = 0; i < testingTweets.Length; i++)
             {
                 progressBar.Value++;
-                inputArr = new double[nn.inputNodes];
-                outputArr = new double[nn.outputNodes];
+                inputArr = new double[nn.InputNodes];
+                outputArr = new double[nn.OutputNodes];
 
                 // Set words for input array.
                 string[] words = this.testingTweets[i].words;
