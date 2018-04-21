@@ -10,7 +10,7 @@ namespace TweemineAnalyzer
     {
         public static List<string> ParseTheText(string txt)
         {
-            int minWordLength = 4;
+            int minWordLength = 3;
             int maxWordLength = 7;
 
             List<string> matchDataList = new List<string>();

@@ -452,6 +452,7 @@ namespace TweemineAnalyzer
         {
             foreach (TweetData data in tweetDatas)
             {
+                
                 // If tweet is not parsed, we'll parse it for first time here. 
                 if (data.words == null || data.words.Length == 0)
                 {

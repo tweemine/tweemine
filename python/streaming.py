@@ -38,12 +38,12 @@ class StdOutListener(StreamListener):
         if(text.startswith('RT')):
             return
         
-        data = {'tweet': text, 'labeled': False, 'words': [], 'users': []}
+        data = {'tweet': text, 'labeled': False, 'words': [], 'users': ["Default"]}
         listOfData.append(data)
         print text
         print "\n"
 
-        if len(listOfData) >= 10:
+        if len(listOfData) >= 100:
             sys.exitfunc()
 
             
@@ -66,4 +66,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth,l,tweet_mode = 'extended',truncated = 'false')
     
-stream.filter( track = news, languages = ['tr'] )
+stream.filter( track = sport, languages = ['tr'] )
