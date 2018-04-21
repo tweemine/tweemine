@@ -25,6 +25,7 @@ namespace TweemineAnalyzer
                 textWriter.Close();
             }
         }
+
         static public void WriteTweetsToTxtFile(TweetData[] tweetDatas,string txtFilePath)
         {
             using (StreamWriter writer =
@@ -51,6 +52,7 @@ namespace TweemineAnalyzer
             }
 
         }
+
         static public void CombineAllJsonFiles(string path)
         {
             List<TweetData> allTweets = new List<TweetData>();
@@ -71,6 +73,7 @@ namespace TweemineAnalyzer
             if (allTweets.Count != 0)
                 WriteToJsonFile(Path.Combine(path, "all_tweets.json"), allTweets.ToArray());
         }
+
         static public /// <summary>
                       /// reads tweets from a file
                       /// </summary>

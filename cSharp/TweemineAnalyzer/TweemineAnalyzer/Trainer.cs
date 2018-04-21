@@ -96,9 +96,9 @@ namespace TweemineAnalyzer
             }
         }
 
-        public List<List<int>> Test(ProgressBar progressBar)
+        public List<List<Tuple<int, double>>> Test(ProgressBar progressBar)
         {
-            List<List<int>> correctIndex = new List<List<int>>();
+            List<List<Tuple<int, double>>> correctIndex = new List<List<Tuple<int, double>>>();
             // Implement me.
             double[] inputArr;
             double[] outputArr;
@@ -145,20 +145,22 @@ namespace TweemineAnalyzer
 
                 // We are training neural network here for every tweet.
                 double[] result = nn.FeedForward(inputArr);
-                List<int> lst = new List<int>();
+                List<Tuple<int, double>> lst = new List<Tuple<int, double>>();
+                Tuple<int, double> max = new Tuple<int, double>(0, result[0]);
+
                 for (int j = 0; j < labels.Length; j++)
                 {
-                    if (result[j] >= 0.7)
-                    {
-                        lst.Add(j);
-                        if (labels[j] == testingTweets[i].users[0].labels[0])
-                            corrects++;
-                    }
+                    lst.Add(new Tuple<int, double>(j, result[j]));
+                    if (result[j] > max.Item2)
+                        max = new Tuple<int, double>(j, result[j]);     
                 }
-                correctIndex.Add(lst);
-                    //result ı kontrol et
 
-                }
+                if(labels[max.Item1] == testingTweets[i].users[0].labels[0])
+                    corrects++;
+
+                correctIndex.Add(lst);
+            }
+
             analyser.Accuracy = ((double)corrects / testingTweets.Length)*100;
             return correctIndex;
         }

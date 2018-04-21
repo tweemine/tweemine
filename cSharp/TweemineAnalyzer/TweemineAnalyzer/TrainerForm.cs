@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TweemineNeuralNetwork;
 
@@ -174,7 +169,7 @@ namespace TweemineAnalyzer
             trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
             trainer.Train(progressBar);
 
-            List<List<int>> list = trainer.Test(progressBar);
+            List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
 
 
             richtxtAnnResult.Text = "";
@@ -184,12 +179,12 @@ namespace TweemineAnalyzer
                 richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
                 
 
-                richtxtAnnResult.AppendText("Prediction: ");
+                richtxtAnnResult.AppendText("Prediction:\n\n");
                 for (int j = 0; j < list[i].Count; j++)
                 {
-                    // We may want to percentage of prediction
-                    string val = labels[list[i][j]];
-                    richtxtAnnResult.AppendText(val + " ");
+                    string val = labels[list[i][j].Item1];
+                    double percentage = list[i][j].Item2 * 100;
+                    richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
                 }
 
                 richtxtAnnResult.AppendText("\n\n");
@@ -206,7 +201,7 @@ namespace TweemineAnalyzer
             lblOutputCount.Text = labels.Length.ToString();
             lblTestingCount.Text = analyser.TestingTweets.Length.ToString();
             lblTrainingCount.Text = analyser.TrainingTweets.Length.ToString();
-            lblAccuracy.Text = analyser.Accuracy.ToString();
+            lblAccuracy.Text = analyser.Accuracy.ToString("F2");
         }
      
         private void ShowInfoLoadedNNFromFile(NeuralNetwork neuralNetwork)
@@ -259,7 +254,7 @@ namespace TweemineAnalyzer
             trainer.Analyser = analyser;
 
 
-            List<List<int>> list = trainer.Test(progressBar);
+            List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
 
 
             richtxtAnnResult.Text = "";
@@ -273,8 +268,9 @@ namespace TweemineAnalyzer
                 for (int j = 0; j < list[i].Count; j++)
                 {
                     // We may want to percentage of prediction
-                    string val = labels[list[i][j]];
-                    richtxtAnnResult.AppendText(val + " ");
+                    string val = labels[list[i][j].Item1];
+                    double percentage = list[i][j].Item2 * 100;
+                    richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
                 }
 
                 richtxtAnnResult.AppendText("\n\n");
