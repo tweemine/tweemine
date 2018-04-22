@@ -18,14 +18,6 @@ namespace TweemineAnalyzer
         public NeuralNetwork Neuralnetwork { get => nn; set => nn = value; }
         public Analyser Analyser { get => analyser; set { analyser = value; SetAnalyser(value); } }
 
-        void SetAnalyser(Analyser _analyser)
-        {
-            trainingTweets = _analyser.TrainingTweets;
-            testingTweets = _analyser.TestingTweets;
-            labels = _analyser.Labels;
-            wordDict = _analyser.WordDictionary;
-            labelDict = _analyser.LabelDictioanary;
-        }
         public Trainer(Analyser _analyser, int _hiddenNodes, double _learningRate)
         {
             analyser = _analyser;
@@ -44,6 +36,15 @@ namespace TweemineAnalyzer
                     _learningRate
                 );
             }
+        }
+
+        void SetAnalyser(Analyser _analyser)
+        {
+            trainingTweets = _analyser.TrainingTweets;
+            testingTweets = _analyser.TestingTweets;
+            labels = _analyser.Labels;
+            wordDict = _analyser.WordDictionary;
+            labelDict = _analyser.LabelDictioanary;
         }
 
         public void Train(ProgressBar progressBar)
@@ -99,9 +100,8 @@ namespace TweemineAnalyzer
         public List<List<Tuple<int, double>>> Test(ProgressBar progressBar)
         {
             List<List<Tuple<int, double>>> correctIndex = new List<List<Tuple<int, double>>>();
-            // Implement me.
             double[] inputArr;
-            int corrects=0;
+            int corrects = 0;
 
             for (int i = 0; i < testingTweets.Length; i++)
             {

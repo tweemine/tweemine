@@ -75,7 +75,6 @@ namespace TweemineAnalyzer
             this.labelDict = new Dictionary<string, int>();
             this.labelFreq = new Dictionary<string, int>();
 
-
             percentage = _percentage;
             isRandom = _isRandom;
 
@@ -85,7 +84,6 @@ namespace TweemineAnalyzer
             TrainingTweets = new TweetData[trainingCount];
             TestingTweets = new TweetData[testingCount];
             SeperateTweets();
-
         }
 
         #endregion
@@ -98,23 +96,24 @@ namespace TweemineAnalyzer
         {
             List<TweetData> trainingList = new List<TweetData>();
             List<TweetData> testingList = new List<TweetData>();
+            Random random = new Random();
+
             for (int i = 0; i < tweets.Length; i++)
             {
                 if (isRandom)
                 {
-                    Random random = new Random();
                     double rndVal = random.NextDouble();
                     if (rndVal > 0.7)
                     {
                         //training
-                        if (trainingList.Count > trainingCount)
+                        if (trainingList.Count >= trainingCount)
                             testingList.Add(tweets[i]);
                         else
                             trainingList.Add(tweets[i]);
                     }
                     else
                     {
-                        if (testingList.Count > testingCount)
+                        if (testingList.Count >= testingCount)
                             trainingList.Add(tweets[i]);
                         else
                             testingList.Add(tweets[i]);
@@ -129,6 +128,7 @@ namespace TweemineAnalyzer
                     
                 }
             }
+
             TrainingTweets = trainingList.ToArray();
             TestingTweets  = testingList.ToArray(); 
         }

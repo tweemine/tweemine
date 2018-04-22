@@ -10,6 +10,8 @@ namespace TweemineAnalyzer
 {
     public partial class TrainerForm : Form
     {
+        #region Variables
+
         string nnParentPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "NNConfig");
         string nnFile = "NN.json";
         string nntestDataFile = "testing.json";
@@ -24,6 +26,13 @@ namespace TweemineAnalyzer
 
         //we need this for changing UI
         bool trackbarschanged = true;
+
+        private bool mouseDown;
+        private Point lastLocation;
+
+        #endregion
+
+        #region Constructor
 
         public TrainerForm(string[] _labels)
         {
@@ -62,6 +71,7 @@ namespace TweemineAnalyzer
 
         }
 
+        #endregion
 
         private void BtnAnnandResultButton_Click(object sender, EventArgs e)
         {
@@ -101,6 +111,7 @@ namespace TweemineAnalyzer
                 ReadNNTweets(nntestDataFile);
             }
         }
+
         void ReadNNTweets(string file)
         {
             txtTrainingandTesting.Clear();
@@ -113,8 +124,6 @@ namespace TweemineAnalyzer
                 txtTrainingandTesting.AppendText("------------------------------------------------\n\n");
             }
         }
-        private bool mouseDown;
-        private Point lastLocation;
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -175,6 +184,7 @@ namespace TweemineAnalyzer
                 filePath = openFileDialog.FileName;
             }
         }
+
         void ParseTweets(ref TweetData[] tweetDatas)
         {
             foreach (TweetData data in tweetDatas)
@@ -206,7 +216,6 @@ namespace TweemineAnalyzer
             trainer.Train(progressBar);
 
             List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
-
 
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
