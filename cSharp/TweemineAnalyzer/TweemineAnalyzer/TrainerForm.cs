@@ -229,17 +229,17 @@ namespace TweemineAnalyzer
                 richtxtAnnResult.AppendText("#################################################################\n\n");
             }
 
-            ShowAnalyserInfo(analyser);
+            ShowAnalyserInfo(trainer);
         }
 
-        private void ShowAnalyserInfo(Analyser analyser)
+        private void ShowAnalyserInfo(Trainer trainer)
         {
-            lblHiddenShowCount.Text = tbHiddenNeuronCount.Value.ToString();
-            lblInputCount.Text = analyser.MaxWordPerTweet.ToString();
-            lblOutputCount.Text = labels.Length.ToString();
-            lblTestingCount.Text = analyser.TestingCount.ToString();
-            lblTrainingCount.Text = analyser.TrainingCount.ToString();
-            lblAccuracy.Text = analyser.Accuracy.ToString("F2");
+            lblHiddenShowCount.Text = trainer.Neuralnetwork.HiddenNodes.ToString();
+            lblInputCount.Text = trainer.Neuralnetwork.InputNodes.ToString();
+            lblOutputCount.Text = trainer.Neuralnetwork.OutputNodes.ToString();
+            lblTestingCount.Text = trainer.Analyser.TestingCount.ToString();
+            lblTrainingCount.Text = trainer.Analyser.TrainingCount.ToString();
+            lblAccuracy.Text = trainer.Analyser.Accuracy.ToString("F2");
         }
 
         private void ShowNeuralNetworkInfo(NeuralNetwork neuralNetwork)
@@ -314,7 +314,7 @@ namespace TweemineAnalyzer
                 richtxtAnnResult.AppendText("######################################################n\n");
             }
 
-            ShowAnalyserInfo(trainer.Analyser);
+            ShowAnalyserInfo(trainer);
         }
     }
 }

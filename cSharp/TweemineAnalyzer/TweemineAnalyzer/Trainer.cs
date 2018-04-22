@@ -101,14 +101,12 @@ namespace TweemineAnalyzer
             List<List<Tuple<int, double>>> correctIndex = new List<List<Tuple<int, double>>>();
             // Implement me.
             double[] inputArr;
-            double[] outputArr;
             int corrects=0;
 
             for (int i = 0; i < testingTweets.Length; i++)
             {
                 progressBar.Value++;
                 inputArr = new double[nn.InputNodes];
-                outputArr = new double[nn.OutputNodes];
 
                 // Set words for input array.
                 string[] words = this.testingTweets[i].words;
@@ -117,28 +115,11 @@ namespace TweemineAnalyzer
                     inputArr[j] = (double)wordDict[words[j]].id;
                 }
 
-                // Set labels for output array.
-                for (int j = 0; j < labels.Length; j++)
-                {
-                    if (labelDict[this.testingTweets[i].users[0].labels[0]] == j)
-                        outputArr[j] = 1f;
-                    else
-                        outputArr[j] = 0f;
-                }
-
                 // Normalise before training.
                 inputArr = Normalize(
                     inputArr,
                     0,
                     analyser.UniqueWordCount,
-                    -1f,
-                    1f
-                );
-
-                outputArr = Normalize(
-                    outputArr,
-                    0f,
-                    analyser.LabelCount - 1f,
                     -1f,
                     1f
                 );
@@ -155,7 +136,7 @@ namespace TweemineAnalyzer
                         max = new Tuple<int, double>(j, result[j]);     
                 }
 
-                if(labels[max.Item1] == testingTweets[i].users[0].labels[0])
+                if (labels[max.Item1] == testingTweets[i].users[0].labels[0])
                     corrects++;
 
                 correctIndex.Add(lst);
