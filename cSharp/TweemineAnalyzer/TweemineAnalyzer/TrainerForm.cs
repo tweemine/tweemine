@@ -10,8 +10,8 @@ namespace TweemineAnalyzer
 {
     public partial class TrainerForm : Form
     {
-        string nnParentPath = Path.Combine("..", "..", "..", "..", "..", "tweets","NNConfig");
-        string nnFile ="NN.json";
+        string nnParentPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "NNConfig");
+        string nnFile = "NN.json";
         string nntestDataFile = "testing.json";
         string nntrainDataFile = "training.json";
         static string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
@@ -59,7 +59,7 @@ namespace TweemineAnalyzer
             lblTestPercent.Text = tbTestCount.Value.ToString() + " %";
             txtFileName.Text = defaultTweetPath;
             filePath = defaultTweetPath;
-            
+
         }
 
 
@@ -147,7 +147,7 @@ namespace TweemineAnalyzer
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        
+
         private void TrackBars_Scroll(object sender, EventArgs e)
         {
             TrackBar trackBar = ((TrackBar)sender);
@@ -156,7 +156,7 @@ namespace TweemineAnalyzer
             else if (trackBar.Tag.ToString() == "HN")
                 lblHiddenNeuronCount.Text = trackBar.Value.ToString();
             else
-                lblTestPercent.Text = trackBar.Value.ToString()+" %";
+                lblTestPercent.Text = trackBar.Value.ToString() + " %";
             if (trackbarschanged == false)
             {
                 btnTrainTest.Text = "Train and Test";
@@ -165,11 +165,11 @@ namespace TweemineAnalyzer
                 trackbarschanged = true;
             }
         }
-        
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog.ShowDialog();
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 txtFileName.Text = openFileDialog.SafeFileName;
                 filePath = openFileDialog.FileName;
@@ -190,7 +190,7 @@ namespace TweemineAnalyzer
 
         private void btnTrainTest_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(filePath))
+            if (string.IsNullOrEmpty(filePath))
             {
                 MessageBox.Show("you have to choose a file to train....");
                 return;
@@ -198,7 +198,7 @@ namespace TweemineAnalyzer
 
             TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
             ParseTweets(ref twData);
-            Analyser analyser = new Analyser(twData, labels,tbTestCount.Value,chckPickRandomly.Checked);
+            Analyser analyser = new Analyser(twData, labels, tbTestCount.Value, chckPickRandomly.Checked);
             analyser.Analyse();
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
@@ -213,7 +213,7 @@ namespace TweemineAnalyzer
             {
                 richtxtAnnResult.AppendText("TWEET:\n\n");
                 richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
-                
+
 
                 richtxtAnnResult.AppendText("PREDICTION:\n\n");
                 for (int j = 0; j < list[i].Count; j++)
@@ -241,13 +241,13 @@ namespace TweemineAnalyzer
             lblTrainingCount.Text = analyser.TrainingTweets.Length.ToString();
             lblAccuracy.Text = analyser.Accuracy.ToString("F2");
         }
-     
+
         private void ShowNeuralNetworkInfo(NeuralNetwork neuralNetwork)
         {
             tbHiddenNeuronCount.Value = neuralNetwork.HiddenNodes;
             lblHiddenNeuronCount.Text = neuralNetwork.HiddenNodes.ToString();
             tbLearningRate.Value = (int)(neuralNetwork.LearningRate * 100);
-            lblLearningRate.Text = (tbLearningRate.Value/100.0).ToString();
+            lblLearningRate.Text = (tbLearningRate.Value / 100.0).ToString();
             lblHiddenShowCount.Text = neuralNetwork.HiddenNodes.ToString();
             lblInputCount.Text = neuralNetwork.InputNodes.ToString();
             lblOutputCount.Text = neuralNetwork.OutputNodes.ToString();
@@ -255,7 +255,7 @@ namespace TweemineAnalyzer
 
         private void btnSaveANN_Click(object sender, EventArgs e)
         {
-            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath,nnFile), trainer.Neuralnetwork);
+            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, nnFile), trainer.Neuralnetwork);
             JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, nntestDataFile), trainer.Analyser.TestingTweets);
             JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, nntrainDataFile), trainer.Analyser.TrainingTweets);
 
@@ -265,7 +265,7 @@ namespace TweemineAnalyzer
         {
             NeuralNetwork neuralNetwork = JsonFileController.ReadDataFromJsonFile<NeuralNetwork>(Path.Combine(nnParentPath, nnFile));
 
-            trainer = new Trainer(null, neuralNetwork.HiddenNodes,neuralNetwork.LearningRate);
+            trainer = new Trainer(null, neuralNetwork.HiddenNodes, neuralNetwork.LearningRate);
             trainer.Neuralnetwork = neuralNetwork;
 
             btnTrainTest.Text = "TEST";
@@ -286,7 +286,7 @@ namespace TweemineAnalyzer
 
             TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
             ParseTweets(ref twData);
-            Analyser analyser = new Analyser(twData, labels,100, chckPickRandomly.Checked);
+            Analyser analyser = new Analyser(twData, labels, 100, chckPickRandomly.Checked);
             analyser.Analyse();
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
@@ -297,13 +297,13 @@ namespace TweemineAnalyzer
             {
                 richtxtAnnResult.AppendText("TWEET:\n\n");
                 richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
-<<<<<<< HEAD
+
                 richtxtAnnResult.AppendText("Prediction: ");
-=======
+
 
 
                 richtxtAnnResult.AppendText("PREDICTION: ");
->>>>>>> f92d19d5e65a3aaaba20d3df622ab2a845ef69c7
+
                 for (int j = 0; j < list[i].Count; j++)
                 {
                     // We may want to percentage of prediction
@@ -311,12 +311,9 @@ namespace TweemineAnalyzer
                     double percentage = list[i][j].Item2 * 100;
                     richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
                 }
-<<<<<<< HEAD
-=======
-
+                
                 richtxtAnnResult.AppendText("\nANSWER:\t" + analyser.TestingTweets[i].users[0].labels[0]);
-
->>>>>>> f92d19d5e65a3aaaba20d3df622ab2a845ef69c7
+                
                 richtxtAnnResult.AppendText("\n\n");
                 richtxtAnnResult.AppendText("######################################################" +
                     "########################################################\n\n");
