@@ -57,6 +57,12 @@ namespace TweemineAnalyzer
             this.wordDict = new Dictionary<string, Word>();
             this.labelDict = new Dictionary<string, int>();
             this.labelFreq = new Dictionary<string, int>();
+
+            TestingTweets = tweets;
+            TrainingTweets = null;
+
+            testingCount = tweetCount;
+            trainingCount = 0;
         }
 
         public Analyser(TweetData[] tweets, string[] labels, int _percentage = 10, bool _isRandom = false)
@@ -271,6 +277,23 @@ namespace TweemineAnalyzer
                 return this.labelCount;
             }
         }
+
+        public int TestingCount
+        {
+            get
+            {
+                return testingCount;
+            }
+        }
+
+        public int TrainingCount
+        {
+            get
+            {
+                return trainingCount;
+            }
+        }
+
         public Dictionary<string, Word> WordDictionary
         {
             get

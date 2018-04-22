@@ -237,8 +237,8 @@ namespace TweemineAnalyzer
             lblHiddenShowCount.Text = tbHiddenNeuronCount.Value.ToString();
             lblInputCount.Text = analyser.MaxWordPerTweet.ToString();
             lblOutputCount.Text = labels.Length.ToString();
-            lblTestingCount.Text = analyser.TestingTweets.Length.ToString();
-            lblTrainingCount.Text = analyser.TrainingTweets.Length.ToString();
+            lblTestingCount.Text = analyser.TestingCount.ToString();
+            lblTrainingCount.Text = analyser.TrainingCount.ToString();
             lblAccuracy.Text = analyser.Accuracy.ToString("F2");
         }
 
@@ -284,26 +284,22 @@ namespace TweemineAnalyzer
                 return;
             }
 
-            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
+            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(Path.Combine(nnParentPath, nntestDataFile));
             ParseTweets(ref twData);
-            Analyser analyser = new Analyser(twData, labels, 100, chckPickRandomly.Checked);
+            Analyser analyser = new Analyser(twData, labels);
             analyser.Analyse();
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
             trainer.Analyser = analyser;
             List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
+
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
             {
                 richtxtAnnResult.AppendText("TWEET:\n\n");
                 richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
 
-                richtxtAnnResult.AppendText("Prediction: ");
-
-
-
-                richtxtAnnResult.AppendText("PREDICTION: ");
-
+                richtxtAnnResult.AppendText("PREDICTION:\n\n");
                 for (int j = 0; j < list[i].Count; j++)
                 {
                     // We may want to percentage of prediction
@@ -315,8 +311,7 @@ namespace TweemineAnalyzer
                 richtxtAnnResult.AppendText("\nANSWER:\t" + analyser.TestingTweets[i].users[0].labels[0]);
                 
                 richtxtAnnResult.AppendText("\n\n");
-                richtxtAnnResult.AppendText("######################################################" +
-                    "########################################################\n\n");
+                richtxtAnnResult.AppendText("######################################################n\n");
             }
 
             ShowAnalyserInfo(trainer.Analyser);
