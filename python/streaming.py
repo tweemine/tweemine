@@ -11,20 +11,22 @@ import atexit
 import sys
 import random
 
-access_token = "xxxx-xxxx"
-access_token_secret = "xx"
-consumer_key = "xxx"
-consumer_secret = "xxx"
+access_token = "2387554910-QZOusvtVxaaXU0dIPEO0ij247D8heARHfM26yHy"
+access_token_secret = "ovYb0LAjxFM6HqIKMulpJEP16tbDZvMqIoAuPEON4eoT3"
+consumer_key = "OnccjMQNxxJw9x5T1UC9BiJ6l"
+consumer_secret = "gmI2qwpTTLw2stqw9Jfh9N3PfIEewtDa1ky7omACUY9jbxtJFV"
 
 listOfData=[]
 nameofFile=str(random.randint(0,1000))+" "+str(random.randint(0,1000));
 f = open("..\\tweets\\"+str(nameofFile)+".json","w")
 
-sport    = [ u'gol', u'hakem', u'turnuva', u'raket', u'galatasaray', u'lig', u'nba', u'uefa', u'puan durumu' ]
-news     = [ u'son dakika', u'haber', u'muhabir', u'nato' ]
+sport    = [ u'gol', u'hakem', u'turnuva', u'raket', u'galatasaray', u'lig', u'nba', u'uefa', u'puan durumu',u'tenis'
+             ,u'galatasaray',u'beşiktaş',u'basketbol',u'voleybol']
+news     = [ u'son dakika', u'haber', u'muhabir', u'nato',u'gündem',u'başbakan',u'muhabir',u'soygun',u'uyuşturucu' ]
 history  = [ u'osmanlı', u'ortaçağ', u'm.ö.', u'm.s.', u'yılında', u'uygarlığı' ]
-tvSeries = [ u'dizi', u'film', u'gişe', u'imdb', u'spoiler', u'twd', u'himym' ]
-music    = [ u'dinledim', u'spotify', u'playlist', u'şarkı', u'akor' ]
+tvSeries = [ u'dizi', u'film', u'gişe', u'imdb', u'spoiler', u'twd', u'himym',u'sinema' ]
+music    = [ u'dinledim', u'spotify', u'playlist', u'şarkı', u'akor',u'mozart',u'bethoveen',u'piyano',u'keman',u'orkestra'
+             ,u'gitar',u'müzik',u'konçerto']
 
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
@@ -67,4 +69,4 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth,l,tweet_mode = 'extended',truncated = 'false')
     
-stream.filter( track = sport, languages = ['tr'] )
+stream.filter( track = news, languages = ['tr'] )
