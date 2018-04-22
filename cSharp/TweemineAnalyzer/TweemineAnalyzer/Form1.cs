@@ -95,6 +95,8 @@ namespace TweemineAnalyzer
 
             currentTweetIndex = currentTweetIndex % tweetDatasLength;
 
+            tweetIndex.Text = (currentTweetIndex + 1) + "/" + tweetDatasLength;
+
             TweetData currTweet = tweetDatas[currentTweetIndex];
             User currUser = currTweet.users[userIndex];
 

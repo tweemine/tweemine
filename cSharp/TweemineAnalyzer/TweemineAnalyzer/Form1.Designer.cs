@@ -37,7 +37,6 @@
             this.btnPrevTweet = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnDelTweet = new System.Windows.Forms.Button();
-            this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
             this.grpDataNavigation = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -53,6 +52,8 @@
             this.folderBD = new System.Windows.Forms.FolderBrowserDialog();
             this.btntrain = new System.Windows.Forms.Button();
             this.tweetInfo = new System.Windows.Forms.Label();
+            this.tweetIndex = new System.Windows.Forms.Label();
+            this.btnWritetoJson = new TweemineAnalyzer.CircleButton();
             this.cntMnFile.SuspendLayout();
             this.grpDataNavigation.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,7 +69,7 @@
             this.lblTweetText.Location = new System.Drawing.Point(12, 44);
             this.lblTweetText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTweetText.Name = "lblTweetText";
-            this.lblTweetText.Size = new System.Drawing.Size(536, 274);
+            this.lblTweetText.Size = new System.Drawing.Size(535, 274);
             this.lblTweetText.TabIndex = 0;
             // 
             // cntMnFile
@@ -133,21 +134,6 @@
             this.btnDelTweet.UseVisualStyleBackColor = true;
             this.btnDelTweet.Click += new System.EventHandler(this.btnDelTweet_Click);
             // 
-            // btnWritetoJson
-            // 
-            this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
-            this.btnWritetoJson.Location = new System.Drawing.Point(11, 28);
-            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(2);
-            this.btnWritetoJson.Name = "btnWritetoJson";
-            this.btnWritetoJson.Size = new System.Drawing.Size(59, 58);
-            this.btnWritetoJson.TabIndex = 9;
-            this.btnWritetoJson.Text = "Write To json File";
-            this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
-            this.btnWritetoJson.UseVisualStyleBackColor = false;
-            this.btnWritetoJson.Click += new System.EventHandler(this.WriteToFile_Click);
-            // 
             // grpDataNavigation
             // 
             this.grpDataNavigation.Controls.Add(this.btnDelTweet);
@@ -169,7 +155,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(82, 107);
+            this.groupBox3.Size = new System.Drawing.Size(82, 124);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Labeled Data";
@@ -284,7 +270,7 @@
             // btntrain
             // 
             this.btntrain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btntrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btntrain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btntrain.Location = new System.Drawing.Point(743, 7);
             this.btntrain.Name = "btntrain";
             this.btntrain.Size = new System.Drawing.Size(105, 23);
@@ -304,12 +290,40 @@
             this.tweetInfo.Size = new System.Drawing.Size(298, 274);
             this.tweetInfo.TabIndex = 11;
             // 
+            // tweetIndex
+            // 
+            this.tweetIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tweetIndex.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tweetIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.tweetIndex.Location = new System.Drawing.Point(760, 429);
+            this.tweetIndex.Name = "tweetIndex";
+            this.tweetIndex.Size = new System.Drawing.Size(88, 26);
+            this.tweetIndex.TabIndex = 12;
+            this.tweetIndex.Text = "0/0";
+            this.tweetIndex.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnWritetoJson
+            // 
+            this.btnWritetoJson.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnWritetoJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWritetoJson.ForeColor = System.Drawing.Color.White;
+            this.btnWritetoJson.Location = new System.Drawing.Point(11, 28);
+            this.btnWritetoJson.Margin = new System.Windows.Forms.Padding(2);
+            this.btnWritetoJson.Name = "btnWritetoJson";
+            this.btnWritetoJson.Size = new System.Drawing.Size(59, 58);
+            this.btnWritetoJson.TabIndex = 9;
+            this.btnWritetoJson.Text = "Write To json File";
+            this.toolTip1.SetToolTip(this.btnWritetoJson, "Write to Json");
+            this.btnWritetoJson.UseVisualStyleBackColor = false;
+            this.btnWritetoJson.Click += new System.EventHandler(this.WriteToFile_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 466);
             this.ContextMenuStrip = this.cntMnFile;
+            this.Controls.Add(this.tweetIndex);
             this.Controls.Add(this.tweetInfo);
             this.Controls.Add(this.btntrain);
             this.Controls.Add(this.combineButton);
@@ -365,6 +379,7 @@
         private System.Windows.Forms.FolderBrowserDialog folderBD;
         private System.Windows.Forms.Button btntrain;
         private System.Windows.Forms.Label tweetInfo;
+        private System.Windows.Forms.Label tweetIndex;
     }
 }
 
