@@ -12,6 +12,7 @@ namespace TweemineNeuralNetwork
 
         public int Rows { get => rows; set => rows = value; }
         public int Cols { get => cols; set => cols = value; }
+        //we need this for serialization
 
         public Matrix()
         {

@@ -23,20 +23,9 @@ namespace TweemineNeuralNetwork
         public Matrix Weights_ho { get => weights_ho;   set => weights_ho = value; }
         public Matrix Bias_h { get => bias_h;   set => bias_h = value; }
         public Matrix Bias_o { get => bias_o;   set => bias_o = value; }
+        //we need this for serialization
         public NeuralNetwork()
         {
-            //Console.WriteLine(InputNodes);
-            //weights_ih = new Matrix(hiddenNodes, inputNodes);
-            //weights_ho = new Matrix(outputNodes, hiddenNodes);
-            //weights_ih.Randomize();
-            //weights_ho.Randomize();
-
-            //bias_h = new Matrix(this.hiddenNodes, 1);
-            //bias_o = new Matrix(this.outputNodes, 1);
-            //bias_h.Randomize();
-            //bias_o.Randomize();
-            
-            
         }
         public NeuralNetwork(int inputNodes, int hiddenNodes, int outputNodes, double learningRate)
 		{

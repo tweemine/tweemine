@@ -74,11 +74,11 @@ namespace TweemineAnalyzer
                 WriteToJsonFile(Path.Combine(path, "all_tweets.json"), allTweets.ToArray());
         }
 
-        static public /// <summary>
-                      /// reads tweets from a file
-                      /// </summary>
-                      /// <param name="path">file path</param>
-        T ReadDataFromJsonFile<T>(string path)
+        /// <summary>
+        /// reads data from a json file we can specify what type of data we will read
+        /// </summary>
+        /// <param name="path">file path</param>
+        static public T ReadDataFromJsonFile<T>(string path)
         {
             object dataArr;
 
@@ -91,9 +91,10 @@ namespace TweemineAnalyzer
                
                 //Sending into JsonConvert.DeserializeObject for getting the data as TweetData array
                 dataArr = JsonConvert.DeserializeObject<T>(context);
+
                 if (dataArr is NeuralNetwork)
                 {
-                    NeuralNetwork neural = (NeuralNetwork)(object)dataArr;
+                    NeuralNetwork neural = (NeuralNetwork)dataArr;
                     dataArr = new NeuralNetwork(neural);
                 }
                 //close the file
