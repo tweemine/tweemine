@@ -11,10 +11,10 @@ import atexit
 import sys
 import random
 
-access_token = "2387554910-QZOusvtVxaaXU0dIPEO0ij247D8heARHfM26yHy"
-access_token_secret = "ovYb0LAjxFM6HqIKMulpJEP16tbDZvMqIoAuPEON4eoT3"
-consumer_key = "OnccjMQNxxJw9x5T1UC9BiJ6l"
-consumer_secret = "gmI2qwpTTLw2stqw9Jfh9N3PfIEewtDa1ky7omACUY9jbxtJFV"
+access_token = "XXX"
+access_token_secret = "X"
+consumer_key = "X"
+consumer_secret = "x"
 
 listOfData=[]
 nameofFile=str(random.randint(0,1000))+" "+str(random.randint(0,1000));
