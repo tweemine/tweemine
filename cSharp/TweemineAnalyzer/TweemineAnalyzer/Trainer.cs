@@ -77,7 +77,7 @@ namespace TweemineAnalyzer
                 inputArr = Normalize(
                     inputArr,
                     0,
-                    analyser.TweetCount,
+                    analyser.UniqueWordCount,
                     -1f,
                     1f
                 );
@@ -130,7 +130,7 @@ namespace TweemineAnalyzer
                 inputArr = Normalize(
                     inputArr,
                     0,
-                    analyser.TweetCount,
+                    analyser.UniqueWordCount,
                     -1f,
                     1f
                 );
