@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TweemineAnalyzer
 {
@@ -24,8 +19,10 @@ namespace TweemineAnalyzer
         {
             if (this.count < ((Word)obj).count)
                 return 1;
-            else
+            else if(this.count > ((Word)obj).count)
                 return -1;
+            else
+                return 0;
         }
     }
 }

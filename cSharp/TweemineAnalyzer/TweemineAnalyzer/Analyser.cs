@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -60,6 +58,7 @@ namespace TweemineAnalyzer
             this.labelDict = new Dictionary<string, int>();
             this.labelFreq = new Dictionary<string, int>();
         }
+
         public Analyser(TweetData[] tweets, string[] labels, int _percentage = 10, bool _isRandom = false)
         {
             this.tweets = tweets;

@@ -211,20 +211,22 @@ namespace TweemineAnalyzer
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
             {
-                richtxtAnnResult.AppendText("Tweet:\n\n");
+                richtxtAnnResult.AppendText("TWEET:\n\n");
                 richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
                 
 
-                richtxtAnnResult.AppendText("Prediction:\n\n");
+                richtxtAnnResult.AppendText("PREDICTION:\n\n");
                 for (int j = 0; j < list[i].Count; j++)
                 {
                     string val = labels[list[i][j].Item1];
                     double percentage = list[i][j].Item2 * 100;
-                    richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
+                    richtxtAnnResult.AppendText(val + ":\t" + percentage.ToString("F2") + "%\n");
                 }
 
+                richtxtAnnResult.AppendText("\nANSWER: " + analyser.TestingTweets[i].users[0].labels[0]);
+
                 richtxtAnnResult.AppendText("\n\n");
-                richtxtAnnResult.AppendText("------------------------------------------------\n\n");
+                richtxtAnnResult.AppendText("#################################################################\n\n");
             }
 
             ShowAnalyserInfo(analyser);
@@ -293,9 +295,15 @@ namespace TweemineAnalyzer
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
             {
-                richtxtAnnResult.AppendText("Tweet:\n\n");
+                richtxtAnnResult.AppendText("TWEET:\n\n");
                 richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
+<<<<<<< HEAD
                 richtxtAnnResult.AppendText("Prediction: ");
+=======
+
+
+                richtxtAnnResult.AppendText("PREDICTION: ");
+>>>>>>> f92d19d5e65a3aaaba20d3df622ab2a845ef69c7
                 for (int j = 0; j < list[i].Count; j++)
                 {
                     // We may want to percentage of prediction
@@ -303,8 +311,15 @@ namespace TweemineAnalyzer
                     double percentage = list[i][j].Item2 * 100;
                     richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
                 }
+<<<<<<< HEAD
+=======
+
+                richtxtAnnResult.AppendText("\nANSWER:\t" + analyser.TestingTweets[i].users[0].labels[0]);
+
+>>>>>>> f92d19d5e65a3aaaba20d3df622ab2a845ef69c7
                 richtxtAnnResult.AppendText("\n\n");
-                richtxtAnnResult.AppendText("------------------------------------------------\n\n");
+                richtxtAnnResult.AppendText("######################################################" +
+                    "########################################################\n\n");
             }
 
             ShowAnalyserInfo(trainer.Analyser);
