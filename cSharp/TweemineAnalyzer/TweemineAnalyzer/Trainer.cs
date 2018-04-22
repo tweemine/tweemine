@@ -18,6 +18,18 @@ namespace TweemineAnalyzer
         public NeuralNetwork Neuralnetwork { get => nn; set => nn = value; }
         public Analyser Analyser { get => analyser; set { analyser = value; SetAnalyser(value); } }
 
+        internal Dictionary<string, Word> WordDict { get => wordDict; set => wordDict = value; }
+        public Dictionary<string, int> LabelDict { get => labelDict; set => labelDict = value; }
+        public TweetData[] TrainingTweets { get => trainingTweets; set => trainingTweets = value; }
+        public TweetData[] TestingTweets { get => testingTweets; set => testingTweets = value; }
+        public string[] Labels { get => labels; set => labels = value; }
+
+        //for serialization
+        public Trainer()
+        {
+
+        }
+
         public Trainer(Analyser _analyser, int _hiddenNodes, double _learningRate)
         {
             analyser = _analyser;

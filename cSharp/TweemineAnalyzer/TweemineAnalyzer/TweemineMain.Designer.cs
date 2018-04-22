@@ -1,6 +1,6 @@
 ﻿namespace TweemineAnalyzer
 {
-    partial class Form1
+    partial class TweemineMain
     {
         /// <summary>
         ///Gerekli tasarımcı değişkeni.

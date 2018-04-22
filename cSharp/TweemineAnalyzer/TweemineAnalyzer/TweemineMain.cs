@@ -7,13 +7,13 @@ using System.IO;
 
 namespace TweemineAnalyzer
 {
-    public partial class Form1 : Form
+    public partial class TweemineMain : Form
     {
         #region Variables
 
-        bool fileChanged=false;
+        bool fileChanged = false;
 
-        string tagsPath = Path.Combine("..", "..", "..", "..", "..","tweets","tags.txt");
+        string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
         string txtFilePath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tweets.txt");
 
         // we need all read tweets so we need this glob. var.
@@ -31,7 +31,7 @@ namespace TweemineAnalyzer
 
         #region Constructors
 
-        public Form1()
+        public TweemineMain()
         {
             InitializeComponent();
         }
@@ -60,14 +60,14 @@ namespace TweemineAnalyzer
 
         private void NavigateLabeledData_Click(object sender, EventArgs e)
         {
-          
-            if(tweetDatas == null )
+
+            if (tweetDatas == null)
             {
-                MessageBox.Show("You forgot to read from json??","Warning",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("You forgot to read from json??", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if(tweetDatas.Length == 0)
+            if (tweetDatas.Length == 0)
             {
                 MessageBox.Show("you dont have any labeled data in json", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -88,7 +88,7 @@ namespace TweemineAnalyzer
         {
             int tweetDatasLength = tweetDatas.Length;
             currentTweetIndex += increment;
-            
+
             ////we need to check if we are under 0.
             currentTweetIndex = currentTweetIndex < 0 ?
                 tweetDatas.Length - 1 : currentTweetIndex;
@@ -114,7 +114,7 @@ namespace TweemineAnalyzer
 
             ClearCheckedDataFromCheckedListBox(chcLstLabels);
 
-           // we already have this labels so we dont have to make changes on data thats why we unregister this event
+            // we already have this labels so we dont have to make changes on data thats why we unregister this event
             UnregisterItemCheckEvent(chcLstLabels_ItemCheck);
             if (currUser.labels != null)
             {
@@ -139,7 +139,7 @@ namespace TweemineAnalyzer
             RegisterItemCheckEvent(chcLstLabels_ItemCheck);
             labels = labels.TrimEnd(',', ' ');
 
-            cmbUserName.Text = currUser.name;            
+            cmbUserName.Text = currUser.name;
 
             if (tweetDatas.Length > 0)
             {
@@ -327,6 +327,7 @@ namespace TweemineAnalyzer
                 }
 
             }
+            Application.Exit();
         }
 
         private void combineButton_Click(object sender, EventArgs e)
@@ -334,7 +335,7 @@ namespace TweemineAnalyzer
             DialogResult result = folderBD.ShowDialog();
             if (result == DialogResult.OK)
             {
-               JsonFileController.CombineAllJsonFiles(folderBD.SelectedPath);
+                JsonFileController.CombineAllJsonFiles(folderBD.SelectedPath);
             }
         }
 
@@ -363,7 +364,7 @@ namespace TweemineAnalyzer
             if (analyser.LabelFreq.Count == 0)
                 return;
 
-            for(int i = 0; i < labels.Length; i++)
+            for (int i = 0; i < labels.Length; i++)
             {
                 if (analyser.LabelFreq.ContainsKey(labels[i]) == true)
                     tweetInfo.Text += labels[i] + ": " + analyser.LabelFreq[labels[i]] + "\n";
@@ -378,7 +379,7 @@ namespace TweemineAnalyzer
         {
             foreach (TweetData data in tweetDatas)
             {
-                
+
                 // If tweet is not parsed, we'll parse it for first time here. 
                 if (data.words == null || data.words.Length == 0)
                 {
@@ -413,7 +414,7 @@ namespace TweemineAnalyzer
 
         private int FindUserIndex()
         {
-            string selectedUser = (string) cmbUserName.SelectedItem;
+            string selectedUser = (string)cmbUserName.SelectedItem;
             User[] users = tweetDatas[currentTweetIndex].users;
 
             for (int i = 0; i < users.Length; i++)
@@ -430,9 +431,8 @@ namespace TweemineAnalyzer
 
         private void btntrain_Click(object sender, EventArgs e)
         {
-            TrainerForm trainerForm = new TrainerForm(labels);
+            new TrainerForm(labels).Show();
             this.Hide();
-            trainerForm.Show();
         }
     }
 }

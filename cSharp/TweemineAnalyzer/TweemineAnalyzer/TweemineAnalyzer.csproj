@@ -49,11 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyser.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="TweemineMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="TweemineMain.Designer.cs">
+      <DependentUpon>TweemineMain.cs</DependentUpon>
     </Compile>
     <Compile Include="JsonFileController.cs" />
     <Compile Include="Matrix.cs" />
@@ -80,8 +80,8 @@
     <Compile Include="TweetData.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Word.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="TweemineMain.resx">
+      <DependentUpon>TweemineMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

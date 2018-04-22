@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace TweemineAnalyzer
 {
+    [Serializable]
     class Analyser
     {
         #region Variables
@@ -47,7 +48,10 @@ namespace TweemineAnalyzer
         #endregion
 
         #region Constructors
+        public Analyser()
+        {
 
+        }
         public Analyser(TweetData[] tweets, string[] labels)
         {
             this.tweets = tweets;
@@ -248,6 +252,7 @@ namespace TweemineAnalyzer
         public double Accuracy { get; set; }
         public int UniqueWordCount
         {
+            set { uniqueWordCount = value; }
             get
             {
                 return uniqueWordCount;
@@ -256,6 +261,7 @@ namespace TweemineAnalyzer
 
         public int TweetCount
         {
+            set { tweetCount = value; }
             get
             {
                 return this.tweetCount;
@@ -263,6 +269,7 @@ namespace TweemineAnalyzer
         }
         public int MaxWordPerTweet
         {
+            set { maxWordPerTweet = value; }
             get
             {
                 return maxWordPerTweet;
@@ -272,6 +279,7 @@ namespace TweemineAnalyzer
 
         public int LabelCount
         {
+            set { labelCount = value; }
             get
             {
                 return this.labelCount;
@@ -280,6 +288,7 @@ namespace TweemineAnalyzer
 
         public int TestingCount
         {
+            set { testingCount = value; }
             get
             {
                 return testingCount;
@@ -288,6 +297,7 @@ namespace TweemineAnalyzer
 
         public int TrainingCount
         {
+            set { trainingCount = value; }
             get
             {
                 return trainingCount;
@@ -296,6 +306,7 @@ namespace TweemineAnalyzer
 
         public Dictionary<string, Word> WordDictionary
         {
+            set { wordDict = value; }
             get
             {
                 return this.wordDict;
@@ -304,6 +315,7 @@ namespace TweemineAnalyzer
 
         public Dictionary<string, int> LabelDictioanary
         {
+            set { labelDict = value; }
             get
             {
                 return this.labelDict;
@@ -312,14 +324,16 @@ namespace TweemineAnalyzer
 
         public TweetData[] TrainingTweets
         {
+            
             get
             {
                 return this.trainingTweets;
             }
-            protected set { trainingTweets = value; }
+             set { trainingTweets = value; }
         }
         public TweetData[] Tweets
         {
+            set { tweets = value; }
             get
             {
                 return this.tweets;
@@ -327,14 +341,16 @@ namespace TweemineAnalyzer
         }
         public TweetData[] TestingTweets
         {
+          
             get
             {
                 return this.testingTweets;
             }
-            protected set { testingTweets = value; }
+             set { testingTweets = value; }
         }
         public string[] Labels
         {
+            set { labels = value; }
             get
             {
                 return this.labels;
@@ -343,6 +359,7 @@ namespace TweemineAnalyzer
 
         public Dictionary<string, int> LabelFreq
         {
+            set { labelFreq = value; }
             get
             {
                 return this.labelFreq;

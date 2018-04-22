@@ -13,9 +13,10 @@ namespace TweemineAnalyzer
         #region Variables
 
         string nnParentPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "NNConfig");
-        string nnFile = "NN.json";
-        string nntestDataFile = "testing.json";
-        string nntrainDataFile = "training.json";
+        //string nnFile = "NN.json";
+        //string nntestDataFile = "testing.json";
+        string TrainDataFile = "TrainClass.json";
+        //string nnAnalyserFile = "analyser.json";
         static string tagsPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "tags.txt");
         static string fileName = "all_tweets.json";
         static string defaultTweetPath = Path.Combine("..", "..", "..", "..", "..", "tweets", fileName);
@@ -100,7 +101,7 @@ namespace TweemineAnalyzer
                 pnlResults.Visible = false;
                 pnlTrainAndTesting.Visible = true;
 
-                ReadNNTweets(nntrainDataFile);
+                ShowSavedData(trainer.Analyser.TrainingTweets);
 
             }
             if (button.Tag.ToString() == "4")
@@ -108,14 +109,14 @@ namespace TweemineAnalyzer
                 pnlANNInfo.Visible = false;
                 pnlResults.Visible = false;
                 pnlTrainAndTesting.Visible = true;
-                ReadNNTweets(nntestDataFile);
+                ShowSavedData(trainer.Analyser.TestingTweets);
             }
         }
 
-        void ReadNNTweets(string file)
+        void ShowSavedData(TweetData[] _tweets)
         {
             txtTrainingandTesting.Clear();
-            TweetData[] _tweetDatas = JsonFileController.ReadDataFromJsonFile<TweetData[]>(Path.Combine(nnParentPath, file));
+            TweetData[] _tweetDatas = _tweets;
             for (int i = 0; i < _tweetDatas.Length; i++)
             {
                 txtTrainingandTesting.AppendText("Tweet:\n\n");
@@ -149,7 +150,8 @@ namespace TweemineAnalyzer
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Hide();
+            new TweemineMain().Show();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -264,18 +266,12 @@ namespace TweemineAnalyzer
 
         private void btnSaveANN_Click(object sender, EventArgs e)
         {
-            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, nnFile), trainer.Neuralnetwork);
-            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, nntestDataFile), trainer.Analyser.TestingTweets);
-            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, nntrainDataFile), trainer.Analyser.TrainingTweets);
-
+            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, TrainDataFile), trainer);
         }
 
         private void btnLoadAnn_Click(object sender, EventArgs e)
         {
-            NeuralNetwork neuralNetwork = JsonFileController.ReadDataFromJsonFile<NeuralNetwork>(Path.Combine(nnParentPath, nnFile));
-
-            trainer = new Trainer(null, neuralNetwork.HiddenNodes, neuralNetwork.LearningRate);
-            trainer.Neuralnetwork = neuralNetwork;
+            trainer = JsonFileController.ReadDataFromJsonFile<Trainer>(Path.Combine(nnParentPath, TrainDataFile));
 
             btnTrainTest.Text = "TEST";
             btnTrainTest.Click -= btnTrainTest_Click;
@@ -293,20 +289,17 @@ namespace TweemineAnalyzer
                 return;
             }
 
-            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(Path.Combine(nnParentPath, nntestDataFile));
-            ParseTweets(ref twData);
-            Analyser analyser = new Analyser(twData, labels);
-            analyser.Analyse();
+            TweetData[] twData = trainer.Analyser.TestingTweets;
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
-            trainer.Analyser = analyser;
+            
             List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
 
             richtxtAnnResult.Text = "";
-            for (int i = 0; i < analyser.TestingTweets.Length; i++)
+            for (int i = 0; i < trainer.Analyser.TestingTweets.Length; i++)
             {
                 richtxtAnnResult.AppendText("TWEET:\n\n");
-                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
+                richtxtAnnResult.AppendText(trainer.Analyser.TestingTweets[i].tweet + "\n\n");
 
                 richtxtAnnResult.AppendText("PREDICTION:\n\n");
                 for (int j = 0; j < list[i].Count; j++)
@@ -317,7 +310,7 @@ namespace TweemineAnalyzer
                     richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
                 }
                 
-                richtxtAnnResult.AppendText("\nANSWER:\t" + analyser.TestingTweets[i].users[0].labels[0]);
+                richtxtAnnResult.AppendText("\nANSWER:\t" + trainer.Analyser.TestingTweets[i].users[0].labels[0]);
                 
                 richtxtAnnResult.AppendText("\n\n");
                 richtxtAnnResult.AppendText("######################################################n\n");

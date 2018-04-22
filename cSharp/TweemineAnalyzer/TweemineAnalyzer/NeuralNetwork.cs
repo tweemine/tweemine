@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 namespace TweemineNeuralNetwork
 {
+    [Serializable]
 	public class NeuralNetwork
 	{
         private int inputNodes;

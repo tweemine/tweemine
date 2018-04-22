@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TweemineAnalyzer
 {
+    [Serializable]
     public class TweetData
     {
         public string tweet;

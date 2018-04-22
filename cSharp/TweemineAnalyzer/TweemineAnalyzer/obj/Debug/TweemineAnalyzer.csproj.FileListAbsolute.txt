@@ -17,7 +17,6 @@ C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyze
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\Newtonsoft.Json.dll
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\bin\Debug\Newtonsoft.Json.xml
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csprojResolveAssemblyReference.cache
-C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Form1.resources
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.Properties.Resources.resources
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.GenerateResource.cache
 C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csproj.CoreCompileInputs.cache
@@ -66,3 +65,4 @@ D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.exe
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.pdb
 D:\workspace\c_sharp\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.csprojResolveAssemblyReference.cache
+C:\Users\sml_o\Documents\GitHub\tweemine\cSharp\TweemineAnalyzer\TweemineAnalyzer\obj\Debug\TweemineAnalyzer.TweemineMain.resources
