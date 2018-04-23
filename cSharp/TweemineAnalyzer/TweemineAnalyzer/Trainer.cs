@@ -85,20 +85,12 @@ namespace TweemineAnalyzer
                     else
                         outputArr[j] = 0f;
                 }
-
+                
                 // Normalise before training.
                 inputArr = Normalize(
                     inputArr,
                     0,
                     analyser.UniqueWordCount,
-                    -1f,
-                    1f
-                );
-
-                outputArr = Normalize(
-                    outputArr,
-                    0f,
-                    analyser.LabelCount - 1f,
                     -1f,
                     1f
                 );
@@ -164,7 +156,7 @@ namespace TweemineAnalyzer
 
             for(int i = 0; i < arr.Length; i++)
             {
-                normalized[i] = (arr[i] - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+                normalized[i] = ((arr[i] - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
             }
 
             return normalized;
