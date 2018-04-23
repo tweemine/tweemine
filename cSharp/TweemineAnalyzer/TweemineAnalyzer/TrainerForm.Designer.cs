@@ -82,6 +82,7 @@
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlTrainAndTesting = new System.Windows.Forms.Panel();
             this.txtTrainingandTesting = new System.Windows.Forms.RichTextBox();
+            this.btnTest = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.grpTrainingSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTestCount)).BeginInit();
@@ -135,6 +136,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.progressBar);
+            this.panel1.Controls.Add(this.btnTest);
             this.panel1.Controls.Add(this.btnTrainTest);
             this.panel1.Controls.Add(this.grpTrainingSettings);
             this.panel1.Controls.Add(this.groupBox1);
@@ -153,7 +155,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 694);
+            this.progressBar.Location = new System.Drawing.Point(16, 685);
             this.progressBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(389, 46);
@@ -166,10 +168,10 @@
             this.btnTrainTest.FlatAppearance.BorderSize = 0;
             this.btnTrainTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrainTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnTrainTest.Location = new System.Drawing.Point(59, 607);
+            this.btnTrainTest.Location = new System.Drawing.Point(19, 599);
             this.btnTrainTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTrainTest.Name = "btnTrainTest";
-            this.btnTrainTest.Size = new System.Drawing.Size(283, 71);
+            this.btnTrainTest.Size = new System.Drawing.Size(172, 71);
             this.btnTrainTest.TabIndex = 5;
             this.btnTrainTest.Text = "Train and Test";
             this.btnTrainTest.UseVisualStyleBackColor = false;
@@ -181,7 +183,7 @@
             this.grpTrainingSettings.Controls.Add(this.chckPickRandomly);
             this.grpTrainingSettings.Controls.Add(this.label4);
             this.grpTrainingSettings.Controls.Add(this.lblTestPercent);
-            this.grpTrainingSettings.Location = new System.Drawing.Point(17, 473);
+            this.grpTrainingSettings.Location = new System.Drawing.Point(17, 459);
             this.grpTrainingSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grpTrainingSettings.Name = "grpTrainingSettings";
             this.grpTrainingSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -243,11 +245,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnLoadAnn);
+            this.groupBox1.Controls.Add(this.btnSaveANN);
             this.groupBox1.Location = new System.Drawing.Point(17, 311);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.groupBox1.Size = new System.Drawing.Size(388, 146);
+            this.groupBox1.Size = new System.Drawing.Size(388, 132);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ANN Settings";
@@ -257,11 +260,11 @@
             this.btnLoadAnn.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnLoadAnn.FlatAppearance.BorderSize = 0;
             this.btnLoadAnn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoadAnn.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnLoadAnn.Location = new System.Drawing.Point(83, 46);
+            this.btnLoadAnn.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnLoadAnn.Location = new System.Drawing.Point(40, 36);
             this.btnLoadAnn.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnLoadAnn.Name = "btnLoadAnn";
-            this.btnLoadAnn.Size = new System.Drawing.Size(223, 69);
+            this.btnLoadAnn.Size = new System.Drawing.Size(133, 69);
             this.btnLoadAnn.TabIndex = 5;
             this.btnLoadAnn.Text = "Load ANN";
             this.btnLoadAnn.UseVisualStyleBackColor = false;
@@ -525,7 +528,6 @@
             this.pnlANNInfo.Controls.Add(this.groupBox3);
             this.pnlANNInfo.Controls.Add(this.label11);
             this.pnlANNInfo.Controls.Add(this.label10);
-            this.pnlANNInfo.Controls.Add(this.btnSaveANN);
             this.pnlANNInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlANNInfo.Location = new System.Drawing.Point(0, 0);
             this.pnlANNInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -547,7 +549,7 @@
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.lblInputCount);
             this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Location = new System.Drawing.Point(239, 145);
+            this.groupBox3.Location = new System.Drawing.Point(254, 236);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -680,7 +682,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label11.Location = new System.Drawing.Point(339, 98);
+            this.label11.Location = new System.Drawing.Point(354, 189);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(94, 17);
             this.label11.TabIndex = 1;
@@ -690,7 +692,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.Location = new System.Drawing.Point(285, 69);
+            this.label10.Location = new System.Drawing.Point(300, 160);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(215, 20);
             this.label10.TabIndex = 1;
@@ -701,11 +703,11 @@
             this.btnSaveANN.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnSaveANN.FlatAppearance.BorderSize = 0;
             this.btnSaveANN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveANN.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSaveANN.Location = new System.Drawing.Point(189, 281);
+            this.btnSaveANN.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSaveANN.Location = new System.Drawing.Point(214, 36);
             this.btnSaveANN.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btnSaveANN.Name = "btnSaveANN";
-            this.btnSaveANN.Size = new System.Drawing.Size(405, 87);
+            this.btnSaveANN.Size = new System.Drawing.Size(133, 69);
             this.btnSaveANN.TabIndex = 5;
             this.btnSaveANN.Text = "Save ANN Settings";
             this.btnSaveANN.UseVisualStyleBackColor = false;
@@ -745,6 +747,22 @@
             this.txtTrainingandTesting.Size = new System.Drawing.Size(807, 566);
             this.txtTrainingandTesting.TabIndex = 0;
             this.txtTrainingandTesting.Text = "";
+            // 
+            // btnTest
+            // 
+            this.btnTest.BackColor = System.Drawing.Color.BlueViolet;
+            this.btnTest.Enabled = false;
+            this.btnTest.FlatAppearance.BorderSize = 0;
+            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnTest.Location = new System.Drawing.Point(231, 599);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(172, 71);
+            this.btnTest.TabIndex = 5;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // TrainerForm
             // 
@@ -844,5 +862,6 @@
         private System.Windows.Forms.Panel pnlContainer;
         private System.Windows.Forms.Panel pnlTrainAndTesting;
         private System.Windows.Forms.RichTextBox txtTrainingandTesting;
+        private System.Windows.Forms.Button btnTest;
     }
 }

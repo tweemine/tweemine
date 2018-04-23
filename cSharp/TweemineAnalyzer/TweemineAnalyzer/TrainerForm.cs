@@ -207,7 +207,7 @@ namespace TweemineAnalyzer
                 MessageBox.Show("you have to choose a file to train....");
                 return;
             }
-
+            btnTest.Enabled = true;
             TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
             ParseTweets(ref twData);
             Analyser analyser = new Analyser(twData, labels, tbTestCount.Value, chckPickRandomly.Checked);
@@ -272,13 +272,10 @@ namespace TweemineAnalyzer
         private void btnLoadAnn_Click(object sender, EventArgs e)
         {
             trainer = JsonFileController.ReadDataFromJsonFile<Trainer>(Path.Combine(nnParentPath, TrainDataFile));
-
-            btnTrainTest.Text = "TEST";
-            btnTrainTest.Click -= btnTrainTest_Click;
-            btnTrainTest.Click += btnTest_Click;
             ShowNeuralNetworkInfo(trainer.Neuralnetwork);
             trackbarschanged = false;
-            btnNNTraining.Enabled = btnNNTesting.Enabled = true;
+            btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = true;
+
         }
 
         private void btnTest_Click(object sender, EventArgs e)
