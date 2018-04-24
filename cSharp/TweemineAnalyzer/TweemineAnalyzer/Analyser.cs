@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
-
+using System.Linq;
 namespace TweemineAnalyzer
 {
     [Serializable]
@@ -44,7 +44,6 @@ namespace TweemineAnalyzer
         int testingCount;
         int trainingCount;
 
-
         #endregion
 
         #region Constructors
@@ -67,6 +66,8 @@ namespace TweemineAnalyzer
 
             testingCount = tweetCount;
             trainingCount = 0;
+
+
         }
 
         public Analyser(TweetData[] tweets, string[] labels, int _percentage = 10, bool _isRandom = false)
@@ -87,7 +88,9 @@ namespace TweemineAnalyzer
 
             TrainingTweets = new TweetData[trainingCount];
             TestingTweets = new TweetData[testingCount];
+
             SeperateTweets();
+
         }
 
         #endregion
@@ -203,6 +206,46 @@ namespace TweemineAnalyzer
                     labelFreq[label]++;
             }
         }
+
+
+
+        #endregion
+
+
+        #region parserv2
+
+        public void calculateWordCount()
+        {
+            for (int i = 0; i < tweets.Length; i++)
+            {
+                tweets[i].wordCount = tweets[i].words.Length;
+            }
+        }
+        
+        public void calculateDigitAndPunctuatinCount()
+        {
+            for (int i = 0; i < tweets.Length; i++)
+            {
+                for (int j = 0; j < tweets[i].words.Length; j++)
+                {
+                    tweets[i].digitCount += tweets[i].words[j].Count(x => Char.IsDigit(x));
+                    tweets[i].punctuationMarkCount += tweets[i].words[j].Count(x => Char.IsPunctuation(x));
+                }
+            }
+        }
+        
+        public void calculateAvarageWordLength()
+        {
+            for (int i = 0; i < tweets.Length; i++)
+            {
+                for (int j = 0; j < tweets[i].words.Length; j++)
+                {
+                    tweets[i].avarageWordLength += tweets[i].words[j].Length;
+                }
+                tweets[i].avarageWordLength /= tweets[i].words.Length;
+            }
+        }
+
 
         #endregion
 

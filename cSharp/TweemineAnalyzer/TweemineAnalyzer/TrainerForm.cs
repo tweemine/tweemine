@@ -191,11 +191,14 @@ namespace TweemineAnalyzer
         {
             foreach (TweetData data in tweetDatas)
             {
+              //  data.words = null;
                 // If tweet is not parsed, we'll parse it for first time here. 
                 if (data.words == null || data.words.Length == 0)
                 {
-                    string[] parsedTweet = Parser.ParseTheText(data.tweet).ToArray();
-                    data.words = parsedTweet;
+                      string[] parsedTweet = Parser.ParseTheText(data.tweet).ToArray();
+                      data.words = parsedTweet;
+                   // string[] parsedTweet = Parser.Parserv2(data.tweet).ToArray();
+                   // data.words = parsedTweet;
                 }
             }
         }

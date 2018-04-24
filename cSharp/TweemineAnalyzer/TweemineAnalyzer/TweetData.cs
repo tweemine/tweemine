@@ -13,5 +13,9 @@ namespace TweemineAnalyzer
         public bool labeled;
         public string[] words;
         public User[] users;
+        public int wordCount;
+        public int punctuationMarkCount;
+        public int digitCount;
+        public int avarageWordLength;
     }
 }

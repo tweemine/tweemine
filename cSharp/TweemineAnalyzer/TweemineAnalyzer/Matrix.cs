@@ -10,8 +10,18 @@ namespace TweemineNeuralNetwork
 
 		static Random randomize = new Random();
 
-        public int Rows { get => rows; set => rows = value; }
-        public int Cols { get => cols; set => cols = value; }
+        // public int Rows { get => rows; set => rows = value; }
+        // public int Cols { get => cols; set => cols = value; }
+        public int Rows
+        {
+            get { return rows; }
+            set { rows = value; }
+        }
+       public int Cols
+        {
+            get { return cols; }
+            set { cols = value; }
+        }
         //we need this for serialization
 
         public Matrix()

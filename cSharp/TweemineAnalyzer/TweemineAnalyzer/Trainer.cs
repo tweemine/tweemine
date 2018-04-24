@@ -15,14 +15,50 @@ namespace TweemineAnalyzer
         TweetData[]              testingTweets;
         string[]                 labels;
 
-        public NeuralNetwork Neuralnetwork { get => nn; set => nn = value; }
+       /* public NeuralNetwork Neuralnetwork { get => nn; set => nn = value; }
         public Analyser Analyser { get => analyser; set { analyser = value; SetAnalyser(value); } }
-
         internal Dictionary<string, Word> WordDict { get => wordDict; set => wordDict = value; }
         public Dictionary<string, int> LabelDict { get => labelDict; set => labelDict = value; }
         public TweetData[] TrainingTweets { get => trainingTweets; set => trainingTweets = value; }
         public TweetData[] TestingTweets { get => testingTweets; set => testingTweets = value; }
-        public string[] Labels { get => labels; set => labels = value; }
+        public string[] Labels { get => labels; set => labels = value; }*/
+        public NeuralNetwork Neuralnetwork
+        {
+            get { return nn; }
+            set { nn = value; }
+        }
+        public Analyser Analyser
+        {
+            get { return analyser; }
+            set { analyser = value; SetAnalyser(value); }
+        }
+        internal Dictionary<string,Word>WordDict
+        {
+            get { return wordDict; }
+            set { wordDict = value; }
+        }
+        public Dictionary<string,int> LabelDict
+        {
+            get { return labelDict; }
+            set { labelDict = value; }
+        }
+        public TweetData[] TrainingTweets
+        {
+            get { return trainingTweets; }
+            set { trainingTweets = value; }
+        }
+        public TweetData[] TestingTweets
+        {
+            get { return testingTweets; }
+            set { testingTweets = value; }
+        }
+        public string[] Labels
+        {
+            get { return labels; }
+            set { labels = value; }
+        }
+
+       
 
         //for serialization
         public Trainer()

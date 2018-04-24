@@ -16,14 +16,56 @@ namespace TweemineNeuralNetwork
         private Matrix bias_h;
         private Matrix bias_o;
 
-        public double LearningRate { get => learningRate;  set => learningRate = value; }
+   /*     public double LearningRate { get => learningRate;  set => learningRate = value; }
         public int InputNodes { get => inputNodes;   set => inputNodes = value; }
         public int HiddenNodes { get => hiddenNodes;   set => hiddenNodes = value; }
         public int OutputNodes { get => outputNodes;   set => outputNodes = value; }
         public Matrix Weights_ih { get => weights_ih;   set => weights_ih = value; }
         public Matrix Weights_ho { get => weights_ho;   set => weights_ho = value; }
         public Matrix Bias_h { get => bias_h;   set => bias_h = value; }
-        public Matrix Bias_o { get => bias_o;   set => bias_o = value; }
+        public Matrix Bias_o { get => bias_o;   set => bias_o = value; }*/
+
+        public double LearningRate
+        {
+            get { return learningRate; }
+            set { learningRate = value; }
+        }
+        public int InputNodes
+        {
+            get { return inputNodes; }
+            set { inputNodes = value; }
+        }
+        public int HiddenNodes
+        {
+            get { return hiddenNodes; }
+            set { hiddenNodes = value; }
+        }
+        public int OutputNodes
+        {
+            get { return outputNodes; }
+            set { outputNodes = value; }
+        }
+        public Matrix Weights_ih
+        {
+            get { return weights_ih; }
+            set {  weights_ih = value; }
+        }
+        public Matrix Weights_ho
+        {
+            get { return weights_ho; }
+            set { weights_ho = value; }
+        }
+        public Matrix Bias_h
+        {
+            get { return bias_h; }
+            set { bias_h = value; }
+        }
+        public Matrix Bias_o
+        {
+            get { return bias_o;  }
+            set { bias_o = value; }
+        }
+
         //we need this for serialization
         public NeuralNetwork()
         {

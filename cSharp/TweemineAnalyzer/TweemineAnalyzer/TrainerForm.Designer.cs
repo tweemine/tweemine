@@ -34,6 +34,7 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.btnTest = new System.Windows.Forms.Button();
             this.btnTrainTest = new System.Windows.Forms.Button();
             this.grpTrainingSettings = new System.Windows.Forms.GroupBox();
             this.tbTestCount = new System.Windows.Forms.TrackBar();
@@ -42,6 +43,7 @@
             this.lblTestPercent = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLoadAnn = new System.Windows.Forms.Button();
+            this.btnSaveANN = new System.Windows.Forms.Button();
             this.grpAnnSettings = new System.Windows.Forms.GroupBox();
             this.tbHiddenNeuronCount = new System.Windows.Forms.TrackBar();
             this.tbLearningRate = new System.Windows.Forms.TrackBar();
@@ -78,11 +80,9 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnSaveANN = new System.Windows.Forms.Button();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlTrainAndTesting = new System.Windows.Forms.Panel();
             this.txtTrainingandTesting = new System.Windows.Forms.RichTextBox();
-            this.btnTest = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.grpTrainingSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbTestCount)).BeginInit();
@@ -161,6 +161,22 @@
             this.progressBar.Size = new System.Drawing.Size(389, 46);
             this.progressBar.TabIndex = 6;
             this.toolTip1.SetToolTip(this.progressBar, "%70");
+            // 
+            // btnTest
+            // 
+            this.btnTest.BackColor = System.Drawing.Color.BlueViolet;
+            this.btnTest.Enabled = false;
+            this.btnTest.FlatAppearance.BorderSize = 0;
+            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnTest.Location = new System.Drawing.Point(231, 599);
+            this.btnTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(172, 71);
+            this.btnTest.TabIndex = 5;
+            this.btnTest.Text = "Test";
+            this.btnTest.UseVisualStyleBackColor = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnTrainTest
             // 
@@ -269,6 +285,21 @@
             this.btnLoadAnn.Text = "Load ANN";
             this.btnLoadAnn.UseVisualStyleBackColor = false;
             this.btnLoadAnn.Click += new System.EventHandler(this.btnLoadAnn_Click);
+            // 
+            // btnSaveANN
+            // 
+            this.btnSaveANN.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnSaveANN.FlatAppearance.BorderSize = 0;
+            this.btnSaveANN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveANN.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSaveANN.Location = new System.Drawing.Point(214, 36);
+            this.btnSaveANN.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.btnSaveANN.Name = "btnSaveANN";
+            this.btnSaveANN.Size = new System.Drawing.Size(133, 69);
+            this.btnSaveANN.TabIndex = 5;
+            this.btnSaveANN.Text = "Save ANN Settings";
+            this.btnSaveANN.UseVisualStyleBackColor = false;
+            this.btnSaveANN.Click += new System.EventHandler(this.btnSaveANN_Click);
             // 
             // grpAnnSettings
             // 
@@ -698,21 +729,6 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "Tweemine Text Analyzer";
             // 
-            // btnSaveANN
-            // 
-            this.btnSaveANN.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.btnSaveANN.FlatAppearance.BorderSize = 0;
-            this.btnSaveANN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSaveANN.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnSaveANN.Location = new System.Drawing.Point(214, 36);
-            this.btnSaveANN.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
-            this.btnSaveANN.Name = "btnSaveANN";
-            this.btnSaveANN.Size = new System.Drawing.Size(133, 69);
-            this.btnSaveANN.TabIndex = 5;
-            this.btnSaveANN.Text = "Save ANN Settings";
-            this.btnSaveANN.UseVisualStyleBackColor = false;
-            this.btnSaveANN.Click += new System.EventHandler(this.btnSaveANN_Click);
-            // 
             // pnlContainer
             // 
             this.pnlContainer.Controls.Add(this.pnlANNInfo);
@@ -747,22 +763,6 @@
             this.txtTrainingandTesting.Size = new System.Drawing.Size(807, 566);
             this.txtTrainingandTesting.TabIndex = 0;
             this.txtTrainingandTesting.Text = "";
-            // 
-            // btnTest
-            // 
-            this.btnTest.BackColor = System.Drawing.Color.BlueViolet;
-            this.btnTest.Enabled = false;
-            this.btnTest.FlatAppearance.BorderSize = 0;
-            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTest.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnTest.Location = new System.Drawing.Point(231, 599);
-            this.btnTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(172, 71);
-            this.btnTest.TabIndex = 5;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = false;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // TrainerForm
             // 
