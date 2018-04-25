@@ -195,7 +195,7 @@ namespace TweemineAnalyzer
                 // If tweet is not parsed, we'll parse it for first time here. 
                 if (data.words == null || data.words.Length == 0)
                 {
-                      string[] parsedTweet = Parser.ParseTheText(data.tweet).ToArray();
+                      string[] parsedTweet = Parser.ParseTheText1(data.tweet).ToArray();
                       data.words = parsedTweet;
                    // string[] parsedTweet = Parser.Parserv2(data.tweet).ToArray();
                    // data.words = parsedTweet;
@@ -214,13 +214,13 @@ namespace TweemineAnalyzer
             TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
             ParseTweets(ref twData);
             Analyser analyser = new Analyser(twData, labels, tbTestCount.Value, chckPickRandomly.Checked);
-            analyser.Analyse();
+            analyser.Analyse1();
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
             trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
-            trainer.Train(progressBar);
+            trainer.Train1(progressBar);
 
-            List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
+            List<List<Tuple<int, double>>> list = trainer.Test1(progressBar);
 
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
@@ -293,7 +293,7 @@ namespace TweemineAnalyzer
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
             
-            List<List<Tuple<int, double>>> list = trainer.Test(progressBar);
+            List<List<Tuple<int, double>>> list = trainer.Test1(progressBar);
 
             richtxtAnnResult.Text = "";
             for (int i = 0; i < trainer.Analyser.TestingTweets.Length; i++)

@@ -10,6 +10,7 @@ namespace TweemineAnalyzer
     public class TweetData
     {
         public string tweet;
+        public string parsedTweet;
         public bool labeled;
         public string[] words;
         public User[] users;

@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 using System.Linq;
+
 namespace TweemineAnalyzer
 {
     [Serializable]
@@ -66,8 +67,6 @@ namespace TweemineAnalyzer
 
             testingCount = tweetCount;
             trainingCount = 0;
-
-
         }
 
         public Analyser(TweetData[] tweets, string[] labels, int _percentage = 10, bool _isRandom = false)
@@ -143,7 +142,7 @@ namespace TweemineAnalyzer
 
         #region Analyser Methods
 
-        public void Analyse()
+        public void Analyse1()
         {
             // We keep words because later we may want to save it.
             words = AnalyseWords();
@@ -158,6 +157,28 @@ namespace TweemineAnalyzer
             }
 
             GetLabelFreq();
+        }
+
+        public void Analyse2()
+        {
+            for(int i = 0; i < tweets.Length; i++)
+            {
+                string tweet = tweets[i].parsedTweet;
+                for (int j = 0; j < tweet.Length; j++)
+                {
+                    if (Char.IsDigit(tweet[j]) == true)
+                        tweets[i].digitCount++;
+
+                    if (tweet[j] == ' ')
+                        tweets[i].wordCount++;
+
+                    if (Char.IsPunctuation(tweet[j]) == true)
+                        tweets[i].punctuationMarkCount++;
+                }
+
+                tweets[i].wordCount++;
+                tweets[i].avarageWordLength = (tweet.Length - tweets[i].wordCount) / tweets[i].wordCount;
+            }
         }
 
         private Word[] AnalyseWords()
@@ -206,46 +227,6 @@ namespace TweemineAnalyzer
                     labelFreq[label]++;
             }
         }
-
-
-
-        #endregion
-
-
-        #region parserv2
-
-        public void calculateWordCount()
-        {
-            for (int i = 0; i < tweets.Length; i++)
-            {
-                tweets[i].wordCount = tweets[i].words.Length;
-            }
-        }
-        
-        public void calculateDigitAndPunctuatinCount()
-        {
-            for (int i = 0; i < tweets.Length; i++)
-            {
-                for (int j = 0; j < tweets[i].words.Length; j++)
-                {
-                    tweets[i].digitCount += tweets[i].words[j].Count(x => Char.IsDigit(x));
-                    tweets[i].punctuationMarkCount += tweets[i].words[j].Count(x => Char.IsPunctuation(x));
-                }
-            }
-        }
-        
-        public void calculateAvarageWordLength()
-        {
-            for (int i = 0; i < tweets.Length; i++)
-            {
-                for (int j = 0; j < tweets[i].words.Length; j++)
-                {
-                    tweets[i].avarageWordLength += tweets[i].words[j].Length;
-                }
-                tweets[i].avarageWordLength /= tweets[i].words.Length;
-            }
-        }
-
 
         #endregion
 

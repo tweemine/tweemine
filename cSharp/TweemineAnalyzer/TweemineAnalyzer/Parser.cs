@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System;
 
 namespace TweemineAnalyzer
 {
     class Parser
     {
-        public static List<string> ParseTheText(string txt)
+        public static List<string> ParseTheText1(string txt)
         {
             int minWordLength = 3;
             int maxWordLength = 7;
@@ -58,56 +59,42 @@ namespace TweemineAnalyzer
             
             return matchDataList;
         }
-        public static List<string>Parserv2(string txt)
+
+        public static string ParseTheText2(string txt)
         {
-            bool foundHttps = false;
-            List<string> matchDataList = new List<string>();
-            string[] data = txt.Split(' ');
-            
-             Regex hashtag = new Regex(@"^#[\w]+$");
+            // Remove hashtag, remove mention, remove links
 
-             Regex mention = new Regex(@"^@[\w]+$");
+            txt = Remove(txt, "#");
+            txt = Remove(txt, "@");
+            txt = Remove(txt, "http");
+            txt = Remove(txt, "www.");
+            txt = txt.Trim();
 
-            foreach (string s in data)
+            return txt;
+        }
+
+        private static string Remove(string txt, string s)
+        {
+            int idx;
+            do
             {
-                foundHttps = false;
-                // If word is a link, hashtag or mention, just pass the other one.
-               if (hashtag.IsMatch(s) || mention.IsMatch(s))
-                    continue;
+                idx = txt.IndexOf(s);
 
-                string curr_word = s;
+                if (idx == -1)
+                    break;
 
-                // if word contains https , we delete the after https part of word and we won't take texts after link
-                if (curr_word.Contains("https"))
+                for (int i = idx + 1; i < txt.Length; i++)
                 {
-                    int index = curr_word.IndexOf("https");
-                    curr_word = curr_word.Remove(index);
-                    foundHttps = true;
-                }
-                
-                // if word contains \n, we replace it with " "
-                if(curr_word.Contains("\n"))
-                {
-                    curr_word = curr_word.Replace("\n", " ");
-                }
-
-                // deleting emoji from tweet
-                for (int i = 0; i < curr_word.Length; i++)
-                {
-                    if(char.IsLetterOrDigit(curr_word[i])==false && char.IsPunctuation(curr_word[i])==false && char.IsSymbol(curr_word[i])==false)
+                    if (txt[i] == ' ' || i == txt.Length - 1)
                     {
-                        curr_word = curr_word.Remove(i, 1);
-                        i--;
+                        txt = txt.Remove(idx, i - idx + 1);
+                        break;
                     }
                 }
-                // if we found https in text , we can't take words after it , it breaks  the tweet ex : https:... aracýlýðýyla
-                if (string.IsNullOrEmpty(curr_word) == false && foundHttps == false)
-                {
-                    // We convert characters to lower. e.g: "NiCe" == "nice"
-                    matchDataList.Add(curr_word.ToLower());
-                }
-            }
-            return matchDataList;
+
+            } while (true);
+
+            return txt;
         }
     }
 }

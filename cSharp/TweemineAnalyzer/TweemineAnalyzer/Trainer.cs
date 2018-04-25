@@ -15,51 +15,6 @@ namespace TweemineAnalyzer
         TweetData[]              testingTweets;
         string[]                 labels;
 
-       /* public NeuralNetwork Neuralnetwork { get => nn; set => nn = value; }
-        public Analyser Analyser { get => analyser; set { analyser = value; SetAnalyser(value); } }
-        internal Dictionary<string, Word> WordDict { get => wordDict; set => wordDict = value; }
-        public Dictionary<string, int> LabelDict { get => labelDict; set => labelDict = value; }
-        public TweetData[] TrainingTweets { get => trainingTweets; set => trainingTweets = value; }
-        public TweetData[] TestingTweets { get => testingTweets; set => testingTweets = value; }
-        public string[] Labels { get => labels; set => labels = value; }*/
-        public NeuralNetwork Neuralnetwork
-        {
-            get { return nn; }
-            set { nn = value; }
-        }
-        public Analyser Analyser
-        {
-            get { return analyser; }
-            set { analyser = value; SetAnalyser(value); }
-        }
-        internal Dictionary<string,Word>WordDict
-        {
-            get { return wordDict; }
-            set { wordDict = value; }
-        }
-        public Dictionary<string,int> LabelDict
-        {
-            get { return labelDict; }
-            set { labelDict = value; }
-        }
-        public TweetData[] TrainingTweets
-        {
-            get { return trainingTweets; }
-            set { trainingTweets = value; }
-        }
-        public TweetData[] TestingTweets
-        {
-            get { return testingTweets; }
-            set { testingTweets = value; }
-        }
-        public string[] Labels
-        {
-            get { return labels; }
-            set { labels = value; }
-        }
-
-       
-
         //for serialization
         public Trainer()
         {
@@ -95,7 +50,7 @@ namespace TweemineAnalyzer
             labelDict = _analyser.LabelDictioanary;
         }
 
-        public void Train(ProgressBar progressBar)
+        public void Train1(ProgressBar progressBar)
         {
             double[] inputArr;
             double[] outputArr;
@@ -137,7 +92,7 @@ namespace TweemineAnalyzer
             }
         }
 
-        public List<List<Tuple<int, double>>> Test(ProgressBar progressBar)
+        public List<List<Tuple<int, double>>> Test1(ProgressBar progressBar)
         {
             List<List<Tuple<int, double>>> correctIndex = new List<List<Tuple<int, double>>>();
             double[] inputArr;
@@ -186,6 +141,18 @@ namespace TweemineAnalyzer
             return correctIndex;
         }
 
+
+        public void Train2(ProgressBar progressBar)
+        {
+
+        }
+
+        public void Test2(ProgressBar progressBar)
+        {
+
+        }
+
+
         private double[] Normalize(double[] arr, double oldMin, double oldMax, double newMin, double newMax)
         {
             double[] normalized = new double[arr.Length];
@@ -197,5 +164,51 @@ namespace TweemineAnalyzer
 
             return normalized;
         }
+
+        #region Properties
+
+        public NeuralNetwork Neuralnetwork
+        {
+            get { return nn; }
+            set { nn = value; }
+        }
+
+        public Analyser Analyser
+        {
+            get { return analyser; }
+            set { analyser = value; SetAnalyser(value); }
+        }
+
+        public Dictionary<string, Word> WordDict
+        {
+            get { return wordDict; }
+            set { wordDict = value; }
+        }
+
+        public Dictionary<string, int> LabelDict
+        {
+            get { return labelDict; }
+            set { labelDict = value; }
+        }
+
+        public TweetData[] TrainingTweets
+        {
+            get { return trainingTweets; }
+            set { trainingTweets = value; }
+        }
+
+        public TweetData[] TestingTweets
+        {
+            get { return testingTweets; }
+            set { testingTweets = value; }
+        }
+
+        public string[] Labels
+        {
+            get { return labels; }
+            set { labels = value; }
+        }
+
+        #endregion
     }
 }
