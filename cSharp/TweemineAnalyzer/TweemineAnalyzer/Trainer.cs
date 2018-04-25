@@ -144,12 +144,87 @@ namespace TweemineAnalyzer
 
         public void Train2(ProgressBar progressBar)
         {
+            double[] inputArr;
+            double[] outputArr;
 
+            // min and max values for features
+            double[] Mins = findMin(trainingTweets);
+            double[] Maxes = findMax(trainingTweets);
+
+            for (int i = 0; i < testingTweets.Length; i++)
+            {
+                progressBar.Value++;
+                inputArr = new double[nn.InputNodes];
+                outputArr = new double[nn.OutputNodes];
+
+                // Set features for input array.
+                inputArr[0] = this.trainingTweets[i].wordCount;
+                inputArr[1] = this.trainingTweets[i].punctuationMarkCount;
+                inputArr[2] = this.trainingTweets[i].digitCount;
+                inputArr[3] = this.trainingTweets[i].avarageWordLength;
+
+                // Normalise before training.
+                inputArr = Normalize(
+                    inputArr,
+                    Mins,
+                    Maxes,
+                    -1f,
+                    1f
+                );
+                nn.FeedForward(inputArr);
+                nn.Train(inputArr, outputArr);
+            }
         }
 
-        public void Test2(ProgressBar progressBar)
+        public List<List<Tuple<int,double>>> Test2(ProgressBar progressBar)
         {
+            List<List<Tuple<int, double>>> correctIndex = new List<List<Tuple<int, double>>>();
+            double[] inputArr;
+            int corrects = 0;
 
+            // min amd max values of features
+            double[] Mins = findMin(testingTweets);   
+            double[] Maxes = findMax(testingTweets);
+
+            for (int i = 0; i < testingTweets.Length; i++)
+            {
+                progressBar.Value++;
+                inputArr = new double[nn.InputNodes];
+
+                // Set words for input array.
+                inputArr[0] = this.trainingTweets[i].wordCount;
+                inputArr[1] = this.trainingTweets[i].punctuationMarkCount;
+                inputArr[2] = this.trainingTweets[i].digitCount;
+                inputArr[3] = this.trainingTweets[i].avarageWordLength;
+
+                // Normalise before training.
+                inputArr = Normalize(
+                    inputArr,
+                    Mins,
+                    Maxes,
+                    -1f,
+                    1f
+                    );
+
+                // We are training neural network here for every tweet.
+                double[] result = nn.FeedForward(inputArr);
+
+                List<Tuple<int, double>> lst = new List<Tuple<int, double>>();
+                Tuple<int, double> max = new Tuple<int, double>(0,result[0]);
+
+                for (int j = 0; j < labels.Length; j++)
+                {
+                    lst.Add(new Tuple<int, double>(j,result[j]));
+                    if (result[j] > max.Item2)
+                        max = new Tuple<int, double>(j, result[j]);
+                }
+                if (labels[max.Item1] == testingTweets[i].users[0].labels[0])
+                    corrects++;
+
+                correctIndex.Add(lst);
+            }
+            analyser.Accuracy = ((double)corrects / testingTweets.Length) * 100;
+            return correctIndex;
         }
 
 
@@ -164,6 +239,63 @@ namespace TweemineAnalyzer
 
             return normalized;
         }
+        private double[] Normalize(double[] arr,double[] oldMins, double[] oldMaxes,double newMin,double newMax)
+        {
+            double[] normalized = new double[arr.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                normalized[i] = ((arr[i] - oldMins[i]) / (oldMaxes[i] - oldMins[i])) * (newMax - newMax) + newMin;
+            }
+            return normalized;
+        }
+        #region Helpers
+
+        private double[] findMin (TweetData[] tweets)
+        {
+            double[] min = { 10000, 10000, 10000, 10000 };
+
+            // find min values for features
+            for (int i = 0; i < tweets.Length; i++)
+            {
+                if (min[0] > tweets[i].wordCount)
+                    min[0] = tweets[i].wordCount;
+
+                if (min[1] > tweets[i].punctuationMarkCount)
+                    min[1] = tweets[i].punctuationMarkCount;
+
+                if (min[2] > tweets[i].digitCount)
+                    min[2] = tweets[i].digitCount;
+
+                if (min[3] > tweets[i].avarageWordLength)
+                    min[3] = tweets[i].avarageWordLength;
+            }
+            return min;
+        }
+
+        private double[] findMax(TweetData[] tweets)
+        {
+            double[] max = { 0, 0, 0, 0 };
+
+            // find max values for features
+            for (int i = 0; i < tweets.Length; i++)
+            {
+                if (max[0] < tweets[i].wordCount)
+                    max[0] = tweets[i].wordCount;
+
+                if (max[1] < tweets[i].punctuationMarkCount)
+                    max[1] = tweets[i].punctuationMarkCount;
+
+                if (max[2] < tweets[i].digitCount)
+                    max[2] = tweets[i].digitCount;
+
+                if (max[3] < tweets[i].avarageWordLength)
+                    max[3] = tweets[i].avarageWordLength;
+            }
+            return max;
+        }
+
+        #endregion
 
         #region Properties
 
