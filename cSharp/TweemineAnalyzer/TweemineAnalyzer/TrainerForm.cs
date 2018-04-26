@@ -74,6 +74,8 @@ namespace TweemineAnalyzer
 
         #endregion
 
+        #region ComponentsEvents
+
         private void BtnAnnandResultButton_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
@@ -110,19 +112,6 @@ namespace TweemineAnalyzer
                 pnlResults.Visible = false;
                 pnlTrainAndTesting.Visible = true;
                 ShowSavedData(trainer.Analyser.TestingTweets);
-            }
-        }
-
-        void ShowSavedData(TweetData[] _tweets)
-        {
-            txtTrainingandTesting.Clear();
-            TweetData[] _tweetDatas = _tweets;
-            for (int i = 0; i < _tweetDatas.Length; i++)
-            {
-                txtTrainingandTesting.AppendText("Tweet:\n\n");
-                txtTrainingandTesting.AppendText(_tweetDatas[i].tweet + "\n\n");
-                txtTrainingandTesting.AppendText("\n\n");
-                txtTrainingandTesting.AppendText("------------------------------------------------\n\n");
             }
         }
 
@@ -187,40 +176,69 @@ namespace TweemineAnalyzer
             }
         }
 
-        void ParseTweets(ref TweetData[] tweetDatas)
+        private void btnSaveANN_Click(object sender, EventArgs e)
         {
-            foreach (TweetData data in tweetDatas)
-            {
-              //  data.words = null;
-                // If tweet is not parsed, we'll parse it for first time here. 
-                if (data.words == null || data.words.Length == 0)
-                {
-                      string[] parsedTweet = Parser.ParseTheText1(data.tweet).ToArray();
-                      data.words = parsedTweet;
-                   // string[] parsedTweet = Parser.Parserv2(data.tweet).ToArray();
-                   // data.words = parsedTweet;
-                }
-            }
+            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, TrainDataFile), trainer);
+        }
+
+        private void btnLoadAnn_Click(object sender, EventArgs e)
+        {
+            trainer = JsonFileController.ReadDataFromJsonFile<Trainer>(Path.Combine(nnParentPath, TrainDataFile));
+            ShowNeuralNetworkInfo(trainer.Neuralnetwork);
+            trackbarschanged = false;
+            btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = true;
+
         }
 
         private void btnTrainTest_Click(object sender, EventArgs e)
+        {
+            TrainTest(TrainingType.FEATURE_TRAINING);
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            Test(TrainingType.FEATURE_TRAINING);
+        }
+
+        #endregion
+
+        #region Trainer Methods
+
+        private void TrainTest(TrainingType type)
         {
             if (string.IsNullOrEmpty(filePath))
             {
                 MessageBox.Show("you have to choose a file to train....");
                 return;
             }
-            btnTest.Enabled = true;
-            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
-            ParseTweets(ref twData);
-            Analyser analyser = new Analyser(twData, labels, tbTestCount.Value, chckPickRandomly.Checked);
-            analyser.Analyse1();
-            progressBar.Value = 0;
-            progressBar.Maximum = twData.Length;
-            trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text));
-            trainer.Train1(progressBar);
 
-            List<List<Tuple<int, double>>> list = trainer.Test1(progressBar);
+            btnTest.Enabled = true;
+            progressBar.Value = 0;
+
+            TweetData[] twData = JsonFileController.ReadDataFromJsonFile<TweetData[]>(filePath);
+            ParseTweets(ref twData, type);
+
+            Analyser analyser = new Analyser(twData, labels, tbTestCount.Value, chckPickRandomly.Checked);
+            if (type == TrainingType.WORD_TRAINING)
+                analyser.Analyse1();
+            else
+                analyser.Analyse2();
+
+            progressBar.Maximum = twData.Length;
+
+            trainer = new Trainer(analyser, tbHiddenNeuronCount.Value, double.Parse(lblLearningRate.Text), type);
+
+            List<List<Tuple<int, double>>> list;
+            if (type == TrainingType.WORD_TRAINING)
+            {
+                trainer.Train1(progressBar);
+                list = trainer.Test1(progressBar);
+            }
+            else
+            {
+                trainer.Train2(progressBar);
+                list = trainer.Test2(progressBar);
+            }
 
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
@@ -246,6 +264,65 @@ namespace TweemineAnalyzer
             ShowAnalyserInfo(trainer);
         }
 
+        private void Test(TrainingType type)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                MessageBox.Show("you have to choose a file to train....");
+                return;
+            }
+
+            TweetData[] twData = trainer.Analyser.TestingTweets;
+            progressBar.Value = 0;
+            progressBar.Maximum = twData.Length;
+
+            List<List<Tuple<int, double>>> list;
+            if (type == TrainingType.WORD_TRAINING)
+                list = trainer.Test1(progressBar);
+            else
+                list = trainer.Test2(progressBar);
+
+            richtxtAnnResult.Text = "";
+            for (int i = 0; i < trainer.Analyser.TestingTweets.Length; i++)
+            {
+                richtxtAnnResult.AppendText("TWEET:\n\n");
+                richtxtAnnResult.AppendText(trainer.Analyser.TestingTweets[i].tweet + "\n\n");
+
+                richtxtAnnResult.AppendText("PREDICTION:\n\n");
+                for (int j = 0; j < list[i].Count; j++)
+                {
+                    // We may want to percentage of prediction
+                    string val = labels[list[i][j].Item1];
+                    double percentage = list[i][j].Item2 * 100;
+                    richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
+                }
+
+                richtxtAnnResult.AppendText("\nANSWER:\t" + trainer.Analyser.TestingTweets[i].users[0].labels[0]);
+
+                richtxtAnnResult.AppendText("\n\n");
+                richtxtAnnResult.AppendText("######################################################n\n");
+            }
+
+            ShowAnalyserInfo(trainer);
+        }
+
+        #endregion
+
+        #region Update Info Methods
+
+        void ShowSavedData(TweetData[] _tweets)
+        {
+            txtTrainingandTesting.Clear();
+            TweetData[] _tweetDatas = _tweets;
+            for (int i = 0; i < _tweetDatas.Length; i++)
+            {
+                txtTrainingandTesting.AppendText("Tweet:\n\n");
+                txtTrainingandTesting.AppendText(_tweetDatas[i].tweet + "\n\n");
+                txtTrainingandTesting.AppendText("\n\n");
+                txtTrainingandTesting.AppendText("------------------------------------------------\n\n");
+            }
+        }
+
         private void ShowAnalyserInfo(Trainer trainer)
         {
             lblHiddenShowCount.Text = trainer.Neuralnetwork.HiddenNodes.ToString();
@@ -267,56 +344,27 @@ namespace TweemineAnalyzer
             lblOutputCount.Text = neuralNetwork.OutputNodes.ToString();
         }
 
-        private void btnSaveANN_Click(object sender, EventArgs e)
-        {
-            JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, TrainDataFile), trainer);
-        }
+        #endregion
 
-        private void btnLoadAnn_Click(object sender, EventArgs e)
-        {
-            trainer = JsonFileController.ReadDataFromJsonFile<Trainer>(Path.Combine(nnParentPath, TrainDataFile));
-            ShowNeuralNetworkInfo(trainer.Neuralnetwork);
-            trackbarschanged = false;
-            btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = true;
+        #region Helpers
 
-        }
-
-        private void btnTest_Click(object sender, EventArgs e)
+        void ParseTweets(ref TweetData[] tweetDatas, TrainingType type)
         {
-            if (string.IsNullOrEmpty(filePath))
+            foreach (TweetData data in tweetDatas)
             {
-                MessageBox.Show("you have to choose a file to train....");
-                return;
-            }
-
-            TweetData[] twData = trainer.Analyser.TestingTweets;
-            progressBar.Value = 0;
-            progressBar.Maximum = twData.Length;
-            
-            List<List<Tuple<int, double>>> list = trainer.Test1(progressBar);
-
-            richtxtAnnResult.Text = "";
-            for (int i = 0; i < trainer.Analyser.TestingTweets.Length; i++)
-            {
-                richtxtAnnResult.AppendText("TWEET:\n\n");
-                richtxtAnnResult.AppendText(trainer.Analyser.TestingTweets[i].tweet + "\n\n");
-
-                richtxtAnnResult.AppendText("PREDICTION:\n\n");
-                for (int j = 0; j < list[i].Count; j++)
+                if (type == TrainingType.WORD_TRAINING)
                 {
-                    // We may want to percentage of prediction
-                    string val = labels[list[i][j].Item1];
-                    double percentage = list[i][j].Item2 * 100;
-                    richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
+                    string[] parsedTweet = Parser.ParseTheText1(data.tweet).ToArray();
+                    data.words = parsedTweet;
                 }
-                
-                richtxtAnnResult.AppendText("\nANSWER:\t" + trainer.Analyser.TestingTweets[i].users[0].labels[0]);
-                
-                richtxtAnnResult.AppendText("\n\n");
-                richtxtAnnResult.AppendText("######################################################n\n");
+                else
+                {
+                    string parsedTweet = Parser.ParseTheText2(data.tweet);
+                    data.parsedTweet = parsedTweet;
+                }
             }
-
-            ShowAnalyserInfo(trainer);
         }
+
+        #endregion
     }
 }

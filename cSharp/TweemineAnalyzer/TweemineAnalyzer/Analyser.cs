@@ -52,6 +52,7 @@ namespace TweemineAnalyzer
         {
 
         }
+
         public Analyser(TweetData[] tweets, string[] labels)
         {
             this.tweets = tweets;

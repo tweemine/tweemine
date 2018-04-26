@@ -257,35 +257,6 @@ namespace TweemineAnalyzer
                     // RegisterUsers() should be called before ParseTweets()
                     // because we check words array is null or not in RegisterUsers().
                     RegisterUsers();
-
-
-
-                    //          T E S T   A R E A
-
-                    //for(int i = 0; i < tweetDatas.Length; i++)
-                    //{
-                    //    tweetDatas[i].parsedTweet = Parser.ParseTheText2(tweetDatas[i].tweet);
-                    //}
-
-                    //Analyser a = new Analyser(tweetDatas, labels);
-                    //a.Analyse2();
-
-                    //for (int i = 0; i < tweetDatas.Length; i++)
-                    //{
-                    //    Console.WriteLine("\n\n" + tweetDatas[i].parsedTweet + "\n\n");
-
-                    //    Console.WriteLine(tweetDatas[i].wordCount);
-                    //    Console.WriteLine(tweetDatas[i].digitCount);
-                    //    Console.WriteLine(tweetDatas[i].punctuationMarkCount);
-                    //    Console.WriteLine(tweetDatas[i].avarageWordLength);
-                    //}
-
-                    //return;
-
-                    //          T E S T   A R E A
-
-
-
                     ParseTweets();
 
                     // save parsed tweets to json file.

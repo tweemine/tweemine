@@ -5,8 +5,16 @@ using TweemineNeuralNetwork;
 
 namespace TweemineAnalyzer
 {
+    public enum TrainingType
+    {
+        WORD_TRAINING,
+        FEATURE_TRAINING
+    }
+
     class Trainer
     {
+        #region Variables
+
         Dictionary<string, Word> wordDict;
         Dictionary<string, int>  labelDict;
         Analyser                 analyser;
@@ -15,13 +23,17 @@ namespace TweemineAnalyzer
         TweetData[]              testingTweets;
         string[]                 labels;
 
+        #endregion
+
+        #region Constructors
+
         //for serialization
         public Trainer()
         {
 
         }
 
-        public Trainer(Analyser _analyser, int _hiddenNodes, double _learningRate)
+        public Trainer(Analyser _analyser, int _hiddenNodes, double _learningRate, TrainingType type)
         {
             analyser = _analyser;
             if (analyser != null)
@@ -33,7 +45,7 @@ namespace TweemineAnalyzer
                 labelDict = _analyser.LabelDictioanary;
 
                 nn = new NeuralNetwork(
-                    _analyser.MaxWordPerTweet,
+                    (type == TrainingType.WORD_TRAINING) ?_analyser.MaxWordPerTweet : 4,
                     _hiddenNodes,
                     _analyser.LabelCount,
                     _learningRate
@@ -49,6 +61,10 @@ namespace TweemineAnalyzer
             wordDict = _analyser.WordDictionary;
             labelDict = _analyser.LabelDictioanary;
         }
+
+        #endregion
+
+        #region Train and Test
 
         public void Train1(ProgressBar progressBar)
         {
@@ -141,17 +157,16 @@ namespace TweemineAnalyzer
             return correctIndex;
         }
 
-
         public void Train2(ProgressBar progressBar)
         {
             double[] inputArr;
             double[] outputArr;
 
             // min and max values for features
-            double[] Mins = findMin(trainingTweets);
-            double[] Maxes = findMax(trainingTweets);
+            double[] Mins = FindMin(trainingTweets);
+            double[] Maxes = FindMax(trainingTweets);
 
-            for (int i = 0; i < testingTweets.Length; i++)
+            for (int i = 0; i < trainingTweets.Length; i++)
             {
                 progressBar.Value++;
                 inputArr = new double[nn.InputNodes];
@@ -171,6 +186,7 @@ namespace TweemineAnalyzer
                     -1f,
                     1f
                 );
+
                 nn.FeedForward(inputArr);
                 nn.Train(inputArr, outputArr);
             }
@@ -183,8 +199,8 @@ namespace TweemineAnalyzer
             int corrects = 0;
 
             // min amd max values of features
-            double[] Mins = findMin(testingTweets);   
-            double[] Maxes = findMax(testingTweets);
+            double[] Mins = FindMin(testingTweets);   
+            double[] Maxes = FindMax(testingTweets);
 
             for (int i = 0; i < testingTweets.Length; i++)
             {
@@ -192,10 +208,10 @@ namespace TweemineAnalyzer
                 inputArr = new double[nn.InputNodes];
 
                 // Set words for input array.
-                inputArr[0] = this.trainingTweets[i].wordCount;
-                inputArr[1] = this.trainingTweets[i].punctuationMarkCount;
-                inputArr[2] = this.trainingTweets[i].digitCount;
-                inputArr[3] = this.trainingTweets[i].avarageWordLength;
+                inputArr[0] = this.testingTweets[i].wordCount;
+                inputArr[1] = this.testingTweets[i].punctuationMarkCount;
+                inputArr[2] = this.testingTweets[i].digitCount;
+                inputArr[3] = this.testingTweets[i].avarageWordLength;
 
                 // Normalise before training.
                 inputArr = Normalize(
@@ -204,9 +220,8 @@ namespace TweemineAnalyzer
                     Maxes,
                     -1f,
                     1f
-                    );
+                );
 
-                // We are training neural network here for every tweet.
                 double[] result = nn.FeedForward(inputArr);
 
                 List<Tuple<int, double>> lst = new List<Tuple<int, double>>();
@@ -223,10 +238,14 @@ namespace TweemineAnalyzer
 
                 correctIndex.Add(lst);
             }
+
             analyser.Accuracy = ((double)corrects / testingTweets.Length) * 100;
             return correctIndex;
         }
 
+        #endregion
+
+        #region Normalization Methods
 
         private double[] Normalize(double[] arr, double oldMin, double oldMax, double newMin, double newMax)
         {
@@ -239,7 +258,7 @@ namespace TweemineAnalyzer
 
             return normalized;
         }
-        private double[] Normalize(double[] arr,double[] oldMins, double[] oldMaxes,double newMin,double newMax)
+        private double[] Normalize(double[] arr,double[] oldMins, double[] oldMaxes, double newMin,double newMax)
         {
             double[] normalized = new double[arr.Length];
 
@@ -249,11 +268,14 @@ namespace TweemineAnalyzer
             }
             return normalized;
         }
+
+        #endregion
+
         #region Helpers
 
-        private double[] findMin (TweetData[] tweets)
+        private double[] FindMin (TweetData[] tweets)
         {
-            double[] min = { 10000, 10000, 10000, 10000 };
+            double[] min = { double.MaxValue, double.MaxValue, double.MaxValue, double.MaxValue };
 
             // find min values for features
             for (int i = 0; i < tweets.Length; i++)
@@ -273,7 +295,7 @@ namespace TweemineAnalyzer
             return min;
         }
 
-        private double[] findMax(TweetData[] tweets)
+        private double[] FindMax(TweetData[] tweets)
         {
             double[] max = { 0, 0, 0, 0 };
 
