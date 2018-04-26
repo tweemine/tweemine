@@ -178,6 +178,8 @@ namespace TweemineAnalyzer
                 inputArr[2] = this.trainingTweets[i].digitCount;
                 inputArr[3] = this.trainingTweets[i].avarageWordLength;
 
+                
+
                 // Normalise before training.
                 inputArr = Normalize(
                     inputArr,
@@ -258,13 +260,14 @@ namespace TweemineAnalyzer
 
             return normalized;
         }
-        private double[] Normalize(double[] arr,double[] oldMins, double[] oldMaxes, double newMin,double newMax)
+
+        private double[] Normalize(double[] arr, double[] oldMins, double[] oldMaxes, double newMin, double newMax)
         {
             double[] normalized = new double[arr.Length];
 
             for (int i = 0; i < arr.Length; i++)
             {
-                normalized[i] = ((arr[i] - oldMins[i]) / (oldMaxes[i] - oldMins[i])) * (newMax - newMax) + newMin;
+                normalized[i] = ((arr[i] - oldMins[i]) / (oldMaxes[i] - oldMins[i])) * (newMax - newMin) + newMin;
             }
             return normalized;
         }
