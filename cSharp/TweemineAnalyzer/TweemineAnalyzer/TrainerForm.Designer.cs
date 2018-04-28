@@ -59,6 +59,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnMinimize = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnCMatrix = new System.Windows.Forms.Button();
             this.pnlPicker = new System.Windows.Forms.Panel();
             this.pnlResults = new System.Windows.Forms.Panel();
             this.richtxtAnnResult = new System.Windows.Forms.RichTextBox();
@@ -433,11 +434,11 @@
             // btnResultInfo
             // 
             this.btnResultInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnResultInfo.BackColor = System.Drawing.Color.MediumPurple;
+            this.btnResultInfo.BackColor = System.Drawing.Color.BlueViolet;
             this.btnResultInfo.FlatAppearance.BorderSize = 0;
             this.btnResultInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnResultInfo.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnResultInfo.Location = new System.Drawing.Point(551, 0);
+            this.btnResultInfo.Location = new System.Drawing.Point(550, 0);
             this.btnResultInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnResultInfo.Name = "btnResultInfo";
             this.btnResultInfo.Size = new System.Drawing.Size(109, 57);
@@ -445,12 +446,12 @@
             this.btnResultInfo.Tag = "2";
             this.btnResultInfo.Text = "Results";
             this.btnResultInfo.UseVisualStyleBackColor = false;
-            this.btnResultInfo.Click += new System.EventHandler(this.BtnAnnandResultButton_Click);
+            this.btnResultInfo.Click += new System.EventHandler(this.UpMenuButtons_Click);
             // 
             // btnAnnInfo
             // 
             this.btnAnnInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAnnInfo.BackColor = System.Drawing.Color.BlueViolet;
+            this.btnAnnInfo.BackColor = System.Drawing.Color.Indigo;
             this.btnAnnInfo.FlatAppearance.BorderSize = 0;
             this.btnAnnInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnnInfo.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -462,7 +463,7 @@
             this.btnAnnInfo.Tag = "1";
             this.btnAnnInfo.Text = "ANN";
             this.btnAnnInfo.UseVisualStyleBackColor = false;
-            this.btnAnnInfo.Click += new System.EventHandler(this.BtnAnnandResultButton_Click);
+            this.btnAnnInfo.Click += new System.EventHandler(this.UpMenuButtons_Click);
             // 
             // btnClose
             // 
@@ -497,6 +498,25 @@
             this.btnMinimize.Text = "-";
             this.btnMinimize.UseVisualStyleBackColor = false;
             this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            // 
+            // btnCMatrix
+            // 
+            this.btnCMatrix.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCMatrix.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.btnCMatrix.Enabled = false;
+            this.btnCMatrix.FlatAppearance.BorderSize = 0;
+            this.btnCMatrix.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCMatrix.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnCMatrix.Location = new System.Drawing.Point(874, 0);
+            this.btnCMatrix.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCMatrix.Name = "btnCMatrix";
+            this.btnCMatrix.Size = new System.Drawing.Size(109, 57);
+            this.btnCMatrix.TabIndex = 8;
+            this.btnCMatrix.Tag = "5";
+            this.btnCMatrix.Text = "C. Matrix";
+            this.toolTip1.SetToolTip(this.btnCMatrix, "Confussion Matrix");
+            this.btnCMatrix.UseVisualStyleBackColor = false;
+            this.btnCMatrix.Click += new System.EventHandler(this.UpMenuButtons_Click);
             // 
             // pnlPicker
             // 
@@ -539,12 +559,12 @@
             // btnNNTraining
             // 
             this.btnNNTraining.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNNTraining.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnNNTraining.BackColor = System.Drawing.Color.MediumPurple;
             this.btnNNTraining.Enabled = false;
             this.btnNNTraining.FlatAppearance.BorderSize = 0;
             this.btnNNTraining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNNTraining.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnNNTraining.Location = new System.Drawing.Point(660, 0);
+            this.btnNNTraining.Location = new System.Drawing.Point(659, 0);
             this.btnNNTraining.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNNTraining.Name = "btnNNTraining";
             this.btnNNTraining.Size = new System.Drawing.Size(109, 57);
@@ -552,17 +572,17 @@
             this.btnNNTraining.Tag = "3";
             this.btnNNTraining.Text = "Training Data";
             this.btnNNTraining.UseVisualStyleBackColor = false;
-            this.btnNNTraining.Click += new System.EventHandler(this.BtnAnnandResultButton_Click);
+            this.btnNNTraining.Click += new System.EventHandler(this.UpMenuButtons_Click);
             // 
             // btnNNTesting
             // 
             this.btnNNTesting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNNTesting.BackColor = System.Drawing.Color.SlateBlue;
+            this.btnNNTesting.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.btnNNTesting.Enabled = false;
             this.btnNNTesting.FlatAppearance.BorderSize = 0;
             this.btnNNTesting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNNTesting.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnNNTesting.Location = new System.Drawing.Point(769, 0);
+            this.btnNNTesting.Location = new System.Drawing.Point(768, 0);
             this.btnNNTesting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNNTesting.Name = "btnNNTesting";
             this.btnNNTesting.Size = new System.Drawing.Size(109, 57);
@@ -570,7 +590,7 @@
             this.btnNNTesting.Tag = "4";
             this.btnNNTesting.Text = "Testing Data";
             this.btnNNTesting.UseVisualStyleBackColor = false;
-            this.btnNNTesting.Click += new System.EventHandler(this.BtnAnnandResultButton_Click);
+            this.btnNNTesting.Click += new System.EventHandler(this.UpMenuButtons_Click);
             // 
             // pnlANNInfo
             // 
@@ -810,6 +830,7 @@
             this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(1269, 742);
             this.Controls.Add(this.pnlContainer);
+            this.Controls.Add(this.btnCMatrix);
             this.Controls.Add(this.btnNNTesting);
             this.Controls.Add(this.btnResultInfo);
             this.Controls.Add(this.btnNNTraining);
@@ -905,5 +926,6 @@
         private toggle toggle1;
         private System.Windows.Forms.Label lblsystemType;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnCMatrix;
     }
 }

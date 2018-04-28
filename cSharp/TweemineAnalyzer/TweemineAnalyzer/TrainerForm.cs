@@ -11,7 +11,7 @@ namespace TweemineAnalyzer
     public partial class TrainerForm : Form
     {
         #region Variables
-
+        
         string nnParentPath = Path.Combine("..", "..", "..", "..", "..", "tweets", "NNConfig");
         //string nnFile = "NN.json";
         //string nntestDataFile = "testing.json";
@@ -31,7 +31,7 @@ namespace TweemineAnalyzer
         private bool mouseDown;
         private Point lastLocation;
         TrainingType trainedType;
-
+        int[,] confussion;
         #endregion
 
         #region Constructor
@@ -46,6 +46,7 @@ namespace TweemineAnalyzer
             lblTestPercent.Text = tbTestCount.Value.ToString() + " %";
             txtFileName.Text = fileName;
             filePath = defaultTweetPath;
+            confussion = new int[labels.Length, labels.Length];
         }
 
         public TrainerForm()
@@ -71,13 +72,15 @@ namespace TweemineAnalyzer
             txtFileName.Text = defaultTweetPath;
             filePath = defaultTweetPath;
 
+            confussion = new int[labels.Length, labels.Length];
+
         }
 
         #endregion
 
         #region ComponentsEvents
 
-        private void BtnAnnandResultButton_Click(object sender, EventArgs e)
+        private void UpMenuButtons_Click(object sender, EventArgs e)
         {
             Button button = ((Button)sender);
             pnlPicker.Left = button.Left;
@@ -113,6 +116,34 @@ namespace TweemineAnalyzer
                 pnlResults.Visible = false;
                 pnlTrainAndTesting.Visible = true;
                 ShowSavedData(trainer.Analyser.TestingTweets);
+            }
+            if (button.Tag.ToString() == "5")
+            {
+                pnlANNInfo.Visible = false;
+                pnlResults.Visible = false;
+                pnlTrainAndTesting.Visible = true;
+                //create confussion Matrix here
+                ShowCMatrix();
+            }
+        }
+
+        private void ShowCMatrix()
+        {
+            txtTrainingandTesting.Clear();
+            txtTrainingandTesting.AppendText(string.Format("{0,-30}", ""));
+            for (int i = 0; i < labels.Length; i++)
+            {
+                txtTrainingandTesting.AppendText(string.Format("{0,-15}",labels[i]));
+            }
+            txtTrainingandTesting.AppendText("\n");
+            for (int i = 0; i < labels.Length; i++)
+            {
+                txtTrainingandTesting.AppendText(string.Format("{0,-10}", labels[i]));
+                for (int j = 0; j < labels.Length; j++)
+                {
+                    txtTrainingandTesting.AppendText(string.Format("{0,18}" , confussion[i,j].ToString()));
+                }
+                txtTrainingandTesting.AppendText("\n\n");
             }
         }
 
@@ -188,8 +219,8 @@ namespace TweemineAnalyzer
             trainer = JsonFileController.ReadDataFromJsonFile<Trainer>(Path.Combine(nnParentPath, TrainDataFile));
             ShowNeuralNetworkInfo(trainer.Neuralnetwork);
             trackbarschanged = false;
-            btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = true;
-            toggle1.Value = trainer.trainingType == TrainingType.WORD_TRAINING ? true : false;
+            btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = btnCMatrix.Enabled = true;
+            toggle1.Value = trainer.trainingType == TrainingType.WORD_TRAINING ? true : false; 
             lblsystemType.Text = trainedType.ToString();
         }
 
@@ -198,6 +229,7 @@ namespace TweemineAnalyzer
             TrainTest(trainingType);
             trainedType = trainingType;
             lblsystemType.Text = trainedType.ToString();
+            btnCMatrix.Enabled = true;
 
         }
 
@@ -246,39 +278,43 @@ namespace TweemineAnalyzer
                 list = trainer.Test2(progressBar);
             }
 
-            richtxtAnnResult.Text = "";
-            for (int i = 0; i < analyser.TestingTweets.Length; i++)
-            {
-                richtxtAnnResult.AppendText("TWEET:\n\n");
-                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
+            Test(type, analyser);
+            //richtxtAnnResult.Text = "";
+            //for (int i = 0; i < analyser.TestingTweets.Length; i++)
+            //{
+            //    richtxtAnnResult.AppendText("TWEET:\n\n");
+            //    richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
 
 
-                richtxtAnnResult.AppendText("PREDICTION:\n\n");
-                for (int j = 0; j < list[i].Count; j++)
-                {
-                    string val = labels[list[i][j].Item1];
-                    double percentage = list[i][j].Item2 * 100;
-                    richtxtAnnResult.AppendText(val + ":\t" + percentage.ToString("F2") + "%\n");
-                }
+            //    richtxtAnnResult.AppendText("PREDICTION:\n\n");
+            //    for (int j = 0; j < list[i].Count; j++)
+            //    {
+            //        string val = labels[list[i][j].Item1];
+            //        double percentage = list[i][j].Item2 * 100;
+            //        richtxtAnnResult.AppendText(val + ":\t" + percentage.ToString("F2") + "%\n");
+            //    }
 
-                richtxtAnnResult.AppendText("\nANSWER: " + analyser.TestingTweets[i].users[0].labels[0]);
+            //    richtxtAnnResult.AppendText("\nANSWER: " + analyser.TestingTweets[i].users[0].labels[0]);
 
-                richtxtAnnResult.AppendText("\n\n");
-                richtxtAnnResult.AppendText("#################################################################\n\n");
-            }
+            //    richtxtAnnResult.AppendText("\n\n");
+            //    richtxtAnnResult.AppendText("#################################################################\n\n");
+            //}
 
             ShowAnalyserInfo(trainer);
         }
 
-        private void Test(TrainingType type)
+        private void Test(TrainingType type,Analyser analyser=null)
         {
+            
             if (string.IsNullOrEmpty(filePath))
             {
                 MessageBox.Show("you have to choose a file to train....");
                 return;
             }
+            if (analyser == null)
+                analyser = trainer.Analyser;
 
-            TweetData[] twData = trainer.Analyser.TestingTweets;
+            TweetData[] twData = analyser.TestingTweets;
             progressBar.Value = 0;
             progressBar.Maximum = twData.Length;
 
@@ -289,21 +325,35 @@ namespace TweemineAnalyzer
                 list = trainer.Test2(progressBar);
 
             richtxtAnnResult.Text = "";
-            for (int i = 0; i < trainer.Analyser.TestingTweets.Length; i++)
+            for (int i = 0; i < analyser.TestingTweets.Length; i++)
             {
                 richtxtAnnResult.AppendText("TWEET:\n\n");
-                richtxtAnnResult.AppendText(trainer.Analyser.TestingTweets[i].tweet + "\n\n");
+                richtxtAnnResult.AppendText(analyser.TestingTweets[i].tweet + "\n\n");
+                double max = double.MinValue;
+                int index=0;
 
                 richtxtAnnResult.AppendText("PREDICTION:\n\n");
                 for (int j = 0; j < list[i].Count; j++)
                 {
+                   
+                       
+                  
                     // We may want to percentage of prediction
                     string val = labels[list[i][j].Item1];
                     double percentage = list[i][j].Item2 * 100;
-                    richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
-                }
+                    if (percentage > max)
+                    {
+                        max = percentage;
+                        index = list[i][j].Item1;
+                    }
 
-                richtxtAnnResult.AppendText("\nANSWER:\t" + trainer.Analyser.TestingTweets[i].users[0].labels[0]);
+
+                        richtxtAnnResult.AppendText(val + ": " + percentage.ToString("F2") + "%\n");
+                }
+               int correct_Index = Array.IndexOf(labels, analyser.TestingTweets[i].users[0].labels[0]);
+
+                confussion[correct_Index, index]++;
+                richtxtAnnResult.AppendText("\nANSWER:\t" + analyser.TestingTweets[i].users[0].labels[0]);
 
                 richtxtAnnResult.AppendText("\n\n");
                 richtxtAnnResult.AppendText("######################################################n\n");
