@@ -37,6 +37,7 @@
             this.btnTest = new System.Windows.Forms.Button();
             this.btnTrainTest = new System.Windows.Forms.Button();
             this.grpTrainingSettings = new System.Windows.Forms.GroupBox();
+            this.toggle1 = new TweemineAnalyzer.toggle();
             this.tbTestCount = new System.Windows.Forms.TrackBar();
             this.chckPickRandomly = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,6 +67,8 @@
             this.btnNNTesting = new System.Windows.Forms.Button();
             this.pnlANNInfo = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblsystemType = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblHiddenShowCount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblOutputCount = new System.Windows.Forms.Label();
@@ -195,6 +198,7 @@
             // 
             // grpTrainingSettings
             // 
+            this.grpTrainingSettings.Controls.Add(this.toggle1);
             this.grpTrainingSettings.Controls.Add(this.tbTestCount);
             this.grpTrainingSettings.Controls.Add(this.chckPickRandomly);
             this.grpTrainingSettings.Controls.Add(this.label4);
@@ -207,6 +211,21 @@
             this.grpTrainingSettings.TabIndex = 4;
             this.grpTrainingSettings.TabStop = false;
             this.grpTrainingSettings.Text = "Training Settings";
+            // 
+            // toggle1
+            // 
+            this.toggle1.BackColor = System.Drawing.Color.Ivory;
+            this.toggle1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toggle1.Location = new System.Drawing.Point(13, 92);
+            this.toggle1.Name = "toggle1";
+            this.toggle1.Size = new System.Drawing.Size(161, 33);
+            this.toggle1.TabIndex = 2;
+            this.toggle1.Toggle1Color = System.Drawing.Color.Ivory;
+            this.toggle1.Toggle1Text = "Feature";
+            this.toggle1.Toggle2Color = System.Drawing.Color.Ivory;
+            this.toggle1.Toggle2Text = "Word";
+            this.toggle1.Value = false;
+            this.toggle1.ToggleChanged += new TweemineAnalyzer.toggle.Toggled(this.toggle1_ToggleChanged);
             // 
             // tbTestCount
             // 
@@ -568,6 +587,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.lblsystemType);
+            this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.lblHiddenShowCount);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.lblOutputCount);
@@ -584,10 +605,28 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(304, 100);
+            this.groupBox3.Size = new System.Drawing.Size(304, 132);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ANN Info";
+            // 
+            // lblsystemType
+            // 
+            this.lblsystemType.AutoSize = true;
+            this.lblsystemType.Location = new System.Drawing.Point(128, 103);
+            this.lblsystemType.Name = "lblsystemType";
+            this.lblsystemType.Size = new System.Drawing.Size(42, 17);
+            this.lblsystemType.TabIndex = 2;
+            this.lblsystemType.Text = "None";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(71, 103);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 17);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Type :";
             // 
             // lblHiddenShowCount
             // 
@@ -863,5 +902,8 @@
         private System.Windows.Forms.Panel pnlTrainAndTesting;
         private System.Windows.Forms.RichTextBox txtTrainingandTesting;
         private System.Windows.Forms.Button btnTest;
+        private toggle toggle1;
+        private System.Windows.Forms.Label lblsystemType;
+        private System.Windows.Forms.Label label6;
     }
 }

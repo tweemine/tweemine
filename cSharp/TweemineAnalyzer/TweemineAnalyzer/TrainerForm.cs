@@ -30,6 +30,7 @@ namespace TweemineAnalyzer
 
         private bool mouseDown;
         private Point lastLocation;
+        TrainingType trainedType;
 
         #endregion
 
@@ -178,6 +179,7 @@ namespace TweemineAnalyzer
 
         private void btnSaveANN_Click(object sender, EventArgs e)
         {
+            trainer.trainingType = trainedType;
             JsonFileController.WriteToJsonFile(Path.Combine(nnParentPath, TrainDataFile), trainer);
         }
 
@@ -187,17 +189,21 @@ namespace TweemineAnalyzer
             ShowNeuralNetworkInfo(trainer.Neuralnetwork);
             trackbarschanged = false;
             btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = true;
-
+            toggle1.Value = trainer.trainingType == TrainingType.WORD_TRAINING ? true : false;
+            lblsystemType.Text = trainedType.ToString();
         }
 
         private void btnTrainTest_Click(object sender, EventArgs e)
         {
-            TrainTest(TrainingType.FEATURE_TRAINING);
+            TrainTest(trainingType);
+            trainedType = trainingType;
+            lblsystemType.Text = trainedType.ToString();
+
         }
 
         private void btnTest_Click(object sender, EventArgs e)
         {
-            Test(TrainingType.FEATURE_TRAINING);
+            Test(trainedType);
         }
 
         #endregion
@@ -366,5 +372,21 @@ namespace TweemineAnalyzer
         }
 
         #endregion
+
+
+        TrainingType trainingType=TrainingType.FEATURE_TRAINING;
+        private void toggle1_ToggleChanged(bool val)
+        {
+            if(val==false)
+            {
+               trainingType = TrainingType.FEATURE_TRAINING;
+                
+            }
+            else
+            {
+                trainingType = TrainingType.WORD_TRAINING;
+                
+            }
+        }
     }
 }

@@ -5,11 +5,7 @@ using TweemineNeuralNetwork;
 
 namespace TweemineAnalyzer
 {
-    public enum TrainingType
-    {
-        WORD_TRAINING,
-        FEATURE_TRAINING
-    }
+
 
     class Trainer
     {
@@ -22,7 +18,7 @@ namespace TweemineAnalyzer
         TweetData[]              trainingTweets;
         TweetData[]              testingTweets;
         string[]                 labels;
-
+        TrainingType _trainingType = TrainingType.FEATURE_TRAINING;
         #endregion
 
         #region Constructors
@@ -365,6 +361,8 @@ namespace TweemineAnalyzer
             get { return labels; }
             set { labels = value; }
         }
+
+        public TrainingType trainingType { get => _trainingType; set => _trainingType = value; }
 
         #endregion
     }

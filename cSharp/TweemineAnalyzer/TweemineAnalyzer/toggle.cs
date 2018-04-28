@@ -22,7 +22,7 @@ namespace TweemineAnalyzer
         delegate void ColorChangedHandler(Color color);
         event ColorChangedHandler ColorChanged;
 
-        public bool State { get { return state; } set { state = value;//ToggleChanged?.Invoke(value);
+        public bool Value { get { return state; } set { state = value;//ToggleChanged?.Invoke(value);
                 if(value==true)
                 {
                     button1_Click(button1, new EventArgs());

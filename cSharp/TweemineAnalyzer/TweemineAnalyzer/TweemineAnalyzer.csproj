@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyser.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="TweemineMain.cs">
       <SubType>Form</SubType>
     </Compile>
