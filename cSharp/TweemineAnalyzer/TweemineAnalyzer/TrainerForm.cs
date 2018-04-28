@@ -220,8 +220,9 @@ namespace TweemineAnalyzer
             ShowNeuralNetworkInfo(trainer.Neuralnetwork);
             trackbarschanged = false;
             btnNNTraining.Enabled = btnNNTesting.Enabled = btnTest.Enabled = btnCMatrix.Enabled = true;
-            toggle1.Value = trainer.trainingType == TrainingType.WORD_TRAINING ? true : false; 
-            lblsystemType.Text = trainedType.ToString();
+            toggle1.Value = trainer.trainingType == TrainingType.WORD_TRAINING ? true : false;
+            trainedType = trainer.trainingType;
+            lblsystemType.Text = trainingType.ToString();
         }
 
         private void btnTrainTest_Click(object sender, EventArgs e)
@@ -323,6 +324,9 @@ namespace TweemineAnalyzer
                 list = trainer.Test1(progressBar);
             else
                 list = trainer.Test2(progressBar);
+
+            confussion = new int[labels.Length, labels.Length];
+
 
             richtxtAnnResult.Text = "";
             for (int i = 0; i < analyser.TestingTweets.Length; i++)
